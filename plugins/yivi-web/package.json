@@ -1,9 +1,9 @@
 {
   "name": "@privacybydesign/yivi-web",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "A front-end to Yivi flows for in the web browser",
   "main": "index.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "deepmerge": "^4.2.2",
     "qrcode": "^1.4.2"

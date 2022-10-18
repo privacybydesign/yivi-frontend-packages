@@ -7,7 +7,7 @@
     "preinstall": "cd ../../../; npm install",
     "build": "webpack --mode development"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "@privacybydesign/yivi-console": "../../../plugins/yivi-console",
     "@privacybydesign/yivi-core": "../../../yivi-core",
