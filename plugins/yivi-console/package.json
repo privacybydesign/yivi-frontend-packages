@@ -1,10 +1,10 @@
 {
   "name": "@privacybydesign/yivi-console",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "A console based front-end for Yivi flows. Useful for testing or use in nodejs",
   "main": "node.js",
   "browser": "web.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "prompt-sync": "^4.1.7",
     "qrcode-terminal": "^0.12.0"

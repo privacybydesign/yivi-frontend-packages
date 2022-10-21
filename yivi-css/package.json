@@ -1,9 +1,9 @@
 {
   "name": "@privacybydesign/yivi-css",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "Styling to standardize the Yivi login flow and make it look pretty",
   "homepage": "https://github.com/privacybydesign/yivi-frontend-packages",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "files": [
     "src/**/*",
     "dist/**/*",

@@ -8,7 +8,7 @@
     "link": "cd ../../../; npm run link",
     "build": "(cd ../../../ && npm run build); webpack --mode development"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "@privacybydesign/yivi-core": "../../../yivi-core",
     "@privacybydesign/yivi-css": "../../../yivi-css",

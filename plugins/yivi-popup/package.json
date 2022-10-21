@@ -1,9 +1,9 @@
 {
   "name": "@privacybydesign/yivi-popup",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "A frond-end plugin to show the Yivi form in a popup",
   "main": "index.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "@privacybydesign/yivi-web": "^0.4.3",
     "deepmerge": "^4.2.2"

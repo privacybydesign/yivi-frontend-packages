@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "An example on how to use the yivi-console package",
   "main": "index.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "scripts": {
     "preinstall": "cd ../../../; npm install",
     "start": "node ./index.js"

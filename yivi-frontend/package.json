@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-frontend",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "A simplified package of yivi-frontend modules to get started easily",
   "main": "dist/yivi.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "release": "npm run build"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "browserslist": [
     "> 0.25%, not dead"
   ],

@@ -1,9 +1,9 @@
 {
   "name": "@privacybydesign/yivi-dummy",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "A dummy back-end for Yivi flows. Useful for testing without an actual server",
   "main": "index.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "deepmerge": "^4.2.2"
   },

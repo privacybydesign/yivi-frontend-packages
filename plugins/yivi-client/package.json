@@ -1,9 +1,9 @@
 {
   "name": "@privacybydesign/yivi-client",
-  "version": "0.4.3",
+  "version": "0.1.0",
   "description": "A plugin to allow your Yivi flows to communicate with a server",
   "main": "index.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "deepmerge": "^4.2.2",
     "eventsource": "^1.0.7",
