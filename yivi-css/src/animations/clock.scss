@@ -1,0 +1,101 @@
+// Clock
+//
+// A clock to show timeouts
+//
+// Markup:
+// <div class="yivi-web-clock-animation"></div>
+//
+// Styleguide Animations.Clock
+
+@use "sass:math";
+
+@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+
+.yivi-web-clock-animation {
+  $clock-size: 42px;
+  $line-size: 5px;
+
+  @include reset;
+  display: inline-block;
+  position: relative;
+  width: $clock-size;
+  height: $clock-size;
+
+  border-radius: 50%;
+  border: $line-size solid $yivi-red;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: $line-size;
+    height: $line-size;
+    top: -1.5 * $line-size;
+    left: $clock-size * 0.5 - $line-size - $line-size * 0.5;
+
+    background-color: $yivi-red;
+  }
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: $line-size;
+    height: math.div($clock-size, 2.4);
+    top: 2px;
+    left: $clock-size * 0.5 - $line-size - $line-size * 0.5;
+
+    background-color: $yivi-red;
+    transform: rotate(0deg);
+    transform-origin: bottom center;
+    @include animation(clock-animation 2s 1 ease);
+  }
+
+  @include keyframes(clock-animation) {
+    0% {
+      transform: rotate(-30deg);
+    }
+    40% {
+      transform: rotate(-30deg);
+    }
+    50% {
+      transform: rotate(-15deg);
+    }
+    90% {
+      transform: rotate(-15deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @include animation(shake-animation 1s infinite linear 2s);
+
+  @include keyframes(shake-animation) {
+    10%,
+    90% {
+      transform: translate3d(-2px, 1px, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, -1px, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-2px, -1px, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(2px, 1px, 0);
+    }
+
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

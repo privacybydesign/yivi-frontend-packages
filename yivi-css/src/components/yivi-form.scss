@@ -1,0 +1,231 @@
+// Yivi 'login form'
+//
+// A place to nicely show the different states of the Yivi disclosure flow.
+//
+// <script type="text/javascript">
+//   // Poor man's forEach that works in IE11 too ;)
+//   function eachDo(l, f) { for(var i=0; i < l.length; i++) { f(l[i]); } }
+// </script>
+//
+// Trigger helper:
+// <ul>
+//   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.add('yivi-web-show-helper')})">Show helpers</a></li>
+//   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.remove('yivi-web-show-helper')})">Hide helpers</a></li>
+// </ul>
+//
+// Markup:
+// <section class="yivi-web-form">
+//   <div class="yivi-web-header">
+//     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+//     <div class="yivi-web-helper">
+//       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+//     </div>
+//   </div>
+//   <div class="yivi-web-content">
+//     <div class="yivi-web-centered">
+//       <button>Some action here</button>
+//       <p>With some text <a href="#">and stuff</a></p>
+//     </div>
+//   </div>
+// </section>
+// <section class="yivi-web-form">
+//   <div class="yivi-web-header">
+//     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+//     <div class="yivi-web-helper">
+//       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+//     </div>
+//     <button class="yivi-web-close"></button>
+//   </div>
+//   <div class="yivi-web-content">
+//     <div class="yivi-web-centered">
+//       <button>Some action here</button>
+//       <p>With some text <a href="#">and stuff</a></p>
+//     </div>
+//   </div>
+// </section>
+//
+// Styleguide Components.Yivi login
+
+@import '../mixins/reset', '../mixins/fonts', '../mixins/responsiveness',
+  '../mixins/center', '../mixins/animation', '../variables/colours',
+  '../variables/sizes';
+
+.yivi-web-centered {
+  @include reset;
+  height: auto;
+  text-align: center;
+
+  img,
+  canvas {
+    cursor: none;
+  }
+
+  // Make sure margin-top of first child and margin-bottom of last child
+  // are equal to prevent issues while centering.
+  > p {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.yivi-web-form {
+  @include reset;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-width: $qr-code-size + 6px;
+  max-width: 400px;
+
+  // Acts as min-height, but IE11 needs a fixed
+  // parent height for the vertical centering.
+  height: $qr-code-size + 224px;
+
+  @include on-small-screen {
+    min-height: $qr-code-size + 184px;
+  }
+
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+
+  .yivi-web-content {
+    @include reset;
+    @include center;
+    flex: 1 1 auto;
+    margin: 0 1rem 1rem 1rem;
+
+    background-color: $content-bg-color;
+    border-radius: $border-radius;
+
+    p {
+      @include reset;
+      @include font($size: 16px, $weight: 18px);
+      margin: 1em 4em;
+      color: $yivi-blue;
+
+      @include on-small-screen {
+        margin: 1em 2em;
+      }
+    }
+
+    a {
+      @include reset;
+      @include font($color: $content-link-color, $size: 15px);
+      text-decoration: underline;
+      cursor: pointer;
+
+      &:hover {
+        color: $content-link-color-hover;
+      }
+    }
+  }
+
+  .yivi-web-header {
+    @include reset;
+    position: relative;
+    flex: 0 0 auto;
+    padding: 2rem;
+    margin: 0 1rem;
+    overflow: hidden;
+
+    text-align: center;
+
+    @include on-small-screen {
+      padding: 1em;
+    }
+
+    p {
+      @include reset;
+      @include font($size: 18px, $weight: 700, $color: $header-text-color);
+
+      @include on-small-screen {
+        @include font($size: 16px, $weight: 600, $color: $header-text-color);
+      }
+
+      i.yivi-web-logo {
+        width: 115px;
+        height: 64px;
+      }
+    }
+
+    .yivi-web-helper {
+      @include reset;
+      @include center;
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      height: calc(100% - 2rem);
+
+      background-color: $helper-color;
+
+      transform: translateX(120%);
+      @include transition(transform 0.4s ease);
+
+      a {
+        @include font($color: $yivi-blue, $size: 16px, $weight: 400);
+        text-decoration-line: underline;
+      }
+
+      p {
+        margin: 1em;
+        text-align: center;
+        @include font($color: $yivi-blue, $size: 16px, $weight: 700);
+      }
+    }
+
+    // Swap out the header content for the helper in a nice animation
+    & > *:not(.yivi-web-helper):not(.yivi-web-close) {
+      transform: translateX(0%);
+      @include transition(transform 0.4s ease);
+    }
+
+    &.yivi-web-show-helper {
+      & > *:not(.yivi-web-helper):not(.yivi-web-close) {
+        transform: translateX(-120%);
+      }
+
+      .yivi-web-helper {
+        transform: translateX(0%);
+      }
+    }
+
+    .yivi-web-close {
+      @include reset;
+      $size: 26px;
+      position: absolute;
+      top: 1rem;
+      right: 0;
+      width: $size;
+      height: $size;
+
+      background-color: white;
+      border-radius: 50%;
+      border: 0;
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: $size * 0.2;
+        left: $size * 0.42;
+        width: $size * 0.16;
+        height: $size * 0.6;
+        background-color: $background-color;
+        transform: rotateZ(45deg);
+        transform-origin: center;
+      }
+
+      &:after {
+        transform: rotateZ(-45deg);
+      }
+    }
+  }
+}

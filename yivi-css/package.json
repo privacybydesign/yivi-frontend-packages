@@ -1,0 +1,44 @@
+{
+  "name": "@privacybydesign/yivi-css",
+  "version": "0.1.0",
+  "description": "Styling to standardize the Yivi login flow and make it look pretty",
+  "homepage": "https://github.com/privacybydesign/yivi-frontend-packages",
+  "license": "SEE LICENSE IN REPOSITORY",
+  "files": [
+    "src/**/*",
+    "dist/**/*",
+    "README.md"
+  ],
+  "main": "dist/yivi.min.css",
+  "style": "dist/yivi.css",
+  "sass": "src/index.scss",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+    "directory": "yivi-css"
+  },
+  "bugs": {
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages/issues"
+  },
+  "scripts": {
+    "clean": "npm run clear && npm run rebuild",
+    "clear": "rm -rf ../docs/styleguide/*",
+    "watch-stylesheets": "onchange 'src/**/*.*' -- npm run rebuild",
+    "rebuild": "concurrently \"npm run sass\" \"npm run kss\"",
+    "sass": "sass src/styleguide.scss ../docs/styleguide/yivi.css",
+    "kss": "kss --config kss-config.json",
+    "watch-images": "onchange 'assets/images/*.*' -- npm run svg-images",
+    "svg-images": "echo \"// This file is auto-generated from the assets/images directory, so don't bother manually changing it.\" > src/variables/svg-images.scss; for file in assets/images/*; do [ -e \"$file\" ] || continue; svgo=`svgo \"$file\" -o -`; name=`basename \"$file\" .svg`; echo \"\\$svg-image-$name: '$svgo';\" >> src/variables/svg-images.scss; done",
+    "dev": "npm run clean && concurrently --kill-others \"npm run watch-stylesheets\" \"npm run watch-images\"",
+    "release": "sass src/dist.scss dist/yivi.css && uglifycss --output dist/yivi.min.css dist/yivi.css"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "kss": "^3.0.1",
+    "michelangelo": "^0.8.0",
+    "onchange": "^7.1.0",
+    "sass": "^1.32.4",
+    "svgo": "^1.3.2",
+    "uglifycss": "0.0.29"
+  }
+}

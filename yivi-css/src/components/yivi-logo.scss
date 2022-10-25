@@ -1,0 +1,25 @@
+// Yivi logo
+//
+// Change an element into the Yivi logo
+//
+// Markup:
+// <div class="yivi-web-logo" style="width: 70px; height: 60px;"></div>
+// <i class="yivi-web-logo" style="width: 70px; height: 60px;"></i><br/>
+// <i class="yivi-web-logo" style="width: 200px; height: 160px;"></i>
+//
+// Styleguide Components.Yivi logo
+
+@import '../mixins/reset', '../mixins/svg-url', '../variables/svg-images';
+
+.yivi-web-logo {
+  @include reset;
+  display: inline-block;
+
+  vertical-align: middle;
+  background-image: svg-url($svg-image-yivi-logo);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-size: 0;
+  color: transparent;
+}

@@ -1,0 +1,49 @@
+// Popup
+//
+// Overlay content over the page
+//
+// Markup:
+// <section class="yivi-web-popup">
+//   <section style="width: 300px; height: 300px; background-color: blue">
+//    <button onclick="document.querySelector('.yivi-web-popup').classList.remove('yivi-web-popup-active')">Close popup</button>
+//   </section>
+// </section>
+// <button onclick="document.querySelector('.yivi-web-popup').classList.add('yivi-web-popup-active')">Open popup</button>
+//
+// Styleguide Layouts.Popup
+
+@import '../mixins/reset', '../mixins/center', '../mixins/animation';
+
+.yivi-web-popup {
+  @include reset;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+
+  overflow: auto;
+
+  @include center;
+
+  // Direct descendant gets animation and auto margins to enable scrolling on small screens
+  & > * {
+    margin: auto 0 !important;
+    transform: scale(0.7);
+  }
+
+  &.yivi-web-popup-active {
+    opacity: 1;
+    visibility: visible;
+
+    & > * {
+      transform: scale(1);
+    }
+  }
+}

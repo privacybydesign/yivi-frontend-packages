@@ -1,0 +1,53 @@
+// Checkmark
+//
+// A checkmark to indicate success
+//
+// Markup:
+// <div class="yivi-web-checkmark-animation"></div>
+//
+// Styleguide Animations.Checkmark
+
+@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+
+.yivi-web-checkmark-animation {
+  $check-width: 27px;
+  $check-height: 15px;
+
+  @include reset;
+  display: inline-block;
+  width: 48px;
+  height: 39px;
+
+  &:before {
+    content: ' ';
+    display: block;
+    box-sizing: content-box;
+    width: $check-width;
+    height: $check-height;
+
+    border: 13px solid $yivi-green;
+    border-top: 0;
+    border-right: 0;
+    transform: translate(0px, 18px) rotate(-45deg);
+    transform-origin: left top;
+    @include animation(checkmark-animation 0.6s 1 ease);
+  }
+
+  @include keyframes(checkmark-animation) {
+    0% {
+      height: 0;
+      width: 0;
+      opacity: 1;
+    }
+    50% {
+      height: $check-height;
+      width: 0;
+      opacity: 1;
+    }
+    100% {
+      height: $check-height;
+      width: $check-width;
+      opacity: 1;
+    }
+  }
+}

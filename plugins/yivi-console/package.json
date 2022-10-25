@@ -1,0 +1,17 @@
+{
+  "name": "@privacybydesign/yivi-console",
+  "version": "0.1.0",
+  "description": "A console based front-end for Yivi flows. Useful for testing or use in nodejs",
+  "main": "node.js",
+  "browser": "web.js",
+  "license": "SEE LICENSE IN REPOSITORY",
+  "dependencies": {
+    "prompt-sync": "^4.1.7",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+    "directory": "plugins/yivi-console"
+  }
+}

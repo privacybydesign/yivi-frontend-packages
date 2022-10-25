@@ -1,0 +1,72 @@
+// Loading
+//
+// A loading animation that precedes the QR code
+//
+// Markup:
+// <div class="yivi-web-loading-animation">
+//   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+// </div>
+//
+// Styleguide Animations.Loading
+
+@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+
+.yivi-web-loading-animation {
+  @include reset($children-too: true);
+  display: inline-block;
+  width: 39px;
+  height: 39px;
+
+  * {
+    @include reset;
+    display: block;
+    width: 33%;
+    height: 33%;
+    border-radius: 50%;
+    background-color: $yivi-light-blue;
+    float: left;
+
+    @include animation(loading-animation 1.3s infinite ease-in-out);
+  }
+
+  *:nth-child(1) {
+    @include animation-delay(0.2s);
+  }
+  *:nth-child(2) {
+    @include animation-delay(0.3s);
+  }
+  *:nth-child(3) {
+    @include animation-delay(0.4s);
+  }
+  *:nth-child(4) {
+    @include animation-delay(0.1s);
+  }
+  *:nth-child(5) {
+    @include animation-delay(0.2s);
+  }
+  *:nth-child(6) {
+    @include animation-delay(0.3s);
+  }
+  *:nth-child(7) {
+    @include animation-delay(0s);
+  }
+  *:nth-child(8) {
+    @include animation-delay(0.1s);
+  }
+  *:nth-child(9) {
+    @include animation-delay(0.2s);
+  }
+
+  @include keyframes(loading-animation) {
+    0%,
+    70%,
+    100% {
+      -webkit-transform: scale3D(1, 1, 1);
+      transform: scale3D(1, 1, 1);
+    }
+    35% {
+      -webkit-transform: scale3D(0, 0, 1);
+      transform: scale3D(0, 0, 1);
+    }
+  }
+}

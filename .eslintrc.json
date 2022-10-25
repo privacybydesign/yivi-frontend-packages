@@ -1,0 +1,47 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "es2021": true
+    },
+    "extends": [
+        "prettier-standard",
+        "plugin:compat/recommended"
+    ],
+    "rules": {
+        "block-scoped-var": "error",
+        "consistent-return": "error",
+        "no-implicit-globals": "error",
+        "no-promise-executor-return": "error",
+        "no-script-url": "error",
+        "no-shadow": ["error", {"builtinGlobals":  true}],
+        "no-unsafe-optional-chaining": "error",
+        "no-var": "error",
+        "prefer-arrow-callback": "error",
+        "prefer-rest-params": "error",
+        "prefer-spread": "error",
+        "prefer-template": "error",
+        "prettier/prettier": ["error", {"singleQuote": true, "printWidth": 120}]
+    },
+    "settings": {
+        "polyfills": [
+            "Promise"
+        ]
+    },
+    "overrides": [
+        {
+            "files": ["plugins/yivi-web/**/*.js", "plugins/yivi-popup/**/*.js", "yivi-frontend/**/*.js"],
+            "env": {
+                "node": false
+            }
+        },
+        {
+            "files": ["plugins/yivi-console/node.js"],
+            "env": {
+                "browser": false
+            }
+        }
+    ]
+}

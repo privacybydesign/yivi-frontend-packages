@@ -1,0 +1,17 @@
+{
+  "name": "@privacybydesign/yivi-client",
+  "version": "0.1.0",
+  "description": "A plugin to allow your Yivi flows to communicate with a server",
+  "main": "index.js",
+  "license": "SEE LICENSE IN REPOSITORY",
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "eventsource": "^1.0.7",
+    "isomorphic-fetch": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+    "directory": "plugins/yivi-client"
+  }
+}

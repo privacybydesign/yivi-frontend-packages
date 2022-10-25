@@ -1,0 +1,115 @@
+// Responsiveness
+//
+// We'll probably want to revisit this some time soon, but for now it will get us going.
+//
+// Styleguide Mixins.Responsiveness
+
+$display-cutoff-point: 768px;
+
+// on-small-touchscreen {}
+//
+// Mixin to specify styling that is only applicable to touchscreen devices with a maximum screen width of 768 pixels.
+//
+// ```css
+// @include on-small-touchscreen {
+//   // Styling to apply
+// }
+// ```
+//
+// Styleguide Mixins.Responsiveness.on-small-touchscreen
+
+@mixin on-small-touchscreen {
+  @media screen and (max-width: $display-cutoff-point) and (pointer: coarse) {
+    @content;
+  }
+}
+
+// on-large-touchscreen {}
+//
+// Mixin to specify styling that is only applicable to touchscreen devices with a minimum screen width of 768 pixels.
+//
+// ```css
+// @include on-large-touchscreen {
+//   // Styling to apply
+// }
+// ```
+//
+// Styleguide Mixins.Responsiveness.on-large-touchscreen
+
+@mixin on-large-touchscreen {
+  @media screen and (min-width: $display-cutoff-point - 1) and (pointer: coarse) {
+    @content;
+  }
+}
+
+// on-small-computer {}
+//
+// Mixin to specify styling that is only applicable to devices that have a mouse pointer with a maximum screen width of 768 pixels.
+//
+// ```css
+// @include on-small-computer {
+//   // Styling to apply
+// }
+// ```
+//
+// Styleguide Mixins.Responsiveness.on-small-computer
+
+@mixin on-small-computer {
+  @media screen and (max-width: $display-cutoff-point) and (pointer: fine) {
+    @content;
+  }
+}
+
+// on-large-computer {}
+//
+// Mixin to specify styling that is only applicable to devices that have a mouse pointer with a minimum screen width of 768 pixels.
+//
+// ```css
+// @include on-large-computer {
+//   // Styling to apply
+// }
+// ```
+//
+// Styleguide Mixins.Responsiveness.on-large-computer
+
+@mixin on-large-computer {
+  @media screen and (min-width: $display-cutoff-point - 1) and (pointer: fine) {
+    @content;
+  }
+}
+
+// on-small-screen {}
+//
+// Mixin to specify styling that is only applicable to devices that have a maximum screen width of 768 pixels.
+//
+// ```css
+// @include on-small-screen {
+//   // Styling to apply
+// }
+// ```
+//
+// Styleguide Mixins.Responsiveness.on-small-screen
+
+@mixin on-small-screen {
+  @media screen and (max-width: $display-cutoff-point) {
+    @content;
+  }
+}
+
+// on-large-screen {}
+//
+// Mixin to specify styling that is only applicable to devices that have a minimum screen width of 768 pixels.
+//
+// ```css
+// @include on-large-screen {
+//   // Styling to apply
+// }
+// ```
+//
+// Styleguide Mixins.Responsiveness.on-large-screen
+
+@mixin on-large-screen {
+  @media screen and (min-width: $display-cutoff-point + 1) {
+    @content;
+  }
+}

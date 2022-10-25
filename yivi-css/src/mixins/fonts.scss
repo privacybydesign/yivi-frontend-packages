@@ -1,0 +1,33 @@
+// font($family:, $size:, $color:)
+//
+// Set the default styling for font family and size.
+//
+// ```css
+// p {
+//   @include font;
+// }
+// ```
+//
+// $family - The font family, defaults to $default-font
+// $size   - The font size, defaults to $default-font-size
+// $color  - The color to use for the font, defaults to $text-color
+//
+// Styleguide Mixins.fonts
+
+@import '../variables/fonts', '../variables/colours';
+
+@mixin font(
+  $family: $default-font,
+  $size: $default-font-size,
+  $color: $content-text-color,
+  $weight: 700
+) {
+  font-family: $family;
+  font-weight: $weight;
+  font-size: $size;
+  color: $color;
+
+  &.yivi-web-error {
+    color: $yivi-red;
+  }
+}

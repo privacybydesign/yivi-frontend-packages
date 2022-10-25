@@ -1,0 +1,147 @@
+// Happy path
+//
+// Weight: 1
+//
+// This is what the entire flow should look like if everything works as intended.
+//
+// <script type="text/javascript">
+//   // Poor man's forEach that works in IE11 too ;)
+//   function eachDo(l, f) { for(var i=0; i < l.length; i++) { f(l[i]); } }
+//
+//   window.addEventListener('load', function() {
+//     eachDo(document.querySelectorAll('[data-animate]'), function(section) {
+//       let panels = section.querySelectorAll('.yivi-web-centered');
+//       eachDo(panels, function(panel) { panel.style.display = 'none'; });
+//       function showPanel(panels, index) {
+//         panels[index].style.display = 'block';
+//         let duration = panels[index].getAttribute('data-duration');
+//         let nextIndex = index + 1;
+//         if ( nextIndex >= panels.length ) { nextIndex = 0; }
+//         window.setTimeout(function() {
+//           panels[index].style.display = 'none';
+//           showPanel(panels, nextIndex);
+//         }, duration);
+//       }
+//       showPanel(panels, 0);
+//     });
+//   });
+// </script>
+//
+// Styleguide Examples.Happy path
+
+// Desktop flow
+//
+// Weight: 0
+//
+// Markup:
+// <section class="yivi-web-center-child" style="/** Parent styles **/ width: 100%; height: 700px; border: 2px solid red;">
+//   <section class="yivi-web-form">
+//     <header class="yivi-web-header">
+//       <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+//       <section class="yivi-web-helper">
+//         <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+//       </section>
+//     </header>
+//     <section class="yivi-web-content" data-animate>
+//       <section class="yivi-web-centered" data-duration="2000">
+//         <div class="yivi-web-loading-animation"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+//         <p>Eén moment alsjeblieft</p>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="5000">
+//         <img class="yivi-web-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQMAAACxXBw2AAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADOElEQVRIx+2XP2rlMBDGx6hQE+z2FQJdQ2miq+QINmmDZfPaYF/gQa6iNNE1BCpea5NGC8Kzo3WSYtlkkdtdFQb/DPoz8+mbMcA/PSRuGuTWOPSds5gqRF+MBdQgw4w2hIlbkKOFA9hMXAYctE/GQmKji4cwnFIzIojuBTF1f8Uc6l4RsTpcqkMYag6p77UXoFR6rD5PWYApsOoqukkF0b2qcOk+412AaWgM88S93BQEXD6zXIDlL4KTxtTqiM/r+waLMDwspJOhBwTaGw2noBjLMyUNl85KNmKEe3MEs6cKeZgAkjDoAGpl/Tf4bdLXVA0q4bqpgFmfxRjMwGnuWoFcrcZ8ZXw5bnvKzrpwmeAWkYKjy7FcWpJ9X2uUg8orqQOYvW36JJqFeza+kmxJv1COcSTP6FuObEXHLg2l6ACeI0/dpAUOt5H5fg/VF1jiijxVqwseKkeBhV0nRVg8kByzoIJoNTJcdDyAb1qIvq2BUrTxgOsuzUJMQeBh6DWjwIJg8xEs31a8irpzPqwxZ2aXfRmmufFEh1OI66sOz4gfSxZgeBhUxHVSnmRPjtpy5YuxaCZF8V4p3iaSWD9s/c+YFK1Pcly0l8sdh8eW63IszxRYpJtGRSDq9Ghwd80iLMwC1+xVIdDcLDVoD2AwpFgAzsKg6EHFzRdjlqpI1ltF6ev8bY7qAD5v+ur7XgFb7jRhi+VY3FBxTd2WHxiT6N7lU4Tl22xBVPnajK9K3LfwLabjXIUZHeD6w3k5wC77MvxUK0k6USGQNNl5jg7K8XnhMQw1WRi+WP9o3G5hRZhmc9QVjFb6KtICdOfLsXyC7Fzkv7jcAWlfYzlmQ614mEeLQHPTBuNeL4uwzB0JGxeQoiWdPKPb4/0Fnjd+ClPjIIyk0UtlYzlmS4VUhidgWd/h0jhdjuGmsVefLYj8H0NAjAcwmS3KzVifW258XriGYkwvZDxtY4McdBT3nYNy/KthpU5JeZGNh3zQHcBm0jG1VBQTNazyYj6crRArKtEzBjA/LPX+oL/HnLoCpL+U5oX0OX9YbxGGOu+kiYwNd9wL89nyF+CcE8nWkXRqqFF/P00h/j9+Hz8BKgnu5v9Z8jEAAAAASUVORK5CYII="/>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="5000">
+//         <div class="yivi-web-waiting-for-user-animation"></div>
+//         <p>Volg de instructies in de Yivi app</p>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="2000">
+//         <div class="yivi-web-checkmark-animation"></div>
+//         <p>Gelukt!</p>
+//       </section>
+//     </section>
+//   </section>
+// </section>
+//
+// Styleguide Examples.Happy path.desktop
+
+// Desktop pairing flow
+//
+// Weight: 1
+//
+// Markup:
+// <section class="yivi-web-center-child" style="/** Parent styles **/ width: 100%; height: 700px; border: 2px solid red;">
+//   <section class="yivi-web-form">
+//     <header class="yivi-web-header">
+//       <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+//       <section class="yivi-web-helper">
+//         <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+//       </section>
+//     </header>
+//     <section class="yivi-web-content" data-animate>
+//       <section class="yivi-web-centered" data-duration="2000">
+//         <div class="yivi-web-loading-animation"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+//         <p>Eén moment alsjeblieft</p>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="5000">
+//         <img class="yivi-web-qr-code" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACvAQMAAACxXBw2AAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADOElEQVRIx+2XP2rlMBDGx6hQE+z2FQJdQ2miq+QINmmDZfPaYF/gQa6iNNE1BCpea5NGC8Kzo3WSYtlkkdtdFQb/DPoz8+mbMcA/PSRuGuTWOPSds5gqRF+MBdQgw4w2hIlbkKOFA9hMXAYctE/GQmKji4cwnFIzIojuBTF1f8Uc6l4RsTpcqkMYag6p77UXoFR6rD5PWYApsOoqukkF0b2qcOk+412AaWgM88S93BQEXD6zXIDlL4KTxtTqiM/r+waLMDwspJOhBwTaGw2noBjLMyUNl85KNmKEe3MEs6cKeZgAkjDoAGpl/Tf4bdLXVA0q4bqpgFmfxRjMwGnuWoFcrcZ8ZXw5bnvKzrpwmeAWkYKjy7FcWpJ9X2uUg8orqQOYvW36JJqFeza+kmxJv1COcSTP6FuObEXHLg2l6ACeI0/dpAUOt5H5fg/VF1jiijxVqwseKkeBhV0nRVg8kByzoIJoNTJcdDyAb1qIvq2BUrTxgOsuzUJMQeBh6DWjwIJg8xEs31a8irpzPqwxZ2aXfRmmufFEh1OI66sOz4gfSxZgeBhUxHVSnmRPjtpy5YuxaCZF8V4p3iaSWD9s/c+YFK1Pcly0l8sdh8eW63IszxRYpJtGRSDq9Ghwd80iLMwC1+xVIdDcLDVoD2AwpFgAzsKg6EHFzRdjlqpI1ltF6ev8bY7qAD5v+ur7XgFb7jRhi+VY3FBxTd2WHxiT6N7lU4Tl22xBVPnajK9K3LfwLabjXIUZHeD6w3k5wC77MvxUK0k6USGQNNl5jg7K8XnhMQw1WRi+WP9o3G5hRZhmc9QVjFb6KtICdOfLsXyC7Fzkv7jcAWlfYzlmQ614mEeLQHPTBuNeL4uwzB0JGxeQoiWdPKPb4/0Fnjd+ClPjIIyk0UtlYzlmS4VUhidgWd/h0jhdjuGmsVefLYj8H0NAjAcwmS3KzVifW258XriGYkwvZDxtY4McdBT3nYNy/KthpU5JeZGNh3zQHcBm0jG1VBQTNazyYj6crRArKtEzBjA/LPX+oL/HnLoCpL+U5oX0OX9YbxGGOu+kiYwNd9wL89nyF+CcE8nWkXRqqFF/P00h/j9+Hz8BKgnu5v9Z8jEAAAAASUVORK5CYII="/>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="5000">
+//         <form class="yivi-web-pairing-form" onsubmit="alert('Input logic is disabled for this example')">
+//           <p>Vul de koppelcode in die in jouw Yivi-app verschijnt.</p>
+//           <div class="yivi-web-pairing-code">
+//             <input inputmode="numeric" pattern="\d" maxlength="1" required oninput="alert('Input logic is disabled for this example')" />
+//             <input inputmode="numeric" pattern="\d" maxlength="1" required oninput="alert('Input logic is disabled for this example')" />
+//             <input inputmode="numeric" pattern="\d" maxlength="1" required oninput="alert('Input logic is disabled for this example')" />
+//             <input inputmode="numeric" pattern="\d" maxlength="1" required oninput="alert('Input logic is disabled for this example')" />
+//           </div>
+//           <button type="submit">
+//             Volgende
+//           </button>
+//           <p><a>Annuleer</a></p>
+//         </form>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="5000">
+//         <div class="yivi-web-waiting-for-user-animation"></div>
+//         <p>Volg de instructies in de Yivi app</p>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="2000">
+//         <div class="yivi-web-checkmark-animation"></div>
+//         <p>Gelukt!</p>
+//       </section>
+//     </section>
+//   </section>
+// </section>
+//
+// Styleguide Examples.Happy path.desktop pairing
+
+// Mobile flow
+//
+// Weight: 2
+//
+// Markup:
+// <section class="yivi-web-center-child" style="/** Parent styles **/ width: 100%; height: 700px; border: 2px solid red; margin: 0 auto;">
+//   <section class="yivi-web-form">
+//     <header class="yivi-web-header">
+//       <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+//       <section class="yivi-web-helper">
+//         <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+//       </section>
+//     </header>
+//     <section class="yivi-web-content" data-animate>
+//       <section class="yivi-web-centered" data-duration="2000">
+//         <div class="yivi-web-loading-animation"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+//         <p>Eén moment alsjeblieft</p>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="3000">
+//         <button class="yivi-web-button">Open Yivi-app</button>
+//         <p><a href="#">Toon QR code</a></p>
+//       </section>
+//       <section class="yivi-web-centered" data-duration="2000">
+//         <div class="yivi-web-checkmark-animation"></div>
+//         <p>Gelukt!</p>
+//       </section>
+//     </section>
+//   </section>
+// </section>
+//
+// Styleguide Examples.Happy path.mobile

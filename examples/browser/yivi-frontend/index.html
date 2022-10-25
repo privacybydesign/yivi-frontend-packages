@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <title>Yivi web frontend example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="node_modules/@privacybydesign/yivi-frontend/dist/yivi.js"></script>
+
+    <style>
+      html, body {
+        margin: 10px 0;
+        padding: 0;
+        width: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      body > * {
+        padding: 10px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="yivi-web-form" id="yivi-web-form"></section>
+    <button id="abort-web">Abort web element</button>
+    <div>Or</div>
+    <button id="start-popup">Start as popup</button>
+  </body>
+
+  <script type="text/javascript">
+    let options = {
+      // Developer options
+      debugging: true,
+
+      // Front-end options
+      language:  'en',
+      translations: {
+        header:  'Try this <i class="yivi-web-logo">Yivi</i> example',
+        loading: 'Just one second please!'
+      },
+
+      // Back-end options
+      session: {
+        // Point this to your IRMA server:
+        url: 'http://localhost:8088',
+
+        // Define your disclosure request:
+        start: {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "@context": "https://irma.app/ld/request/disclosure/v2",
+            "disclose": [
+              [
+                [ "pbdf.pbdf.email.email" ],
+                [ "pbdf.sidn-pbdf.email.email" ],
+              ]
+            ]
+          })
+        }
+      }
+    };
+
+    const yiviWeb = yivi.newWeb({
+      ...options,
+      element: '#yivi-web-form',
+    });
+
+    yiviWeb.start()
+    .then(result => console.log("Successful disclosure! 🎉", result))
+    .catch(error => {
+      if (error === 'Aborted') {
+        console.log('We closed it ourselves, so no problem 😅');
+        return;
+      }
+      console.error("Couldn't do what you asked 😢", error);
+    });
+
+    document.getElementById('abort-web').onclick = () => yiviWeb.abort();
+
+    let yiviPopup = yivi.newPopup(options);
+    document.getElementById('start-popup').onclick = () => {
+      yiviPopup.start()
+      .then(result => console.log("Successful disclosure! 🎉", result))
+      .catch(error => {
+        if (error === 'Aborted') {
+          console.log('We closed it ourselves, so no problem 😅');
+          return;
+        }
+        console.error("Couldn't do what you asked 😢", error);
+      })
+      .finally(() => yiviPopup = yivi.newPopup(options));
+    };
+  </script>
+
+</html>

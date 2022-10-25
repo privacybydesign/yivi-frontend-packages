@@ -1,0 +1,99 @@
+image: privacybydesign/node_yarn:latest
+
+stages:
+  - build
+
+before_script:
+  - set -euxo pipefail
+
+yivi-core:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - yivi-core
+  script:
+    - cd yivi-core
+    - npm install --only=prod
+
+yivi-client:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - plugins/yivi-client
+  script:
+    - cd plugins/yivi-client
+    - npm install --only=prod
+
+yivi-console:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - plugins/yivi-console
+  script:
+    - cd plugins/yivi-console
+    - npm install --only=prod
+
+yivi-dummy:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - plugins/yivi-dummy
+  script:
+    - cd plugins/yivi-dummy
+    - npm install --only=prod
+
+yivi-web:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - plugins/yivi-web
+  script:
+    - cd plugins/yivi-web
+    - npm install --only=prod
+
+yivi-css:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - yivi-css
+  script:
+    - cd yivi-css
+    - npm install
+    - npm run release
+    - rm -rf node_modules
+
+yivi-popup:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - plugins/yivi-popup
+  script:
+    - cd plugins/yivi-popup
+    - npm install --only=prod
+
+yivi-frontend:
+  stage: build
+  artifacts:
+    # Disabling artifact expiry is not supported yet, so make
+    expire_in: 10 year
+    paths:
+      - yivi-frontend
+  script:
+    - cd yivi-frontend
+    - npm install
+    - npm run release
+    - rm -rf node_modules

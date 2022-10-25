@@ -1,0 +1,30 @@
+{
+  "name": "yivi-browser-popup-example",
+  "version": "0.1.0",
+  "description": "An example on how to use the yivi-popup package",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "cd ../../../; npm install",
+    "link": "cd ../../../; npm run link",
+    "build": "(cd ../../../ && npm run build); webpack --mode development"
+  },
+  "license": "SEE LICENSE IN REPOSITORY",
+  "dependencies": {
+    "@privacybydesign/yivi-core": "../../../yivi-core",
+    "@privacybydesign/yivi-css": "../../../yivi-css",
+    "@privacybydesign/yivi-dummy": "../../../plugins/yivi-dummy",
+    "@privacybydesign/yivi-popup": "../../../plugins/yivi-popup"
+  },
+  "devDependencies": {
+    "css-loader": "^6.3.0",
+    "file-loader": "^6.2.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+    "directory": "examples/browser/yivi-popup"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@privacybydesign/yivi-core",
+  "version": "0.1.0",
+  "description": "The state machine for implementing Yivi flows, that plugins can register on",
+  "main": "index.js",
+  "license": "SEE LICENSE IN REPOSITORY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+    "directory": "yivi-core"
+  }
+}

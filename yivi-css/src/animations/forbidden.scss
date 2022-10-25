@@ -1,0 +1,144 @@
+// Forbidden
+//
+// A forbidden sign to show issues
+//
+// Markup:
+// <div class="yivi-web-forbidden-animation" onclick="var elm = this; elm.className = ''; setTimeout(function() { elm.className = 'yivi-web-forbidden-animation'; }, 100)"></div>
+//
+// Styleguide Animations.Forbidden
+
+@use "sass:math";
+
+@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+
+.yivi-web-forbidden-animation {
+  $sign-size: 44px;
+  $line-size: 7px;
+
+  // Parent element is just a container for :before and :after
+
+  @include reset;
+  display: inline-block;
+  position: relative;
+  width: $sign-size;
+  height: $sign-size;
+
+  // Before and after together form the animated forbidden sign
+
+  &:before,
+  &:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    width: $sign-size * 0.5;
+    height: $sign-size;
+    top: 0;
+    left: $sign-size * 0.5;
+
+    // Note: Safari has issues animating the border if it hasn't been set before
+    border: $line-size solid $yivi-red;
+    // Note: IE11 has issues animating the border radius :/
+    border-radius: $sign-size * 0.5;
+  }
+
+  &:before {
+    @include animation(complete-animation 0.8s linear 1 forwards);
+  }
+
+  &:after {
+    width: $sign-size - $line-size; // Desired end state that's not in the 100% declaration
+    @include animation(rotate-animation 0.8s linear 1 forwards);
+  }
+
+  @include keyframes(complete-animation) {
+    // Be half a circle
+    0%,
+    65% {
+      border-radius: 0px;
+      border-left: 0px;
+      border-top-right-radius: $sign-size * 0.5;
+      border-bottom-right-radius: $sign-size * 0.5;
+      width: $sign-size * 0.5;
+      left: $sign-size * 0.5;
+    }
+
+    // Become a whole circle
+    66%,
+    100% {
+      border: $line-size solid $yivi-red;
+      border-radius: $sign-size * 0.5;
+      width: $sign-size;
+      left: 0;
+    }
+  }
+
+  // Note: If you use multiple blocks with the same percentage, IE11 doesn't
+  // combine them, but overwrites the first with the last.
+
+  @include keyframes(rotate-animation) {
+    // Be a white mask to hide :before
+    0%,
+    32.99% {
+      border: 0;
+      border-radius: 0;
+      background-color: $content-bg-color;
+      transform-origin: center left;
+      width: $sign-size * 0.5;
+    }
+    // Be a half circle
+    33%,
+    65.99% {
+      border: $line-size solid $yivi-red;
+      border-radius: 0px;
+      border-left: 0px;
+      border-top-right-radius: $sign-size * 0.5;
+      border-bottom-right-radius: $sign-size * 0.5;
+      background-color: $content-bg-color;
+      width: $sign-size * 0.5;
+      height: $sign-size;
+      transform-origin: center left;
+      left: $sign-size * 0.5;
+    }
+    // Be a diagonal line
+    66%,
+    100% {
+      border: 0;
+      background-color: $yivi-red;
+      height: $line-size;
+      transform: rotate(-45deg)
+        translate(
+          math.div($sign-size, -2) + $line-size * 0.5,
+          $sign-size * 0.5 + $line-size * 0.5 + 2
+        );
+      transform-origin: top left;
+      left: 0;
+    }
+
+    // Rotate twice the same way with a different look to complete the circle
+    0.01% {
+      transform: rotate(
+        1deg
+      ); // Note: Safari rotates the wrong way when more than 180 degrees :(
+    }
+    32.98% {
+      transform: rotate(180deg);
+    }
+    33.01% {
+      transform: rotate(
+        1deg
+      ); // Note: Safari rotates the wrong way when more than 180 degrees :(
+    }
+    65.98% {
+      transform: rotate(180deg);
+    }
+
+    // Then animate width to draw the strike-through line
+    66.01% {
+      width: 0;
+    }
+    99.99% {
+      width: $sign-size - $line-size;
+    }
+  }
+}
