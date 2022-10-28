@@ -13,18 +13,11 @@
     "> 0.25%, not dead"
   ],
   "dependencies": {
-    "@privacybydesign/yivi-client": "^0.4.3",
-    "@privacybydesign/yivi-core": "^0.4.3",
-    "@privacybydesign/yivi-css": "^0.4.3",
-    "@privacybydesign/yivi-popup": "^0.4.3",
-    "@privacybydesign/yivi-web": "^0.4.3"
-  },
-  "optionalDependencies": {
-    "@privacybydesign/yivi-client": "../plugins/yivi-client",
-    "@privacybydesign/yivi-core": "../yivi-core",
-    "@privacybydesign/yivi-css": "../yivi-css",
-    "@privacybydesign/yivi-popup": "../plugins/yivi-popup",
-    "@privacybydesign/yivi-web": "../plugins/yivi-web"
+    "@privacybydesign/yivi-client": "^0.1.0",
+    "@privacybydesign/yivi-core": "^0.1.0",
+    "@privacybydesign/yivi-css": "^0.1.0",
+    "@privacybydesign/yivi-popup": "^0.1.0",
+    "@privacybydesign/yivi-web": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
