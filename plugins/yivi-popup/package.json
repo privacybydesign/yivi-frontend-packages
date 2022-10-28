@@ -5,11 +5,8 @@
   "main": "index.js",
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
-    "@privacybydesign/yivi-web": "^0.4.3",
+    "@privacybydesign/yivi-web": "^0.1.0",
     "deepmerge": "^4.2.2"
-  },
-  "optionalDependencies": {
-      "@privacybydesign/yivi-web": "../yivi-web"
   },
   "repository": {
     "type": "git",
