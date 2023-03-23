@@ -20,7 +20,7 @@
     "@privacybydesign/yivi-css": "^0.1.0",
     "@privacybydesign/yivi-popup": "^0.1.0",
     "@privacybydesign/yivi-web": "^0.1.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^9.1.2",
     "core-js": "^3.16.3",
     "css-loader": "^6.3.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
