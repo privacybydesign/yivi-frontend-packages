@@ -18,7 +18,7 @@ const yivi = new YiviCore({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        '@context': 'https://yivi.app/ld/request/disclosure/v2',
+        '@context': 'https://irma.app/ld/request/disclosure/v2',
         disclose: [[['pbdf.pbdf.email.email'], ['pbdf.sidn-pbdf.email.email']]],
       }),
     },
