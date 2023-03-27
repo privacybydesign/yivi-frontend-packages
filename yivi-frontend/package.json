@@ -1,37 +1,36 @@
 {
     "name": "@privacybydesign/yivi-frontend",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A simplified package of yivi-frontend modules to get started easily",
     "main": "dist/yivi.js",
     "scripts": {
-      "dev": "webpack --mode development --watch",
-      "build": "webpack --mode production",
-      "release": "npm run build"
+        "dev": "webpack --mode development --watch",
+        "build": "webpack --mode production",
+        "release": "npm run build"
     },
     "license": "SEE LICENSE IN REPOSITORY",
     "browserslist": [
-      "> 0.25%, not dead"
+        "> 0.25%, not dead"
     ],
     "devDependencies": {
-      "@babel/core": "^7.15.0",
-      "@babel/preset-env": "^7.15.6",
-      "@privacybydesign/yivi-client": "^0.1.0",
-      "@privacybydesign/yivi-core": "^0.1.0",
-      "@privacybydesign/yivi-css": "^0.1.0",
-      "@privacybydesign/yivi-popup": "^0.1.0",
-      "@privacybydesign/yivi-web": "^0.1.0",
-      "babel-loader": "^9.1.2",
-      "core-js": "^3.16.3",
-      "css-loader": "^6.3.0",
-      "node-polyfill-webpack-plugin": "^2.0.1",
-      "style-loader": "^3.3.0",
-      "webpack": "^5.76.3",
-      "webpack-cli": "^4.8.0"
+        "@babel/core": "^7.15.0",
+        "@babel/preset-env": "^7.15.6",
+        "@privacybydesign/yivi-client": "^0.1.1",
+        "@privacybydesign/yivi-core": "^0.1.1",
+        "@privacybydesign/yivi-css": "^0.1.1",
+        "@privacybydesign/yivi-popup": "^0.1.1",
+        "@privacybydesign/yivi-web": "^0.1.1",
+        "babel-loader": "^9.1.2",
+        "core-js": "^3.16.3",
+        "css-loader": "^6.3.0",
+        "node-polyfill-webpack-plugin": "^2.0.1",
+        "style-loader": "^3.3.0",
+        "webpack": "^5.76.3",
+        "webpack-cli": "^4.8.0"
     },
     "repository": {
-      "type": "git",
-      "url": "https://github.com/privacybydesign/yivi-frontend-packages",
-      "directory": "yivi-frontend"
+        "type": "git",
+        "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+        "directory": "yivi-frontend"
     }
-  }
-  
+}
