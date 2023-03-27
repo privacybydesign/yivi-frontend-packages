@@ -264,8 +264,8 @@ module.exports = class DOMManipulations {
               <input inputmode="numeric" pattern="\\d" maxlength="1" required />
               <input inputmode="numeric" pattern="\\d" maxlength="1" required />
             </div>
-            <input type="submit" style="display: none" />
-            <div class="yivi-web-pairing-loading-animation" style="visibility: hidden">
+            <input type="submit" />
+            <div class="yivi-web-pairing-loading-animation">
                 <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </div>
             <p><a data-yivi-glue-transition="cancel">${this._translations.cancel}</a></p>

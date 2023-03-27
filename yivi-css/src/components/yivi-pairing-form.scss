@@ -100,6 +100,7 @@
 
   .yivi-web-pairing-loading-animation {
     @extend .yivi-web-loading-animation;
+    visibility: hidden;
     margin: 10px 0;
   }
 
@@ -119,5 +120,9 @@
       width: 24px;
       font-size: 1em;
     }
+  }
+
+  input[type='submit'] {
+    display: none;
   }
 }

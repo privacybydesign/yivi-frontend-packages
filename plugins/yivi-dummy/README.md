@@ -51,6 +51,12 @@ the `qrPayload` option.
 If you want to customize what the Promise resolves to, you can pass anything to
 the `successPayload` option.
 
+### pairingCode
+
+If you are testing the `pairing` dummy flow, a 4-digit pairing code is asked. 
+By default, this is `1234`, but you can change it by setting the `pairingCode` 
+option to a different value.
+
 ### timing
 
 Finally, you can customize the timings of the different stages. Maybe you want
@@ -64,7 +70,9 @@ These are the defaults:
 const yivi = new YiviCore({
   timing: {
     start: 1000,
+    prepare: 1000,
     scan: 2000,
+    pairing: 500,
     app: 2000
   }
 });
