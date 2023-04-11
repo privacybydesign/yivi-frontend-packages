@@ -23,7 +23,7 @@
     width: 33%;
     height: 33%;
     border-radius: 50%;
-    background-color: $yivi-light-blue;
+    background-color: $yivi-link-blue;
     float: left;
 
     @include animation(loading-animation 1.3s infinite ease-in-out);
