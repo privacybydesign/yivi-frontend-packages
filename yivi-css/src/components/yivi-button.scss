@@ -14,18 +14,21 @@
 // Styleguide Components.Yivi button
 
 @import '../mixins/reset', '../mixins/fonts', '../variables/colours',
-  '../variables/sizes';
+  '../variables/sizes', '../mixins/svg-url', '../variables/svg-images';
 
 .yivi-web-button {
   @include reset;
   @include font;
   display: inline-block;
-  padding: 1em 4em;
+  padding: 12px 32px;
+
+  background-image: svg-url($svg-image-yivi-button-background);
+  background-position: right top;
+  background-repeat: no-repeat;
 
   background-color: $button-color;
-  border: 1px solid darken($button-color, 10%);
+  border: 0px solid transparent;
   border-radius: $button-border-radius;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   text-decoration: none;
   color: $button-text-color;
   font-weight: 500;
@@ -40,11 +43,6 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
-
-  &:active {
-    transform: scale3d(0.99, 0.99, 1);
-    transform-origin: center;
-  }
 
   &:focus {
     outline: 0;

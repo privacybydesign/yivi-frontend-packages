@@ -90,8 +90,9 @@
   }
 
   background-color: $background-color;
-  border: 1px solid $border-color;
   border-radius: $border-radius;
+
+  box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.15);
 
   .yivi-web-content {
     @include reset;
@@ -106,7 +107,7 @@
       @include reset;
       @include font($size: 16px, $weight: 18px);
       margin: 1em 4em;
-      color: $yivi-blue;
+      color: $yivi-anthracite;
 
       @include on-small-screen {
         margin: 1em 2em;
@@ -168,14 +169,14 @@
       @include transition(transform 0.4s ease);
 
       a {
-        @include font($color: $yivi-blue, $size: 16px, $weight: 400);
+        @include font($color: $yivi-anthracite, $size: 16px, $weight: 400);
         text-decoration-line: underline;
       }
 
       p {
         margin: 1em;
         text-align: center;
-        @include font($color: $yivi-blue, $size: 16px, $weight: 700);
+        @include font($color: $yivi-anthracite, $size: 16px, $weight: 700);
       }
     }
 
