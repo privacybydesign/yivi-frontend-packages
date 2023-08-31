@@ -1,7 +1,13 @@
-const transitions = require('./state-transitions');
+import transitions from './state-transitions'
 
-module.exports = class StateMachine {
-  constructor(debugging) {
+export default class StateMachine {
+  _state: keyof typeof transitions;
+  _debugging: boolean;
+  _listeners: any[];
+  _inEndState: boolean;
+  _disabledTransitions: any[];
+
+  constructor(debugging: boolean) {
     this._state = transitions.startState;
     this._debugging = debugging;
     this._listeners = [];
