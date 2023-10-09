@@ -15,7 +15,7 @@ module.exports = class YiviPopup {
           this._popupClosedEarly();
         }
         return false;
-      })
+      }),
     );
 
     this._yiviWeb = new YiviWeb({

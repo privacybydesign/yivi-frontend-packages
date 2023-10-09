@@ -27,7 +27,7 @@ module.exports = class YiviDummy {
             this._doTransition('showQRCode', {
               qr: JSON.stringify(this._options.qrPayload),
             }),
-          this._options.timing.prepare
+          this._options.timing.prepare,
         );
         break;
       case 'PreparingYiviButton':
@@ -36,7 +36,7 @@ module.exports = class YiviDummy {
             this._doTransition('showYiviButton', {
               mobile: JSON.stringify(this._options.qrPayload),
             }),
-          this._options.timing.prepare
+          this._options.timing.prepare,
         );
         break;
       case 'ShowingQRCode':

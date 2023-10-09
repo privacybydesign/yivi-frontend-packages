@@ -6,5 +6,5 @@ module.exports = yiviConsole(
     const input = prompt(`⌨️ ${message} Do you want to try again? [Yn]`);
     return ['y', 'Y', ''].indexOf(input) >= 0;
   },
-  () => prompt('Please enter the pairing code that your Yivi app currently shows: ')
+  () => prompt('Please enter the pairing code that your Yivi app currently shows: '),
 );

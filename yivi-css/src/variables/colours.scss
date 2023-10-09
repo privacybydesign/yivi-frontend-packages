@@ -1,19 +1,20 @@
-// Colours
-//
-// Styleguide Variables.colours
+/* Colours
+ *
+ * Styleguide Variables.colours
 
-// Colours from the Yivi app
-//
-// $yivi-anthracite  - #484747; Yivi anthracite
-// $yivi-link-blue   - #00508a; Yivi link blue
-// $yivi-green       - #00973a; Yivi green
-// $yivi-light-blue  - #dcecf5; Yivi light blue
-// $yivi-red         - #e12747; Yivi red
-// $yivi-grey        - #eae5e2; Yivi grey
-//
-// Weight: 1
-//
-// Styleguide Variables.colours.app
+ * Colours from the Yivi app
+ *
+ * $yivi-anthracite  - #484747; Yivi anthracite
+ * $yivi-link-blue   - #00508a; Yivi link blue
+ * $yivi-green       - #00973a; Yivi green
+ * $yivi-light-blue  - #dcecf5; Yivi light blue
+ * $yivi-red         - #e12747; Yivi red
+ * $yivi-grey        - #eae5e2; Yivi grey
+ *
+ * Weight: 1
+ *
+ * Styleguide Variables.colours.app
+ */
 
 $yivi-anthracite: #484747;
 $yivi-link-blue: #00508a;
@@ -22,36 +23,38 @@ $yivi-light-blue: #dcecf5;
 $yivi-red: #e12747;
 $yivi-grey: #eae5e2;
 
-// Colours for interface elements
-//
-// $background-color - #dcecf5; For the background
-// $helper-color     - #dcecf5; For the helper background
-// $content-bg-color - #ffffff; For background of the actual content
-// $button-color     - #e12747; For the background of the buttons
-//
-// Weight: 1
-//
-// Styleguide Variables.colours.app
+/* Colours for interface elements
+ *
+ * $background-color - #dcecf5; For the background
+ * $helper-color     - #dcecf5; For the helper background
+ * $content-bg-color - #ffffff; For background of the actual content
+ * $button-color     - #e12747; For the background of the buttons
+ *
+ * Weight: 1
+ *
+ * Styleguide Variables.colours.app
 
-// From out to in:
+ * From out to in:
+ */
 $background-color: $yivi-light-blue;
 $helper-color: $yivi-light-blue;
 $content-bg-color: white;
 $button-color: $yivi-red;
 
-// Text colours
-//
-// For the fonts
-//
-// $header-text-color        - #484747; For the header text
-// $content-text-color       - #484747; For the content text
-// $content-link-color       - #00508a; For links in the content
-// $content-link-color-hover - #484747; For the hover state on links in the content
-// $button-text-color        - #ffffff; For the button foreground text
-//
-// Weight: 2
-//
-// Styleguide Variables.colours.text
+/* Text colours
+ *
+ * For the fonts
+ *
+ * $header-text-color        - #484747; For the header text
+ * $content-text-color       - #484747; For the content text
+ * $content-link-color       - #00508a; For links in the content
+ * $content-link-color-hover - #484747; For the hover state on links in the content
+ * $button-text-color        - #ffffff; For the button foreground text
+ *
+ * Weight: 2
+ *
+ * Styleguide Variables.colours.text
+ */
 
 $header-text-color: $yivi-anthracite;
 $content-text-color: $yivi-anthracite;

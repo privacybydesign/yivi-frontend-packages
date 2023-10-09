@@ -1,14 +1,15 @@
-// Center
-//
-// Center the content in this element. Both vertically and horizontally.
-//
-// ```css
-// .complicated-element {
-//   @include center;
-// }
-// ```
-//
-// Styleguide Mixins.Center
+/* Center
+ *
+ * Center the content in this element. Both vertically and horizontally.
+ *
+ * ```css
+ * .complicated-element {
+ *   @include center;
+ * }
+ * ```
+ *
+ * Styleguide Mixins.Center
+ */
 
 @mixin center {
   display: flex;

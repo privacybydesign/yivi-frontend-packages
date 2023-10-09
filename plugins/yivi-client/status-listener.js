@@ -47,7 +47,7 @@ module.exports = class StatusListener {
   _getFetchUrl(endpoint) {
     return ProtocolVersion.below(
       this._mappings.frontendRequest.maxProtocolVersion,
-      ProtocolVersion.get('chained-sessions')
+      ProtocolVersion.get('chained-sessions'),
     )
       ? this._options.legacyUrl(this._mappings, endpoint)
       : this._options.url(this._mappings, endpoint);
@@ -130,7 +130,7 @@ module.exports = class StatusListener {
         .then((r) => {
           if (r.status !== 200)
             throw new Error(
-              `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`
+              `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`,
             );
           return r;
         })

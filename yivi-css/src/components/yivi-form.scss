@@ -1,50 +1,51 @@
-// Yivi 'login form'
-//
-// A place to nicely show the different states of the Yivi disclosure flow.
-//
-// <script type="text/javascript">
-//   // Poor man's forEach that works in IE11 too ;)
-//   function eachDo(l, f) { for(var i=0; i < l.length; i++) { f(l[i]); } }
-// </script>
-//
-// Trigger helper:
-// <ul>
-//   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.add('yivi-web-show-helper')})">Show helpers</a></li>
-//   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.remove('yivi-web-show-helper')})">Hide helpers</a></li>
-// </ul>
-//
-// Markup:
-// <section class="yivi-web-form">
-//   <div class="yivi-web-header">
-//     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
-//     <div class="yivi-web-helper">
-//       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
-//     </div>
-//   </div>
-//   <div class="yivi-web-content">
-//     <div class="yivi-web-centered">
-//       <button>Some action here</button>
-//       <p>With some text <a href="#">and stuff</a></p>
-//     </div>
-//   </div>
-// </section>
-// <section class="yivi-web-form">
-//   <div class="yivi-web-header">
-//     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
-//     <div class="yivi-web-helper">
-//       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
-//     </div>
-//     <button class="yivi-web-close"></button>
-//   </div>
-//   <div class="yivi-web-content">
-//     <div class="yivi-web-centered">
-//       <button>Some action here</button>
-//       <p>With some text <a href="#">and stuff</a></p>
-//     </div>
-//   </div>
-// </section>
-//
-// Styleguide Components.Yivi login
+/* Yivi 'login form'
+ *
+ * A place to nicely show the different states of the Yivi disclosure flow.
+ *
+ * <script type="text/javascript">
+ *   // Poor man's forEach that works in IE11 too ;)
+ *   function eachDo(l, f) { for(var i=0; i < l.length; i++) { f(l[i]); } }
+ * </script>
+ *
+ * Trigger helper:
+ * <ul>
+ *   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.add('yivi-web-show-helper')})">Show helpers</a></li>
+ *   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.remove('yivi-web-show-helper')})">Hide helpers</a></li>
+ * </ul>
+ *
+ * Markup:
+ * <section class="yivi-web-form">
+ *   <div class="yivi-web-header">
+ *     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+ *     <div class="yivi-web-helper">
+ *       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+ *     </div>
+ *   </div>
+ *   <div class="yivi-web-content">
+ *     <div class="yivi-web-centered">
+ *       <button>Some action here</button>
+ *       <p>With some text <a href="#">and stuff</a></p>
+ *     </div>
+ *   </div>
+ * </section>
+ * <section class="yivi-web-form">
+ *   <div class="yivi-web-header">
+ *     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+ *     <div class="yivi-web-helper">
+ *       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+ *     </div>
+ *     <button class="yivi-web-close"></button>
+ *   </div>
+ *   <div class="yivi-web-content">
+ *     <div class="yivi-web-centered">
+ *       <button>Some action here</button>
+ *       <p>With some text <a href="#">and stuff</a></p>
+ *     </div>
+ *   </div>
+ * </section>
+ *
+ * Styleguide Components.Yivi login
+ */
 
 @import '../mixins/reset', '../mixins/fonts', '../mixins/responsiveness',
   '../mixins/center', '../mixins/animation', '../variables/colours',

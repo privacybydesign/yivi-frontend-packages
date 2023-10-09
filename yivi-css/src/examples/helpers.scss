@@ -1,35 +1,36 @@
-// Helpers
-//
-// Weight: 0
-//
-// The Yivi form has a notification area for non-state errors that occur outside
-// the disclosure flow. We call these "helpers", and they're supposed to give
-// the user hints about known issues or point to specific resources to help the
-// user along.
-//
-// You can trigger these helpers to show in each and every example on this page.
-//
-// <script type="text/javascript">
-//   // Poor man's forEach that works in IE11 too ;)
-//   function eachDo(l, f) { for(var i=0; i < l.length; i++) { f(l[i]); } }
-// </script>
-//
-// Trigger helper:
-// <ul>
-//   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.add('yivi-web-show-helper')})">Show helpers</a></li>
-//   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.remove('yivi-web-show-helper')})">Hide helpers</a></li>
-// </ul>
-//
-// Markup:
-// <section class="yivi-web-form">
-//   <header class="yivi-web-header yivi-web-show-helper">
-//     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
-//     <section class="yivi-web-helper">
-//       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
-//     </section>
-//   </header>
-//   <section class="yivi-web-content">
-//   </section>
-// </section>
-//
-// Styleguide Examples.Helpers
+/* Helpers
+ *
+ * Weight: 0
+ *
+ * The Yivi form has a notification area for non-state errors that occur outside
+ * the disclosure flow. We call these "helpers", and they're supposed to give
+ * the user hints about known issues or point to specific resources to help the
+ * user along.
+ *
+ * You can trigger these helpers to show in each and every example on this page.
+ *
+ * <script type="text/javascript">
+ *   // Poor man's forEach that works in IE11 too ;)
+ *   function eachDo(l, f) { for(var i=0; i < l.length; i++) { f(l[i]); } }
+ * </script>
+ *
+ * Trigger helper:
+ * <ul>
+ *   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.add('yivi-web-show-helper')})">Show helpers</a></li>
+ *   <li><a href="javascript:eachDo(document.querySelectorAll('.yivi-web-header'), function(h) {h.classList.remove('yivi-web-show-helper')})">Hide helpers</a></li>
+ * </ul>
+ *
+ * Markup:
+ * <section class="yivi-web-form">
+ *   <header class="yivi-web-header yivi-web-show-helper">
+ *     <p>Ga verder met <i class="yivi-web-logo">Yivi</i></p>
+ *     <section class="yivi-web-helper">
+ *       <p>Kom je er niet uit? Kijk dan eerst eens op <a href="https://yivi.app/">de website van Yivi</a>.</p>
+ *     </section>
+ *   </header>
+ *   <section class="yivi-web-content">
+ *   </section>
+ * </section>
+ *
+ * Styleguide Examples.Helpers
+ */

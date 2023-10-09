@@ -1,18 +1,19 @@
-// font($family:, $size:, $color:)
-//
-// Set the default styling for font family and size.
-//
-// ```css
-// p {
-//   @include font;
-// }
-// ```
-//
-// $family - The font family, defaults to $default-font
-// $size   - The font size, defaults to $default-font-size
-// $color  - The color to use for the font, defaults to $text-color
-//
-// Styleguide Mixins.fonts
+/* font($family:, $size:, $color:)
+ *
+ * Set the default styling for font family and size.
+ *
+ * ```css
+ * p {
+ *   @include font;
+ * }
+ * ```
+ *
+ * $family - The font family, defaults to $default-font
+ * $size   - The font size, defaults to $default-font-size
+ * $color  - The color to use for the font, defaults to $text-color
+ *
+ * Styleguide Mixins.fonts
+ */
 
 @import '../variables/fonts', '../variables/colours';
 

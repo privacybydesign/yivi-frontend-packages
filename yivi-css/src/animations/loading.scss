@@ -1,17 +1,22 @@
-// Loading
-//
-// A loading animation that precedes the QR code
-//
-// Markup:
-// <div class="yivi-web-loading-animation">
-//   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-// </div>
-//
-// Styleguide Animations.Loading
+/* Loading
+ *
+ * A loading animation that precedes the QR code
+ *
+ * Markup:
+ * <div class="yivi-web-loading-animation">
+ *   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+ * </div>
+ *
+ * Styleguide Animations.Loading
+ */
 
 @import '../mixins/reset', '../mixins/animation', '../variables/colours';
 
 .yivi-web-loading-animation {
+  @extend %yivi-web-loading-animation;
+}
+
+%yivi-web-loading-animation {
   @include reset($children-too: true);
   display: inline-block;
   width: 39px;
