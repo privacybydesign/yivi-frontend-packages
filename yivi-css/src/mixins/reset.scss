@@ -1,17 +1,18 @@
-/* reset($children-too: false)
- *
- * A mixin that resets margin, background color, padding and box-sizing to reliable defaults on the given element (and optionally all its children).
- *
- * ```css
- * .complicated-element {
- *   @include reset;
- * }
- * ```
- *
- * $children-too - Apply the reset to all the element's children too. Defaults to false. Only use this option if you are sure that no unknown components can ever be a child of your element.
- *
- * Styleguide Mixins.reset
- */
+/*
+reset($children-too: false)
+
+A mixin that resets margin, background color, padding and box-sizing to reliable defaults on the given element (and optionally all its children).
+
+```css
+.complicated-element {
+  @include reset;
+}
+```
+
+$children-too - Apply the reset to all the element's children too. Defaults to false. Only use this option if you are sure that no unknown components can ever be a child of your element.
+
+Styleguide Mixins.reset
+*/
 
 @mixin _reset {
   background-color: inherit;

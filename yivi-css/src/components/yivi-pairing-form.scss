@@ -1,76 +1,77 @@
-/* Yivi pairing form
- *
- * A form to enter the pairing code in order to pair your Yivi app with the session.
- *
- * Markup:
- * <form class="yivi-web-pairing-form">
- *   <p>Vul de koppelcode in die in je Yivi-app verschijnt.</>
- *   <div class="yivi-web-pairing-code">
- *     <input inputmode="numeric" pattern="\d" maxlength="1" required />
- *     <input inputmode="numeric" pattern="\d" maxlength="1" required />
- *     <input inputmode="numeric" pattern="\d" maxlength="1" required />
- *     <input inputmode="numeric" pattern="\d" maxlength="1" required />
- *   </div>
- *   <div class="yivi-web-pairing-loading-animation" style="visibility: hidden">
- *     <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
- *   </div>
- *   <input type="submit" style="display: none" />
- *   <script type="application/javascript">
- *     let form = document.querySelector('.yivi-web-pairing-form');
- *     let inputFields = form.querySelectorAll('.yivi-web-pairing-code input');
- *     inputFields.forEach(field => {
- *       field.onkeydown = (e) => {
- *         e.target.prevValue = e.target.value;
- *         if (e.key != 'Enter') e.target.value = '';
- *       };
- *       field.onkeyup = (e) => {
- *         let prevField = e.target.previousElementSibling;
- *         if (prevField && e.key == 'Backspace' && e.target.value === e.target.prevValue) {
- *           prevField.value = '';
- *           prevField.focus();
- *         }
- *       };
- *       field.oninput = (e) => {
- *         let nextField = e.target.nextElementSibling;
- *         if (!nextField || !e.target.checkValidity()) {
- *           e.target.form.querySelector('input[type=submit]').click();
- *         } else {
- *           nextField.focus();
- *         }
- *       };
- *       field.onfocus = (e) => {
- *         if (!e.target.value) {
- *           e.preventDefault();
- *           e.target.form.querySelector('input:invalid').focus();
- *         }
- *       };
- *     });
- *     inputFields[0].parentElement.onclick = (e) => {
- *       if (e.target.tagName !== 'INPUT') {
- *         let firstInvalidField = form.querySelector('input:invalid');
- *         if (firstInvalidField) firstInvalidField.focus();
- *       }
- *     };
- *     form.onsubmit = (e) => {
- *       e.preventDefault();
- *       let code = Array.prototype.map.call(inputFields, f => {
- *         f.disabled = true;
- *         return f.value;
- *       }).join('');
- *       e.target.querySelector('.yivi-web-pairing-loading-animation').style.visibility = 'visible';
- *       setTimeout(() => {
- *         e.target.reset();
- *         inputFields.forEach(f => f.disabled = false);
- *         inputFields[0].focus();
- *         e.target.querySelector('p').innerHTML = `De ingevoerde koppelcode ${code} komt niet overeen met de code in jouw Yivi-app. Probeer het opnieuw.`;
- *         e.target.querySelector('.yivi-web-pairing-loading-animation').style.visibility = 'hidden';
- *       }, 500);
- *     };
- *   </script>
- * </form>
- *
- * Styleguide Components.Yivi pairing form
- */
+/*
+Yivi pairing form
+
+A form to enter the pairing code in order to pair your Yivi app with the session.
+
+Markup:
+<form class="yivi-web-pairing-form">
+  <p>Vul de koppelcode in die in je Yivi-app verschijnt.</>
+  <div class="yivi-web-pairing-code">
+    <input inputmode="numeric" pattern="\d" maxlength="1" required />
+    <input inputmode="numeric" pattern="\d" maxlength="1" required />
+    <input inputmode="numeric" pattern="\d" maxlength="1" required />
+    <input inputmode="numeric" pattern="\d" maxlength="1" required />
+  </div>
+  <div class="yivi-web-pairing-loading-animation" style="visibility: hidden">
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <input type="submit" style="display: none" />
+  <script type="application/javascript">
+    let form = document.querySelector('.yivi-web-pairing-form');
+    let inputFields = form.querySelectorAll('.yivi-web-pairing-code input');
+    inputFields.forEach(field => {
+      field.onkeydown = (e) => {
+        e.target.prevValue = e.target.value;
+        if (e.key != 'Enter') e.target.value = '';
+      };
+      field.onkeyup = (e) => {
+        let prevField = e.target.previousElementSibling;
+        if (prevField && e.key == 'Backspace' && e.target.value === e.target.prevValue) {
+          prevField.value = '';
+          prevField.focus();
+        }
+      };
+      field.oninput = (e) => {
+        let nextField = e.target.nextElementSibling;
+        if (!nextField || !e.target.checkValidity()) {
+          e.target.form.querySelector('input[type=submit]').click();
+        } else {
+          nextField.focus();
+        }
+      };
+      field.onfocus = (e) => {
+        if (!e.target.value) {
+          e.preventDefault();
+          e.target.form.querySelector('input:invalid').focus();
+        }
+      };
+    });
+    inputFields[0].parentElement.onclick = (e) => {
+      if (e.target.tagName !== 'INPUT') {
+        let firstInvalidField = form.querySelector('input:invalid');
+        if (firstInvalidField) firstInvalidField.focus();
+      }
+    };
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      let code = Array.prototype.map.call(inputFields, f => {
+        f.disabled = true;
+        return f.value;
+      }).join('');
+      e.target.querySelector('.yivi-web-pairing-loading-animation').style.visibility = 'visible';
+      setTimeout(() => {
+        e.target.reset();
+        inputFields.forEach(f => f.disabled = false);
+        inputFields[0].focus();
+        e.target.querySelector('p').innerHTML = `De ingevoerde koppelcode ${code} komt niet overeen met de code in jouw Yivi-app. Probeer het opnieuw.`;
+        e.target.querySelector('.yivi-web-pairing-loading-animation').style.visibility = 'hidden';
+      }, 500);
+    };
+  </script>
+</form>
+
+Styleguide Components.Yivi pairing form
+*/
 
 @import './yivi-button', '../animations/loading', '../mixins/reset',
   '../mixins/fonts', '../mixins/center', '../variables/colours';

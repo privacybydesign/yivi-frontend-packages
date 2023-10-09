@@ -28,22 +28,22 @@
     $chunk: str-replace($chunk, '>', '%3E');
 
     /*
-     *    The maybe list
-     *
-     *    Keep size and compile time down
-     *    ... only add on documented fail
-     *
-     *  $chunk: str-replace($chunk, '|', '%7C');
-     *  $chunk: str-replace($chunk, '[', '%5B');
-     *  $chunk: str-replace($chunk, ']', '%5D');
-     *  $chunk: str-replace($chunk, '^', '%5E');
-     *  $chunk: str-replace($chunk, '`', '%60');
-     *  $chunk: str-replace($chunk, ';', '%3B');
-     *  $chunk: str-replace($chunk, '?', '%3F');
-     *  $chunk: str-replace($chunk, ':', '%3A');
-     *  $chunk: str-replace($chunk, '@', '%40');
-     *  $chunk: str-replace($chunk, '=', '%3D');
-     */
+       The maybe list
+    
+       Keep size and compile time down
+       ... only add on documented fail
+    
+     $chunk: str-replace($chunk, '|', '%7C');
+     $chunk: str-replace($chunk, '[', '%5B');
+     $chunk: str-replace($chunk, ']', '%5D');
+     $chunk: str-replace($chunk, '^', '%5E');
+     $chunk: str-replace($chunk, '`', '%60');
+     $chunk: str-replace($chunk, ';', '%3B');
+     $chunk: str-replace($chunk, '?', '%3F');
+     $chunk: str-replace($chunk, ':', '%3A');
+     $chunk: str-replace($chunk, '@', '%40');
+     $chunk: str-replace($chunk, '=', '%3D');
+    */
 
     $encoded: #{$encoded}#{$chunk};
     $index: $index + $slice;

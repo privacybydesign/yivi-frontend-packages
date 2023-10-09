@@ -1,14 +1,15 @@
-/* Loading
- *
- * A loading animation that precedes the QR code
- *
- * Markup:
- * <div class="yivi-web-loading-animation">
- *   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
- * </div>
- *
- * Styleguide Animations.Loading
- */
+/*
+Loading
+
+A loading animation that precedes the QR code
+
+Markup:
+<div class="yivi-web-loading-animation">
+  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
+
+Styleguide Animations.Loading
+*/
 
 @import '../mixins/reset', '../mixins/animation', '../variables/colours';
 
