@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-web",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A front-end to Yivi flows for in the web browser",
   "main": "index.js",
   "license": "SEE LICENSE IN REPOSITORY",
