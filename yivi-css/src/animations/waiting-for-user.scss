@@ -1,12 +1,14 @@
-// Waiting for user
-//
-// An animation to show while we wait for the user to disclose credentials from
-// their mobile phone
-//
-// Markup:
-// <div class="yivi-web-waiting-for-user-animation"></div>
-//
-// Styleguide Animations.Waiting for user
+/*
+Waiting for user
+
+An animation to show while we wait for the user to disclose credentials from
+their mobile phone
+
+Markup:
+<div class="yivi-web-waiting-for-user-animation"></div>
+
+Styleguide Animations.Waiting for user
+*/
 
 @import '../mixins/reset', '../mixins/animation', '../variables/colours';
 

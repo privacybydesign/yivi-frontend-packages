@@ -15,7 +15,7 @@ module.exports = class YiviCore {
       new mod({
         stateMachine: this._stateMachine,
         options: this._options,
-      })
+      }),
     );
   }
 
@@ -76,7 +76,7 @@ module.exports = class YiviCore {
       (returnValues) => {
         const hasValues = returnValues.some((v) => v !== undefined);
         return hasValues ? [coreReturnValue, ...returnValues] : coreReturnValue;
-      }
+      },
     );
   }
 };

@@ -1,13 +1,15 @@
-// Forbidden
-//
-// A forbidden sign to show issues
-//
-// Markup:
-// <div class="yivi-web-forbidden-animation" onclick="var elm = this; elm.className = ''; setTimeout(function() { elm.className = 'yivi-web-forbidden-animation'; }, 100)"></div>
-//
-// Styleguide Animations.Forbidden
+/*
+Forbidden
 
-@use "sass:math";
+A forbidden sign to show issues
+
+Markup:
+<div class="yivi-web-forbidden-animation" onclick="var elm = this; elm.className = ''; setTimeout(function() { elm.className = 'yivi-web-forbidden-animation'; }, 100)"></div>
+
+Styleguide Animations.Forbidden
+*/
+
+@use 'sass:math';
 
 @import '../mixins/reset', '../mixins/animation', '../variables/colours';
 

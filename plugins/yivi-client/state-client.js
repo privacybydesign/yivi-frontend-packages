@@ -45,11 +45,9 @@ module.exports = class YiviStateClient {
           setTimeout(
             () =>
               this._stateMachine.selectTransition(({ validTransitions }) =>
-                validTransitions.includes('pairingRejected')
-                  ? { transition: 'pairingRejected', payload: payload }
-                  : false
+                validTransitions.includes('pairingRejected') ? { transition: 'pairingRejected', payload } : false,
               ),
-            this._options.state.pairing.minCheckingDelay
+            this._options.state.pairing.minCheckingDelay,
           );
         }
         break;
@@ -78,7 +76,7 @@ module.exports = class YiviStateClient {
     try {
       this._statusListener.observe(
         (s) => this._serverStateChange(s),
-        (e) => this._serverHandleError(e)
+        (e) => this._serverHandleError(e),
       );
     } catch (error) {
       if (this._options.debugging) console.error('Observing server state could not be started: ', error);
@@ -160,25 +158,25 @@ module.exports = class YiviStateClient {
               return this._noSuccessTransition(
                 validTransitions,
                 'fail',
-                new Error('Unknown state received from server')
+                new Error('Unknown state received from server'),
               );
           }
           return false;
-        })
+        }),
       );
   }
 
   _handleNoSuccess(transition, payload) {
     return this._stateMachine.selectTransition(({ validTransitions }) =>
-      this._noSuccessTransition(validTransitions, transition, payload)
+      this._noSuccessTransition(validTransitions, transition, payload),
     );
   }
 
   _noSuccessTransition(validTransitions, transition, payload) {
     if (validTransitions.includes(transition)) {
       return {
-        transition: transition,
-        payload: payload,
+        transition,
+        payload,
         isFinal: !this._canRestart,
       };
     }
@@ -232,7 +230,7 @@ module.exports = class YiviStateClient {
                 }
               : false;
           }
-        })
+        }),
       )
       .catch((err) => {
         if (this._options.debugging) console.error('Error received while updating pairing state:', err);
@@ -254,8 +252,8 @@ module.exports = class YiviStateClient {
       .finally(() => delay)
       .then(() =>
         this._stateMachine.selectTransition(({ validTransitions }) =>
-          validTransitions.includes('appConnected') ? { transition: 'appConnected' } : false
-        )
+          validTransitions.includes('appConnected') ? { transition: 'appConnected' } : false,
+        ),
       )
       .catch((err) => {
         if (this._options.debugging) console.error('Error received while completing pairing:', err);
