@@ -96,6 +96,25 @@ Styleguide Components.Yivi login
 
   box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.15);
 
+  .yivi-web-explanation {
+    @include reset;
+    flex: 1 1 auto;
+    margin: 0 1rem 1rem 1rem;
+    padding: 1rem;
+
+    background-color: $content-bg-color;
+    border-radius: $border-radius;
+
+    @include font($size: 16px, $weight: 18px);
+    color: $yivi-anthracite;
+
+    p {
+      @include reset;
+      @include font($size: 16px, $weight: 18px);
+      color: $yivi-anthracite;
+    }
+  }
+
   .yivi-web-content {
     @include reset;
     @include center;

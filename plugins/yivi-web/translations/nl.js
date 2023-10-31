@@ -15,5 +15,20 @@ module.exports = {
   success: 'Gelukt!',
   cancel: 'Annuleer',
   pairing: 'Vul de koppelcode in die in jouw Yivi-app verschijnt.',
-  pairingFailed: (code) => `De koppelcode ${code} komt niet overeen met de code in je Yivi-app. Probeer het opnieuw.`
+  pairingFailed: (code) => `De koppelcode ${code} komt niet overeen met de code in je Yivi-app. Probeer het opnieuw.`,
+  explanation: function (applicationName, type) {
+    const explanations = {};
+
+    // Type can be 'disclosing', 'issuing' or 'signing'
+    // Only available for ShowingQRCode and ShowingYiviButton states
+    if (type === 'disclosing') {
+      explanations.ShowingQRCode = `<p>Doorloop de volgende stappen:</p><ol><li>Scan deze QR-code met uw Yivi-app.</li><li>Kies in uw Yivi-app of u de gevraagde gegevens wilt delen met ${applicationName}.</li></ol>`;
+    }
+
+    if (type === 'issuing') {
+      explanations.ShowingQRCode = `<p>Doorloop de volgende stappen:</p><ol><li>Scan deze QR-code met uw Yivi-app.</li><li>Kies in uw Yivi-app of u de gegevens wilt toevoegen.</li></ol>`;
+    }
+
+    return explanations;
+  }
 };
