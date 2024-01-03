@@ -1,12 +1,23 @@
-const ProtocolVersion = require('./protocol-version');
+import ProtocolVersion from './protocol-version';
 
 // Never use window.EventSource, because it doesn't support requests with additional HTTP headers.
 // eslint-disable-next-line no-shadow
-const EventSource = require('eventsource');
+import EventSource from 'eventsource';
 
-if (typeof fetch === 'undefined') require('isomorphic-fetch');
+export default class StatusListener {
+  _isRunning: boolean;
+  _isPolling: boolean;
+  _options: any;
+  _mappings: any;
+  _listeningMethod: string;
+  _sseUrl: string;
+  _pollingUrl: string;
+  _fetchParams: any;
+  _stateChangeCallback: any;
+  _errorCallback: any;
+  _source: any;
+  _currentStatus: any;
 
-module.exports = class StatusListener {
   constructor(mappings, options) {
     this._isRunning = false;
     this._isPolling = false;
@@ -140,7 +151,7 @@ module.exports = class StatusListener {
     );
   }
 
-  _polling() {
+  _polling(): Promise<void> {
     return new Promise((resolve, reject) => {
       if (!this._isRunning) {
         this._isPolling = false;

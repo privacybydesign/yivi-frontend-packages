@@ -1,5 +1,5 @@
 // prettier-ignore
-module.exports = {
+export default {
   header: 'Ga verder met <i class="yivi-web-logo">Yivi</i>',
   helper: 'Kom je er niet uit? Kijk dan eens op <a href="https://yivi.app/">de website van Yivi</a>.',
   loading: 'Een moment alstublieft',

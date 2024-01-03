@@ -1,11 +1,14 @@
-const DOMManipulations = require('./dom-manipulations');
-const merge = require('deepmerge');
-const translations = {
-  nl: require('./translations/nl'),
-  en: require('./translations/en'),
-};
+import DOMManipulations from './dom-manipulations';
+import merge from 'deepmerge';
+import * as translations from './translations';
 
-module.exports = class YiviWeb {
+export default class YiviWeb {
+  _stateMachine: any
+  _options: any
+  _lastPayload: any
+  _dom: DOMManipulations
+  _removeVisibilityListener: (event?: Event) => void
+
   constructor({ stateMachine, options }) {
     this._stateMachine = stateMachine;
     this._options = this._sanitizeOptions(options);

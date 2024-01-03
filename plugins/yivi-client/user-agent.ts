@@ -1,8 +1,9 @@
-module.exports = () => {
+export default () => {
   if (typeof window === 'undefined') return 'nodejs';
 
   // IE11 doesn't have window.navigator, test differently
-  // https://stackoverflow.com/questions/21825157/internet-explorer-11-detection
+  // https://stackoverflow.com/questions/21825157/internet-explorer-11-detection\
+  // @ts-ignore
   if (!!window.MSInputMethodContext && !!document.documentMode) return 'Desktop';
 
   if (/Android/i.test(window.navigator.userAgent)) {
@@ -10,6 +11,7 @@ module.exports = () => {
   }
 
   // https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
+  // @ts-ignore
   if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) return 'iOS';
 
   // https://stackoverflow.com/questions/57776001/how-to-detect-ipad-pro-as-ipad-using-javascript

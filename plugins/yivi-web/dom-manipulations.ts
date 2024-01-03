@@ -1,6 +1,16 @@
-const QRCode = require('qrcode');
+import QRCode from 'qrcode';
 
-module.exports = class DOMManipulations {
+export default class DOMManipulations {
+  _element: Element;
+  _translations: Record<string, any>;
+  _showHelper: boolean;
+  _showCloseButton: boolean;
+  _fallbackDelay: number;
+  _eventHandlers = {};
+
+  _clickCallback: (...arg: any[]) => void;
+  _pairingCodeCallback: (...arg: any[]) => void;
+
   constructor(element, options, clickCallback, pairingCodeCallback) {
     this._element = element;
     this._translations = options.translations;
@@ -28,7 +38,7 @@ module.exports = class DOMManipulations {
     if (state.isFinal) {
       this._detachEventHandlers();
       // Make sure all restart buttons are hidden when being in a final state
-      this._element.querySelectorAll('.yivi-web-restart-button').forEach((e) => (e.style.display = 'none'));
+      this._element.querySelectorAll('.yivi-web-restart-button').forEach((e) => ((e as HTMLButtonElement).style.display = 'none'));
     }
   }
 
@@ -56,6 +66,7 @@ module.exports = class DOMManipulations {
   _attachEventHandlers() {
     // Polyfill for Element.matches to fix IE11
     if (!Element.prototype.matches) {
+      // @ts-ignore
       Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
     }
 
@@ -237,7 +248,7 @@ module.exports = class DOMManipulations {
   }
 
   _stateEnterPairingCode({ transition, payload }) {
-    const form = this._element.querySelector('.yivi-web-pairing-form');
+    const form = this._element.querySelector('.yivi-web-pairing-form') as HTMLFormElement;
     const inputFields = this._element.querySelectorAll('.yivi-web-pairing-code input');
     switch (transition) {
       case 'pairingRejected': {
@@ -245,13 +256,13 @@ module.exports = class DOMManipulations {
         textElement.innerHTML = this._translations.pairingFailed(payload.enteredPairingCode);
         textElement.classList.add('yivi-web-error');
         form.reset();
-        inputFields.forEach((f) => (f.disabled = false));
-        form.querySelector('.yivi-web-pairing-loading-animation').style.visibility = 'hidden';
+        inputFields.forEach((f) => ((f as HTMLInputElement).disabled = false));
+        (form.querySelector('.yivi-web-pairing-loading-animation') as HTMLElement).style.visibility = 'hidden';
         return false;
       }
       case 'codeEntered':
-        inputFields.forEach((f) => (f.disabled = true));
-        form.querySelector('.yivi-web-pairing-loading-animation').style.visibility = 'visible';
+        inputFields.forEach((f) => ((f as HTMLInputElement).disabled = true));
+        (form.querySelector('.yivi-web-pairing-loading-animation') as HTMLElement).style.visibility = 'visible';
         return false;
       default:
         return `

@@ -1,4 +1,4 @@
-module.exports = class {
+export default class {
   static _parse(str) {
     const split = str.split('.').map((x) => parseInt(x));
     if (split.length !== 2) throw new Error('Length does not match');

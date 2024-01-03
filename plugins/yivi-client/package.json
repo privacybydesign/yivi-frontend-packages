@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
+    "@types/deepmerge": "^2.2.0",
     "deepmerge": "^4.2.2",
     "eventsource": "^1.0.7",
     "isomorphic-fetch": "^3.0.0"
