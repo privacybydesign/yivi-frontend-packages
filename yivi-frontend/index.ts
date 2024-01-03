@@ -1,9 +1,9 @@
-import '@privacybydesign/yivi-css';
+import '../yivi-css';
 
-import YiviCore from '@privacybydesign/yivi-core';
-import YiviWeb from '@privacybydesign/yivi-web';
-import YiviPopup from '@privacybydesign/yivi-popup';
-import YiviClient from '@privacybydesign/yivi-client';
+import YiviCore from '../yivi-core';
+import YiviWeb from '../plugins/yivi-web';
+import YiviPopup from '../plugins/yivi-popup';
+import YiviClient from '../plugins/yivi-client';
 
 const YiviFrontend = {
   newWeb: (options) => {

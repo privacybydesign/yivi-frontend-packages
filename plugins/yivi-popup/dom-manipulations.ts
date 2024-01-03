@@ -1,4 +1,11 @@
-module.exports = class DOMManipulations {
+export default class DOMManipulations {
+  _element: HTMLElement
+  _options: any
+  _transitionCallback: any
+  _codeEnteredCallback: any
+  _removeEventListeners: any
+  _closeCallback: () => void
+
   constructor(element, closeCallback) {
     this._closeCallback = closeCallback;
     this._element = this._findElement(element);
