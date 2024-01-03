@@ -19,14 +19,14 @@ export default class YiviWeb {
       this._options,
       (t) =>
         this._stateMachine.selectTransition(({ validTransitions }) =>
-          validTransitions.includes(t) ? { transition: t, payload: this._lastPayload } : false
+          validTransitions.includes(t) ? { transition: t, payload: this._lastPayload } : false,
         ),
       (enteredPairingCode) =>
         this._stateMachine.selectTransition(({ validTransitions }) =>
           validTransitions.includes('codeEntered')
             ? { transition: 'codeEntered', payload: { enteredPairingCode } }
-            : false
-        )
+            : false,
+        ),
     );
 
     this._addVisibilityListener();

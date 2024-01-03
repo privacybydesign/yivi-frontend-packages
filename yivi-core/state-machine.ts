@@ -28,7 +28,7 @@ export default class StateMachine {
    */
   transition(transition, payload) {
     console.warn(
-      "The 'transition' function of the yivi-core state machine is deprecated. Please use 'selectTransition'."
+      "The 'transition' function of the yivi-core state machine is deprecated. Please use 'selectTransition'.",
     );
     return this.selectTransition(() => ({ transition, payload }));
   }
@@ -44,7 +44,7 @@ export default class StateMachine {
    */
   finalTransition(transition, payload) {
     console.warn(
-      "The 'finalTransition' function of the yivi-core state machine is deprecated. Please use 'selectTransition'."
+      "The 'finalTransition' function of the yivi-core state machine is deprecated. Please use 'selectTransition'.",
     );
     return this.selectTransition(() => ({
       transition,
@@ -112,11 +112,11 @@ export default class StateMachine {
     this._listeners.forEach((func) =>
       func({
         newState: this._state,
-        oldState: oldState,
-        transition: transition,
+        oldState,
+        transition,
         isFinal: this._inEndState,
-        payload: payload,
-      })
+        payload,
+      }),
     );
   }
 
@@ -127,7 +127,7 @@ export default class StateMachine {
     if (isDisabled) throw new Error(`Transition '${transition}' is currently disabled in state '${this._state}'.`);
     if (isFinal && !transitions.endStates.includes(newState))
       throw new Error(
-        `Transition '${transition}' from state '${this._state}' is marked as final, but resulting state ${newState} cannot be an end state.`
+        `Transition '${transition}' from state '${this._state}' is marked as final, but resulting state ${newState} cannot be an end state.`,
       );
     return newState;
   }

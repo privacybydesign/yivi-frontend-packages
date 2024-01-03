@@ -1,21 +1,23 @@
-// Animation
-//
-// These are some really simple mixins to write clean and DRY animations and
-// leave the annoying vendor specific prefixing to the mixin.
-//
-// Styleguide Mixins.Animation
+/*
+Animation
 
-// animation($animation)
-//
-// A mixin for vendor prefixing the `animation` declaration
-//
-// ```css
-// .complicated-element {
-//   @include animation(animation-name 2s infinite linear);
-// }
-// ```
-//
-// Styleguide Mixins.Animation.animation
+These are some really simple mixins to write clean and DRY animations and
+leave the annoying vendor specific prefixing to the mixin.
+
+Styleguide Mixins.Animation
+
+animation($animation)
+
+A mixin for vendor prefixing the `animation` declaration
+
+```css
+.complicated-element {
+  @include animation(animation-name 2s infinite linear);
+}
+```
+
+Styleguide Mixins.Animation.animation
+*/
 
 @mixin animation($animation) {
   -ms-animation: $animation;
@@ -23,17 +25,19 @@
   animation: $animation;
 }
 
-// animation-delay($delay)
-//
-// A mixin for vendor prefixing the `animation-delay` declaration
-//
-// ```css
-// .complicated-element {
-//   @include animation-delay(2s);
-// }
-// ```
-//
-// Styleguide Mixins.Animation.animation-delay
+/*
+animation-delay($delay)
+
+A mixin for vendor prefixing the `animation-delay` declaration
+
+```css
+.complicated-element {
+  @include animation-delay(2s);
+}
+```
+
+Styleguide Mixins.Animation.animation-delay
+*/
 
 @mixin animation-delay($delay) {
   -ms-animation-delay: $delay;
@@ -41,17 +45,19 @@
   animation-delay: $delay;
 }
 
-// keyframes($name) { ... }
-//
-// A mixin for vendor prefixing the `@keyframes` declaration
-//
-// ```css
-// @include keyframes(animation-name) {
-//   // Your animation here
-// }
-// ```
-//
-// Styleguide Mixins.Animation.keyframes
+/*
+keyframes($name) { ... }
+
+A mixin for vendor prefixing the `@keyframes` declaration
+
+```css
+@include keyframes(animation-name) {
+    // Your animation here
+}
+```
+
+Styleguide Mixins.Animation.keyframes
+*/
 
 @mixin keyframes($name) {
   @-ms-keyframes #{$name} {
@@ -65,17 +71,19 @@
   }
 }
 
-// transition($props);
-//
-// A mixin for vendor prefixing transitions
-//
-// ```css
-// .complicated-element {
-//   @include transition(transform 0.2s ease-in-out);
-// }
-// ```
-//
-// Styleguide Mixins.Animation.transition
+/*
+transition($props);
+
+A mixin for vendor prefixing transitions
+
+```css
+.complicated-element {
+  @include transition(transform 0.2s ease-in-out);
+}
+```
+
+Styleguide Mixins.Animation.transition
+*/
 
 @mixin transition($props) {
   -webkit-transition: -webkit-#{$props};

@@ -65,7 +65,7 @@ module.exports = (askRetry, askPairingCode) => {
     }
 
     _renderQRcode(payload) {
-      qrcode.generate(payload.qr);
+      qrcode.generate(payload.qr, { small: true });
     }
   };
 };

@@ -23,7 +23,7 @@ export default class SessionManagement {
       .then((r) => {
         if (r.status !== 200)
           throw new Error(
-            `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`
+            `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`,
           );
         return r;
       })
@@ -64,7 +64,7 @@ export default class SessionManagement {
       .then((r) => {
         if (r.status !== 200)
           throw new Error(
-            `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`
+            `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`,
           );
         return r;
       })

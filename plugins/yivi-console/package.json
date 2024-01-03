@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-console",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A console based front-end for Yivi flows. Useful for testing or use in nodejs",
   "main": "node.js",
   "browser": "web.js",

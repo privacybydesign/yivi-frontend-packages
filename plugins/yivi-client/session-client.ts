@@ -51,14 +51,14 @@ export default class YiviSessionClient {
               this._onCancel(mappings);
               return false;
             }
-          })
+          }),
         )
         .catch((error) =>
           this._stateMachine.selectTransition(({ validTransitions }) => {
             if (this._options.debugging) console.error('Error starting a new session on the server:', error);
             if (validTransitions.includes('fail')) return { transition: 'fail', payload: error };
             throw error;
-          })
+          }),
         );
     }
   }
@@ -69,15 +69,15 @@ export default class YiviSessionClient {
         .result()
         .then((result) =>
           this._stateMachine.selectTransition(({ validTransitions }) =>
-            validTransitions.includes('succeed') ? { transition: 'succeed', payload: result } : false
-          )
+            validTransitions.includes('succeed') ? { transition: 'succeed', payload: result } : false,
+          ),
         )
         .catch((error) =>
           this._stateMachine.selectTransition(({ validTransitions }) => {
             if (this._options.debugging) console.error('Error getting result from the server:', error);
             if (validTransitions.includes('fail')) return { transition: 'fail', payload: error };
             throw error;
-          })
+          }),
         );
     }
   }

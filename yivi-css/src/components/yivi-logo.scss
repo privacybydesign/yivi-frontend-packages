@@ -1,13 +1,15 @@
-// Yivi logo
-//
-// Change an element into the Yivi logo
-//
-// Markup:
-// <div class="yivi-web-logo" style="width: 70px; height: 60px;"></div>
-// <i class="yivi-web-logo" style="width: 70px; height: 60px;"></i><br/>
-// <i class="yivi-web-logo" style="width: 200px; height: 160px;"></i>
-//
-// Styleguide Components.Yivi logo
+/*
+Yivi logo
+
+Change an element into the Yivi logo
+
+Markup:
+<div class="yivi-web-logo" style="width: 70px; height: 60px;"></div>
+<i class="yivi-web-logo" style="width: 70px; height: 60px;"></i><br/>
+<i class="yivi-web-logo" style="width: 200px; height: 160px;"></i>
+
+Styleguide Components.Yivi logo
+*/
 
 @import '../mixins/reset', '../mixins/svg-url', '../variables/svg-images';
 
