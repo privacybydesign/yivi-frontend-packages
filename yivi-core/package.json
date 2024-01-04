@@ -2,8 +2,21 @@
   "name": "@privacybydesign/yivi-core",
   "version": "0.1.3",
   "description": "The state machine for implementing Yivi flows, that plugins can register on",
-  "main": "index.js",
+  "source": "index.ts",
+  "main": "dist/yivi-core.cjs.js",
+  "module": "dist/yivi-core.esm.js",
+  "types": "dist/yivi-core.d.ts",
   "license": "SEE LICENSE IN REPOSITORY",
+  "scripts": {
+    "watch": "parcel watch",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.10.3",
+    "@parcel/transformer-typescript-types": "^2.10.3",
+    "parcel": "^2.10.3",
+    "typescript": "^5.3.3"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/privacybydesign/yivi-frontend-packages",

@@ -7,7 +7,7 @@ export default class YiviStateClient {
   _stateMachine: any;
   _options: any;
   _mappings: any;
-  _statusListener: any;
+  _statusListener: StatusListener;
   _canRestart: boolean;
   _pairingEnabled: boolean;
   _frontendOptions: any;
