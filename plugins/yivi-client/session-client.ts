@@ -1,7 +1,12 @@
-const ServerSession = require('./session-management');
-const merge = require('deepmerge');
+import ServerSession from './session-management';
+import merge from 'deepmerge';
 
-module.exports = class YiviSessionClient {
+export default class YiviSessionClient {
+  _stateMachine: any;
+  _options: any;
+  _session: any;
+  _onCancel: any;
+  
   constructor({ stateMachine, options, onCancel }) {
     this._stateMachine = stateMachine;
     this._options = this._sanitizeOptions(options);

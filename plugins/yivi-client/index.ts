@@ -1,7 +1,10 @@
-const SessionClient = require('./session-client');
-const StateClient = require('./state-client');
+import SessionClient from './session-client';
+import StateClient from './state-client';
 
-module.exports = class YiviClient {
+export default class YiviClient {
+  _stateClient: StateClient;
+  _sessionClient: SessionClient;
+  
   constructor(args) {
     this._stateClient = new StateClient(args);
     this._sessionClient = new SessionClient({

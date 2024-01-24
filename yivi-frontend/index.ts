@@ -1,11 +1,11 @@
-require('@privacybydesign/yivi-css');
+import '../yivi-css';
 
-const YiviCore = require('@privacybydesign/yivi-core');
-const YiviWeb = require('@privacybydesign/yivi-web');
-const YiviPopup = require('@privacybydesign/yivi-popup');
-const YiviClient = require('@privacybydesign/yivi-client');
+import YiviCore from '../yivi-core';
+import YiviWeb from '../plugins/yivi-web';
+import YiviPopup from '../plugins/yivi-popup';
+import YiviClient from '../plugins/yivi-client';
 
-module.exports = {
+const YiviFrontend = {
   newWeb: (options) => {
     const core = new YiviCore(options);
     core.use(YiviWeb);
@@ -26,3 +26,5 @@ module.exports = {
     };
   },
 };
+
+export default YiviFrontend

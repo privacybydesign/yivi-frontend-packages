@@ -1,7 +1,13 @@
-const StateMachine = require('./state-machine');
+import StateMachine  from './state-machine';
 
-module.exports = class YiviCore {
-  constructor(options) {
+export default class YiviCore {
+  _modules: any[];
+  _options: Record<string, any>;
+  _stateMachine: StateMachine;
+  _resolve: any;
+  _reject: any;
+
+  constructor(options: Record<string, any>) {
     this._modules = [];
     this._options = options || {};
 
@@ -19,7 +25,7 @@ module.exports = class YiviCore {
     );
   }
 
-  start(...input) {
+  start(...input: any[]): Promise<any> {
     if (this._resolve) throw new Error('The yivi-core instance has already been started');
 
     if (this._options.debugging) console.log('Starting session with options:', this._options);
@@ -43,7 +49,7 @@ module.exports = class YiviCore {
     });
   }
 
-  _stateChangeListener(state) {
+  _stateChangeListener(state: any) {
     this._modules.filter((m) => m.stateChange).forEach((m) => m.stateChange(state));
 
     const { newState, payload, isFinal } = state;
@@ -71,7 +77,7 @@ module.exports = class YiviCore {
    * @returns Promise<*coreReturnValue* | *[coreReturnValue, ...]*>
    * @private
    */
-  _close(coreReturnValue) {
+  _close(coreReturnValue: any): Promise<any> {
     return Promise.all(this._modules.map((m) => Promise.resolve(m.close ? m.close() : undefined))).then(
       (returnValues) => {
         const hasValues = returnValues.some((v) => v !== undefined);

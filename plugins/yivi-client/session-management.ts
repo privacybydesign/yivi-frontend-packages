@@ -1,8 +1,9 @@
-const ProtocolVersion = require('./protocol-version');
+import ProtocolVersion from './protocol-version';
 
-if (typeof fetch === 'undefined') require('isomorphic-fetch');
-
-module.exports = class SessionManagement {
+export default class SessionManagement {
+  _options: any;
+  _mappings: any;
+  
   constructor(options) {
     this._options = options;
     this._mappings = {};

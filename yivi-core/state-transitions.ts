@@ -6,7 +6,7 @@
  * try to apply an invalid transition from that state.
  */
 
-module.exports = {
+const stateTransitions = {
   startState: 'Uninitialized',
   endStates: ['BrowserNotSupported', 'Success', 'Aborted', 'Cancelled', 'TimedOut', 'Error'],
 
@@ -118,4 +118,6 @@ module.exports = {
   BrowserNotSupported: {},
   Success: {},
   Aborted: {},
-};
+} as const;
+
+export default stateTransitions;

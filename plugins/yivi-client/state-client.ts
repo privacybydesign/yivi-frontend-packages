@@ -1,12 +1,18 @@
-const ProtocolVersion = require('./protocol-version');
+import ProtocolVersion from './protocol-version';
+import StatusListener from './status-listener';
+import merge from 'deepmerge';
+import userAgent from './user-agent';
 
-if (typeof fetch === 'undefined') require('isomorphic-fetch');
+export default class YiviStateClient {
+  _stateMachine: any;
+  _options: any;
+  _mappings: any;
+  _statusListener: StatusListener;
+  _canRestart: boolean;
+  _pairingEnabled: boolean;
+  _frontendOptions: any;
+  _userAgent: any;
 
-const StatusListener = require('./status-listener');
-const merge = require('deepmerge');
-const userAgent = require('./user-agent');
-
-module.exports = class YiviStateClient {
   constructor({ stateMachine, options }) {
     this._stateMachine = stateMachine;
     this._options = this._sanitizeOptions(options);
@@ -36,7 +42,7 @@ module.exports = class YiviStateClient {
         break;
       case 'ShowingQRCode':
       case 'ShowingYiviButton':
-        this._startWatchingServerState(payload);
+        this._startWatchingServerState();
         break;
       case 'Pairing':
         if (this._frontendOptions.pairingCode === payload.enteredPairingCode) {
@@ -172,7 +178,7 @@ module.exports = class YiviStateClient {
     );
   }
 
-  _noSuccessTransition(validTransitions, transition, payload) {
+  _noSuccessTransition(validTransitions, transition, payload?: any) {
     if (validTransitions.includes(transition)) {
       return {
         transition,

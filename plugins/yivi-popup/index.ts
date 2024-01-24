@@ -1,8 +1,14 @@
-const YiviWeb = require('@privacybydesign/yivi-web');
-const DOMManipulations = require('./dom-manipulations');
-const merge = require('deepmerge');
+import YiviWeb from '@privacybydesign/yivi-web';
+import DOMManipulations from './dom-manipulations';
+import merge from 'deepmerge';
 
-module.exports = class YiviPopup {
+export default class YiviPopup {
+  _stateMachine: any;
+  _options: any;
+  _dom: DOMManipulations;
+  _yiviWeb: YiviWeb;
+  _popupClosedEarly: any;
+  
   constructor({ stateMachine, options }) {
     this._stateMachine = stateMachine;
     this._options = this._sanitizeOptions(options);
@@ -46,7 +52,7 @@ module.exports = class YiviPopup {
     if (!this._dom.isPopupActive()) return Promise.resolve();
 
     // Delay closing pop-up so that the user can see the animation.
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this._popupClosedEarly = resolve;
       window.setTimeout(() => {
         // Popup might already be closed in the meantime.
