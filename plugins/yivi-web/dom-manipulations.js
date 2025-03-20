@@ -40,7 +40,7 @@ module.exports = class DOMManipulations {
   }
 
   setButtonLink(link) {
-    this._element.querySelector('.yivi-web-button-link').setAttribute('href', link);
+    this._element.querySelector('.yivi-web-button-link').setAttribute('href', link).setAttribute('target', '_top');
   }
 
   _renderInitialState() {
