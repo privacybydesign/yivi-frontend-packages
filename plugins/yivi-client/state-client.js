@@ -211,11 +211,12 @@ module.exports = class YiviStateClient {
       .then(() =>
         this._stateMachine.selectTransition(({ validTransitions }) => {
           if (continueOnSecondDevice) {
+            const jsonSessionPtr = encodeURIComponent(JSON.stringify(this._mappings.sessionPtr));
             return validTransitions.includes('showQRCode')
               ? {
                   transition: 'showQRCode',
                   payload: {
-                    qr: JSON.stringify(this._mappings.sessionPtr),
+                    qr: `https://open.yivi.app/-/session#${jsonSessionPtr}`,
                     showBackButton: prevTransition === 'chooseQR',
                   },
                 }
@@ -293,7 +294,7 @@ module.exports = class YiviStateClient {
         return `intent://qr/json/${encodeURIComponent(json)}#${intent};end`;
       }
       case 'iOS': {
-        return `https://irma.app/-/session#${encodeURIComponent(json)}`;
+        return `https://open.yivi.app/-/session#${encodeURIComponent(json)}`;
       }
       default: {
         throw new Error('Device type is not supported.');
