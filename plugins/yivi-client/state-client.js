@@ -211,7 +211,11 @@ module.exports = class YiviStateClient {
       .then(() =>
         this._stateMachine.selectTransition(({ validTransitions }) => {
           if (continueOnSecondDevice) {
-            const jsonSessionPtr = encodeURIComponent(JSON.stringify(this._mappings.sessionPtr));
+            const crossDeviceJson = {
+              ...this._mappings.sessionPtr,
+              continueOnSecondDevice: true,
+            };
+            const jsonSessionPtr = encodeURIComponent(JSON.stringify(crossDeviceJson));
             return validTransitions.includes('showQRCode')
               ? {
                   transition: 'showQRCode',

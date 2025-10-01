@@ -5,6 +5,7 @@
     "> 0.25%, not dead"
   ],
   "scripts": {
+    "fmt": "eslint . --fix",
     "lint-js": "eslint . --ext .js",
     "lint-css": "stylelint yivi-css/src/",
     "lint": "npm run lint-js && npm run lint-css",
