@@ -1,6 +1,5 @@
 {
   "name": "yivi-frontend-packages",
-  "version": "2.1.0",
   "license": "MIT",
   "browserslist": [
     "> 0.25%, not dead"
