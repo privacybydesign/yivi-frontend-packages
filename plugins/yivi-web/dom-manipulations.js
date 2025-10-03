@@ -40,7 +40,17 @@ module.exports = class DOMManipulations {
   }
 
   setButtonLink(link) {
-    this._element.querySelector('.yivi-web-button-link').setAttribute('href', link);
+    const anchor = this._element.querySelector('.yivi-web-button-link');
+    anchor.setAttribute('href', link);
+
+    // On iOS the https://irma.app/-/session#[...] url does not open
+    // the Yivi app within an iframe.  Setting target="_top" solves this.
+    //
+    // But setting target="_top" breaks Adroid intent links.
+    // Whence:
+    if (!link.startsWith('intent')) {
+      anchor.setAttribute('target', '_top');
+    }
   }
 
   _renderInitialState() {
