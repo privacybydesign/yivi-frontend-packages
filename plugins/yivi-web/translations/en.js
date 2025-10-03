@@ -15,5 +15,20 @@ module.exports = {
   success: 'Success!',
   cancel: 'Cancel',
   pairing: 'Enter the pairing code that your Yivi app currently shows.',
-  pairingFailed: (code) => `The pairing code ${code} does not match the code in your Yivi app. Please try again.`
+  pairingFailed: (code) => `The pairing code ${code} does not match the code in your Yivi app. Please try again.`,
+  explanation: function (applicationName, type) {
+    const explanations = {};
+
+    // Type can be 'disclosing', 'issuing' or 'signing'
+    // Only available for ShowingQRCode and ShowingYiviButton states
+    if (type === 'disclosing') {
+      explanations.ShowingQRCode = `<p>Follow the following steps:</p><ol><li>Scan the QR-code with your Yivi-app.</li><li>Choose in the Yivi-app if you want share the requested data with ${applicationName}.</li></ol>`;
+    }
+
+    if (type === 'issuing') {
+      explanations.ShowingQRCode = `<p>Follow the following steps:</p><ol><li>Scan the QR-code with your Yivi-app.</li><li>Choose in the Yivi-app if you want to add the data.</li></ol>`;
+    }
+
+    return explanations;
+  }
 };

@@ -6,8 +6,10 @@ module.exports = class DOMManipulations {
     this._translations = options.translations;
     this._showHelper = options.showHelper;
     this._showCloseButton = options.showCloseButton;
+    this._showExplanation = options.showExplanation;
     this._fallbackDelay = options.fallbackDelay;
     this._eventHandlers = {};
+    this._applicationName = options.applicationName;
 
     this._clickCallback = clickCallback;
     this._pairingCodeCallback = pairingCodeCallback;
@@ -20,6 +22,7 @@ module.exports = class DOMManipulations {
     const newPartial = this._stateToPartialMapping()[state.newState];
     if (!newPartial) throw new Error(`I don't know how to render '${state.newState}'`);
     this._renderPartial(newPartial, state);
+    this._renderExplanation(state);
 
     if (state.oldState === 'ShowingYiviButton' && !this._showHelper) {
       this._element.querySelector('.yivi-web-header').classList.remove('yivi-web-show-helper');
@@ -184,12 +187,34 @@ module.exports = class DOMManipulations {
             : ''
         }
       </div>
+      ${
+        this._showExplanation
+          ? `
+        <div class="yivi-web-explanation" style="display: none;"></div>
+      `
+          : ''
+      }
       <div class="yivi-web-content">
         <div class="yivi-web-centered">
           ${content}
         </div>
       </div>
     `;
+  }
+
+  _renderExplanation({ newState, payload }) {
+    if (newState === undefined) {
+      return;
+    }
+
+    const content = this._translations.explanation(this._applicationName, payload?.type)[newState];
+    if (!content) {
+      this._element.querySelector('.yivi-web-explanation').style.display = 'none';
+      return;
+    }
+
+    this._element.querySelector('.yivi-web-explanation').style.display = null;
+    this._element.querySelector('.yivi-web-explanation').innerHTML = content;
   }
 
   /** States markup **/

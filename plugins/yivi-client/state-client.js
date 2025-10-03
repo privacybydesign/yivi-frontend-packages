@@ -222,6 +222,7 @@ module.exports = class YiviStateClient {
                   payload: {
                     qr: `https://open.yivi.app/-/session#${jsonSessionPtr}`,
                     showBackButton: prevTransition === 'chooseQR',
+                    type: this._mappings.sessionPtr.irmaqr,
                   },
                 }
               : false;
@@ -231,6 +232,7 @@ module.exports = class YiviStateClient {
                   transition: 'showYiviButton',
                   payload: {
                     mobile: this._getMobileUrl(this._mappings.sessionPtr),
+                    type: this._mappings.sessionPtr.irmaqr,
                   },
                 }
               : false;

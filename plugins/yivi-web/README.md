@@ -79,3 +79,10 @@ becomes visible when the user presses the button to open the Yivi app, and the a
 So, when `showHelper` is set to false, the helper is only visible as fallback and disappears
 again as soon as the happy flow continues. When `showHelper` is set to true, the helper will
 be visible unconditionally._
+
+### showExplanation
+
+The option `showExplanation` is a boolean that determines if the explanation text
+should be shown. Default is false.
+
+_Note: the explanation text can be updated using the `translations` option.
