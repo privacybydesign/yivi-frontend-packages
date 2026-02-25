@@ -114,17 +114,6 @@ Styleguide Components.Yivi login
         margin: 1em 2em;
       }
     }
-
-    a {
-      @include reset;
-      @include font($color: $content-link-color);
-      text-decoration: underline;
-      cursor: pointer;
-
-      &:hover {
-        color: $content-link-color-hover;
-      }
-    }
   }
 
   .yivi-web-header {

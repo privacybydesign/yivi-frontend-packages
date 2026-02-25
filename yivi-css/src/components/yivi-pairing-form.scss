@@ -96,10 +96,6 @@ Styleguide Components.Yivi pairing form
     align-self: center;
   }
 
-  button {
-    @extend %yivi-web-button;
-  }
-
   .yivi-web-pairing-loading-animation {
     @extend %yivi-web-loading-animation;
     visibility: hidden;

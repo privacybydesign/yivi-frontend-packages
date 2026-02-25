@@ -21,6 +21,12 @@ Styleguide Components.Yivi button
 .yivi-web-button {
   @extend %yivi-web-button;
 }
+.yivi-web-button-secondary {
+  @extend %yivi-web-button-secondary;
+}
+.yivi-web-button-tertiary {
+  @extend %yivi-web-button-tertiary;
+}
 
 %yivi-web-button {
   @include reset;
@@ -49,4 +55,51 @@ Styleguide Components.Yivi button
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+
+  &:hover {
+    box-shadow: 0 .1em .1em rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0.1em);
+    box-shadow: none;
+  }
+}
+
+%yivi-web-button-secondary {
+  @include reset;
+  @include font;
+  display: inline-block;
+  padding: 10px 30px;
+
+  color: $yivi-anthracite;
+  border: 2px solid $yivi-anthracite;
+  border-radius: $button-border-radius;
+  background-color: $button-text-color;
+
+  &:hover {
+    color: darken($yivi-anthracite, 5%);
+    border-color: darken($yivi-anthracite, 5%);
+    background-color: transparentize($yivi-anthracite, 0.9);
+    box-shadow: 0 .1em .1em rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0.1em);
+    box-shadow: none;
+  }
+}
+
+%yivi-web-button-tertiary {
+  @include reset;
+  @include font;
+  display: inline-block;
+  border: 0;
+
+  color: $content-link-color;
+  text-decoration: underline;
+
+  &:hover {
+    color: $content-link-color-hover;
+  }
 }
