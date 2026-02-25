@@ -23,6 +23,12 @@ Styleguide Mixins.Animation.animation
   -ms-animation: $animation;
   -webkit-animation: $animation;
   animation: $animation;
+
+  @media (prefers-reduced-motion: reduce) {
+    -ms-animation-duration: 0s;
+    -webkit-animation-duration: 0s;
+    animation-duration: 0s;
+  }
 }
 
 /*
