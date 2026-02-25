@@ -229,8 +229,8 @@ module.exports = class DOMManipulations {
   _stateShowingYiviButton() {
     return `
       <!-- State: ShowingButton -->
-      <a class="yivi-web-button-link">
-        <button class="yivi-web-button">${this._translations.button}</button>
+      <a class="yivi-web-button-link yivi-web-button">
+        ${this._translations.button}
       </a>
       <p><button class="yivi-web-button-secondary" data-yivi-glue-transition="chooseQR">${this._translations.qrCode}</button></p>
     `;
