@@ -57,7 +57,7 @@ Styleguide Components.Yivi button
                                   supported by Chrome and Opera */
 
   &:hover {
-    box-shadow: 0 .1em .1em rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.1em 0.1em rgba(0, 0, 0, 0.3);
   }
 
   &:active {
@@ -78,10 +78,10 @@ Styleguide Components.Yivi button
   background-color: $button-text-color;
 
   &:hover {
-    color: darken($yivi-anthracite, 5%);
-    border-color: darken($yivi-anthracite, 5%);
-    background-color: transparentize($yivi-anthracite, 0.9);
-    box-shadow: 0 .1em .1em rgba(0, 0, 0, 0.2);
+    color: oklch(from $yivi-anthracite calc(l - 0.05) c h);
+    border-color: oklch(from $yivi-anthracite calc(l - 0.05) c h);
+    background-color: oklch(from $yivi-anthracite l c h / calc(alpha - 0.9));
+    box-shadow: 0 0.1em 0.1em rgba(0, 0, 0, 0.2);
   }
 
   &:active {
