@@ -21,7 +21,7 @@
     "build:popup": "npm run build -w @privacybydesign/yivi-popup",
     "build:frontend": "npm run build -w @privacybydesign/yivi-frontend",
     "build:css": "npm run build -w yivi-css --if-present",
-    "build": "npm run build:core && npm run build:plugins && npm run build:popup && npm run build:frontend && npm run build:css",
+    "build": "npm run build:css && npm run build:core && npm run build:plugins && npm run build:popup && npm run build:frontend",
     "dev": "npm run dev --workspaces --if-present",
     "typecheck": "tsc --build",
     "test": "vitest run",
