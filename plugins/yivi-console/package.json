@@ -2,12 +2,61 @@
   "name": "@privacybydesign/yivi-console",
   "version": "0.2.1",
   "description": "A console based front-end for Yivi flows. Useful for testing or use in nodejs",
-  "main": "node.js",
-  "browser": "web.js",
+  "type": "module",
+  "main": "./dist/node.cjs",
+  "module": "./dist/node.js",
+  "browser": "./dist/web.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./node": {
+      "import": {
+        "types": "./dist/node.d.ts",
+        "default": "./dist/node.js"
+      },
+      "require": {
+        "types": "./dist/node.d.cts",
+        "default": "./dist/node.cjs"
+      }
+    },
+    "./web": {
+      "import": {
+        "types": "./dist/web.d.ts",
+        "default": "./dist/web.js"
+      },
+      "require": {
+        "types": "./dist/web.d.cts",
+        "default": "./dist/web.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "prompt-sync": "^4.1.7",
     "qrcode-terminal": "^0.12.0"
+  },
+  "peerDependencies": {
+    "@privacybydesign/yivi-core": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/prompt-sync": "^4.2.0",
+    "@types/qrcode-terminal": "^0.12.0"
   },
   "repository": {
     "type": "git",

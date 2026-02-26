@@ -1,21 +1,27 @@
 {
   "name": "yivi-frontend-packages",
+  "private": true,
   "license": "MIT",
+  "workspaces": [
+    "yivi-core",
+    "yivi-css",
+    "yivi-frontend",
+    "plugins/*"
+  ],
   "browserslist": [
     "> 0.25%, not dead"
   ],
   "scripts": {
     "fmt": "eslint . --fix",
-    "lint-js": "eslint . --ext .js",
+    "lint-js": "eslint . --ext .js,.ts",
     "lint-css": "stylelint yivi-css/src/",
     "lint": "npm run lint-js && npm run lint-css",
-    "install": "set -eux; for pkg in `find . -maxdepth 2 -type d -name 'yivi-*'`; do (cd $pkg && npm install); done",
-    "link": "npm run link-yivi-popup && npm run link-yivi-frontend",
-    "link-yivi-popup": "cd ./plugins/yivi-popup && npm install ../yivi-web --no-save",
-    "link-yivi-frontend": "cd ./yivi-frontend && npm install ../yivi-core ../yivi-css ../plugins/yivi-client ../plugins/yivi-web ../plugins/yivi-popup --no-save",
-    "build": "set -eux; for pkg in ./yivi-css ./yivi-frontend; do (cd $pkg; npm run release); done"
+    "build": "npm run build --workspaces --if-present",
+    "dev": "npm run dev --workspaces --if-present",
+    "typecheck": "tsc --build"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-prettier-standard": "^4.0.1",
@@ -30,7 +36,9 @@
     "stylelint": "^15.10.3",
     "stylelint-config-recommended-scss": "^13.0.0",
     "stylelint-prettier": "^4.0.2",
-    "stylelint-scss": "^5.2.1"
+    "stylelint-scss": "^5.2.1",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
   },
   "repository": {
     "type": "git",

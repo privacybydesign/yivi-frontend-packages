@@ -2,11 +2,39 @@
   "name": "@privacybydesign/yivi-web",
   "version": "0.2.1",
   "description": "A front-end to Yivi flows for in the web browser",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "deepmerge": "^4.2.2",
     "qrcode": "^1.4.2"
+  },
+  "peerDependencies": {
+    "@privacybydesign/yivi-core": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.0"
   },
   "repository": {
     "type": "git",

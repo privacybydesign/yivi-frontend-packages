@@ -1,36 +1,63 @@
 {
-    "name": "@privacybydesign/yivi-frontend",
-    "version": "0.2.1",
-    "description": "A simplified package of yivi-frontend modules to get started easily",
-    "main": "dist/yivi.js",
-    "scripts": {
-        "dev": "webpack --mode development --watch",
-        "build": "webpack --mode production",
-        "release": "npm run build"
-    },
-    "license": "SEE LICENSE IN REPOSITORY",
-    "browserslist": [
-        "> 0.25%, not dead"
-    ],
-    "devDependencies": {
-        "@babel/core": "^7.15.0",
-        "@babel/preset-env": "^7.15.6",
-        "@privacybydesign/yivi-client": "^0.2.1",
-        "@privacybydesign/yivi-core": "^0.2.1",
-        "@privacybydesign/yivi-css": "^0.2.1",
-        "@privacybydesign/yivi-popup": "^0.2.1",
-        "@privacybydesign/yivi-web": "^0.2.1",
-        "babel-loader": "^9.1.2",
-        "core-js": "^3.16.3",
-        "css-loader": "^6.3.0",
-        "node-polyfill-webpack-plugin": "^2.0.1",
-        "style-loader": "^3.3.0",
-        "webpack": "^5.76.3",
-        "webpack-cli": "^4.8.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/privacybydesign/yivi-frontend-packages",
-        "directory": "yivi-frontend"
+  "name": "@privacybydesign/yivi-frontend",
+  "version": "0.2.1",
+  "description": "A simplified package of yivi-frontend modules to get started easily",
+  "type": "module",
+  "main": "./dist/yivi.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/yivi.js"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build:webpack": "webpack --mode production",
+    "build:esm": "tsup",
+    "build": "npm run build:esm && npm run build:webpack",
+    "release": "npm run build"
+  },
+  "license": "SEE LICENSE IN REPOSITORY",
+  "browserslist": [
+    "> 0.25%, not dead"
+  ],
+  "dependencies": {
+    "@privacybydesign/yivi-client": "^0.2.1",
+    "@privacybydesign/yivi-core": "^0.2.1",
+    "@privacybydesign/yivi-css": "^0.2.1",
+    "@privacybydesign/yivi-popup": "^0.2.1",
+    "@privacybydesign/yivi-web": "^0.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^9.1.2",
+    "core-js": "^3.16.3",
+    "css-loader": "^6.3.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "style-loader": "^3.3.0",
+    "ts-loader": "^9.5.0",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^4.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/privacybydesign/yivi-frontend-packages",
+    "directory": "yivi-frontend"
+  }
 }
