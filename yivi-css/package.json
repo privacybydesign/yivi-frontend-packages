@@ -30,7 +30,8 @@
     "watch-images": "onchange 'assets/images/*.*' -- npm run svg-images",
     "svg-images": "echo \"// This file is auto-generated from the assets/images directory, so don't bother manually changing it.\" > src/variables/svg-images.scss; for file in assets/images/*; do [ -e \"$file\" ] || continue; svgo=`svgo \"$file\" -o -`; name=`basename \"$file\" .svg`; echo \"\\$svg-image-$name: '$svgo';\" >> src/variables/svg-images.scss; done",
     "dev": "npm run clean && concurrently --kill-others \"npm run watch-stylesheets\" \"npm run watch-images\"",
-    "release": "sass src/dist.scss dist/yivi.css && uglifycss --output dist/yivi.min.css dist/yivi.css"
+    "build": "sass src/dist.scss dist/yivi.css && uglifycss --output dist/yivi.min.css dist/yivi.css",
+    "release": "npm run build"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
