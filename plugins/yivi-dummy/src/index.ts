@@ -52,7 +52,7 @@ export default class YiviDummy {
         setTimeout(
           () =>
             this._doTransition('showQRCode', {
-              qr: JSON.stringify(this._options.qrPayload),
+              qr: this._getUniversalLink(),
             }),
           this._options.timing.prepare,
         );
@@ -61,7 +61,7 @@ export default class YiviDummy {
         setTimeout(
           () =>
             this._doTransition('showYiviButton', {
-              mobile: JSON.stringify(this._options.qrPayload),
+              mobile: this._getMobileLink(),
             }),
           this._options.timing.prepare,
         );
@@ -159,11 +159,25 @@ export default class YiviDummy {
     }, this._options.timing.app);
   }
 
+  private _getUniversalLink(): string {
+    const sessionPtr = {
+      ...this._options.qrPayload,
+      continueOnSecondDevice: true,
+    };
+    return `https://open.yivi.app/-/session#${encodeURIComponent(JSON.stringify(sessionPtr))}`;
+  }
+
+  private _getMobileLink(): string {
+    const sessionPtr = this._options.qrPayload;
+    return `https://open.yivi.app/-/session#${encodeURIComponent(JSON.stringify(sessionPtr))}`;
+  }
+
   private _sanitizeOptions(options: YiviOptions): DummyOptions {
     const defaults = {
       dummy: 'happy path',
       qrPayload: {
-        message: 'Just be patient ;)',
+        u: 'https://example.com/irma/session/dummy',
+        irmaqr: 'disclosing',
       },
       successPayload: {
         disclosed: 'Some attributes',
