@@ -81,7 +81,9 @@ describe('YiviCore Integration', () => {
       const resultPromise = yivi.start();
 
       // Wait a bit then abort
-      await new Promise((resolve) => setTimeout(resolve, 50));
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 50);
+      });
       await yivi.abort();
 
       // Abort results in rejection with 'Aborted'
@@ -156,6 +158,7 @@ describe('YiviCore Integration', () => {
         constructor({ options }: any) {
           receivedOptions = options;
         }
+
         start() {}
       };
 
@@ -177,6 +180,7 @@ describe('YiviCore Integration', () => {
         constructor({ stateMachine }: any) {
           receivedStateMachine = stateMachine;
         }
+
         start() {}
       };
 

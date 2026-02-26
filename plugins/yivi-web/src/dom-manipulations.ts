@@ -72,7 +72,9 @@ export default class DOMManipulations {
     if (state.isFinal) {
       this._detachEventHandlers();
       // Make sure all restart buttons are hidden when being in a final state
-      this._element.querySelectorAll<HTMLElement>('.yivi-web-restart-button').forEach((e) => (e.style.display = 'none'));
+      this._element
+        .querySelectorAll<HTMLElement>('.yivi-web-restart-button')
+        .forEach((e) => (e.style.display = 'none'));
     }
   }
 

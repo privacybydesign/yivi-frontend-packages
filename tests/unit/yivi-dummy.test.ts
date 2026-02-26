@@ -13,6 +13,7 @@ describe('YiviDummy', () => {
             stateChanges.push(event);
           });
         }
+
         start() {}
       };
 
@@ -41,6 +42,7 @@ describe('YiviDummy', () => {
             stateChanges.push(event);
           });
         }
+
         start() {}
       };
 
@@ -83,6 +85,7 @@ describe('YiviDummy', () => {
             stateChanges.push(event);
           });
         }
+
         start() {}
       };
 
@@ -119,6 +122,7 @@ describe('YiviDummy', () => {
             states.push(event.newState);
           });
         }
+
         start() {}
       };
 

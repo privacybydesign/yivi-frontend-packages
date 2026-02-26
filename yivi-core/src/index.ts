@@ -1,10 +1,5 @@
 import StateMachine from './state-machine';
-import type {
-  YiviOptions,
-  YiviPlugin,
-  YiviPluginConstructor,
-  StateChangeEvent,
-} from './types';
+import type { YiviOptions, YiviPlugin, YiviPluginConstructor, StateChangeEvent } from './types';
 
 export default class YiviCore {
   private _modules: YiviPlugin[];

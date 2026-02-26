@@ -139,9 +139,9 @@ describe('StateMachine', () => {
       // Navigate to an end state
       await stateMachine.selectTransition(() => ({ transition: 'browserError', isFinal: true }));
 
-      await expect(
-        stateMachine.selectTransition(() => ({ transition: 'initialize' })),
-      ).rejects.toThrow('State machine is in an end state');
+      await expect(stateMachine.selectTransition(() => ({ transition: 'initialize' }))).rejects.toThrow(
+        'State machine is in an end state',
+      );
     });
   });
 
@@ -184,9 +184,7 @@ describe('StateMachine', () => {
 
       await debugStateMachine.selectTransition(() => ({ transition: 'initialize' }));
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining("State change: 'Uninitialized' -> 'Loading'"),
-      );
+      expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("State change: 'Uninitialized' -> 'Loading'"));
 
       consoleSpy.mockRestore();
     });

@@ -113,8 +113,7 @@ export default class StateMachine implements IStateMachine {
       throw new Error(`State machine is in an end state. No transitions are allowed from ${oldState}.`);
     this._state = this._getNewState(transition, isFinal);
 
-    if (this._debugging)
-      console.debug(`State change: '${oldState}' -> '${this._state}' (because of '${transition}')`);
+    if (this._debugging) console.debug(`State change: '${oldState}' -> '${this._state}' (because of '${transition}')`);
 
     // State is also an end state when no transitions are available from that state. We exclude the
     // abort transition since abort is only intended to turn a non end state into an end state.

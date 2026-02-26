@@ -157,17 +157,19 @@ export default class StatusListener {
   }
 
   private _pollOnce(): Promise<ServerState> {
-    return fetch(this._pollingUrl, { ...this._fetchParams, cache: 'no-store' })
-      .then((r) => {
-        if (r.status !== 200)
-          throw new Error(
-            `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`,
-          );
-        return r;
-      })
-      .then((r) => r.json() as Promise<ServerState | string>)
-      // Do additional parsing in case we received the legacy status response.
-      .then((state): ServerState => (typeof state === 'string' ? { status: state } : state));
+    return (
+      fetch(this._pollingUrl, { ...this._fetchParams, cache: 'no-store' })
+        .then((r) => {
+          if (r.status !== 200)
+            throw new Error(
+              `Error in fetch: endpoint returned status other than 200 OK. Status: ${r.status} ${r.statusText}`,
+            );
+          return r;
+        })
+        .then((r) => r.json() as Promise<ServerState | string>)
+        // Do additional parsing in case we received the legacy status response.
+        .then((state): ServerState => (typeof state === 'string' ? { status: state } : state))
+    );
   }
 
   private _polling(): Promise<void> {

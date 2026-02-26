@@ -30,17 +30,50 @@
             "Promise"
         ]
     },
+    "ignorePatterns": [
+        "dist",
+        "coverage",
+        "*.d.ts"
+    ],
     "overrides": [
         {
-            "files": ["plugins/yivi-web/**/*.js", "plugins/yivi-popup/**/*.js", "yivi-frontend/**/*.js"],
+            "files": ["**/*.ts"],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "ecmaVersion": 2021,
+                "sourceType": "module"
+            },
+            "plugins": ["@typescript-eslint"],
+            "extends": [
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "no-shadow": "off",
+                "@typescript-eslint/no-shadow": ["error", {"builtinGlobals": true, "ignoreTypeValueShadow": true, "allow": ["event", "EventSource", "exports"]}],
+                "no-unused-vars": "off",
+                "@typescript-eslint/no-unused-vars": ["error", {"argsIgnorePattern": "^_"}],
+                "@typescript-eslint/no-explicit-any": "off",
+                "no-use-before-define": "off",
+                "@typescript-eslint/no-use-before-define": "off",
+                "new-cap": "off"
+            }
+        },
+        {
+            "files": ["plugins/yivi-web/**/*.ts", "plugins/yivi-popup/**/*.ts", "yivi-frontend/**/*.ts"],
             "env": {
                 "node": false
             }
         },
         {
-            "files": ["plugins/yivi-console/node.js"],
+            "files": ["plugins/yivi-console/src/node.ts"],
             "env": {
                 "browser": false
+            }
+        },
+        {
+            "files": ["tests/**/*.ts"],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "off"
             }
         }
     ]

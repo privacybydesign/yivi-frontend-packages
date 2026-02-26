@@ -130,24 +130,28 @@ export interface IStateMachine {
  */
 export interface YiviSessionOptions {
   url?: string;
-  start?: {
-    url?: string | ((options: YiviSessionOptions) => string);
-    parseResponse?: (response: Response) => unknown | Promise<unknown>;
-    method?: string;
-    headers?: Record<string, string>;
-    body?: string;
-  } | false;
+  start?:
+    | {
+        url?: string | ((options: YiviSessionOptions) => string);
+        parseResponse?: (response: Response) => unknown | Promise<unknown>;
+        method?: string;
+        headers?: Record<string, string>;
+        body?: string;
+      }
+    | false;
   mapping?: {
     sessionPtr?: (response: unknown) => SessionPtr;
     sessionToken?: (response: unknown) => string;
     frontendRequest?: (response: unknown) => FrontendRequest;
   };
-  result?: {
-    url?: string | ((options: YiviSessionOptions, mappings: SessionMappings) => string);
-    parseResponse?: (response: Response) => unknown | Promise<unknown>;
-    method?: string;
-    headers?: Record<string, string>;
-  } | false;
+  result?:
+    | {
+        url?: string | ((options: YiviSessionOptions, mappings: SessionMappings) => string);
+        parseResponse?: (response: Response) => unknown | Promise<unknown>;
+        method?: string;
+        headers?: Record<string, string>;
+      }
+    | false;
 }
 
 /**
@@ -160,25 +164,31 @@ export interface YiviStateOptions {
   };
   url?: (mappings: SessionMappings, endpoint: string) => string;
   legacyUrl?: (mappings: SessionMappings, endpoint: string) => string;
-  serverSentEvents?: {
-    endpoint?: string;
-    timeout?: number;
-  } | false;
-  polling?: {
-    endpoint?: string;
-    interval?: number;
-    startState?: string;
-  } | false;
+  serverSentEvents?:
+    | {
+        endpoint?: string;
+        timeout?: number;
+      }
+    | false;
+  polling?:
+    | {
+        endpoint?: string;
+        interval?: number;
+        startState?: string;
+      }
+    | false;
   frontendOptions?: {
     endpoint?: string;
     requestContext?: string;
   };
-  pairing?: {
-    onlyEnableIf?: (mappings: SessionMappings) => boolean;
-    completedEndpoint?: string;
-    minCheckingDelay?: number;
-    pairingMethod?: string;
-  } | false;
+  pairing?:
+    | {
+        onlyEnableIf?: (mappings: SessionMappings) => boolean;
+        completedEndpoint?: string;
+        minCheckingDelay?: number;
+        pairingMethod?: string;
+      }
+    | false;
 }
 
 /**
