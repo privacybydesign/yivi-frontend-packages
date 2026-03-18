@@ -74,7 +74,7 @@ export default class StatusListener {
 
   private _getFetchUrl(endpoint: string): string {
     const maxProtocolVersion = this._mappings.frontendRequest?.maxProtocolVersion;
-    if (maxProtocolVersion && ProtocolVersion.below(maxProtocolVersion, ProtocolVersion.get('chained-sessions'))) {
+    if (!maxProtocolVersion || ProtocolVersion.below(maxProtocolVersion, ProtocolVersion.get('chained-sessions'))) {
       return this._options.legacyUrl!(this._mappings, endpoint);
     }
     return this._options.url!(this._mappings, endpoint);
@@ -82,7 +82,7 @@ export default class StatusListener {
 
   private _getFetchParams(): FetchParams {
     const maxProtocolVersion = this._mappings.frontendRequest?.maxProtocolVersion;
-    if (maxProtocolVersion && ProtocolVersion.below(maxProtocolVersion, ProtocolVersion.get('chained-sessions'))) {
+    if (!maxProtocolVersion || ProtocolVersion.below(maxProtocolVersion, ProtocolVersion.get('chained-sessions'))) {
       return {};
     }
 
