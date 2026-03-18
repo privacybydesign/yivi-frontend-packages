@@ -4,6 +4,7 @@
     "stylelint-prettier/recommended"
   ],
   "rules": {
-    "prettier/prettier": [true, {"singleQuote": true}]
+    "prettier/prettier": [true, {"singleQuote": true}],
+    "scss/operator-no-newline-after": null
   }
 }
