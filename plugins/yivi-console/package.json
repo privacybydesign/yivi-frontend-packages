@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-console",
-  "version": "0.2.1",
+  "version": "1.0.0-beta.1",
   "description": "A console based front-end for Yivi flows. Useful for testing or use in nodejs",
   "type": "module",
   "main": "./dist/node.cjs",
@@ -52,7 +52,7 @@
     "qrcode-terminal": "^0.12.0"
   },
   "peerDependencies": {
-    "@privacybydesign/yivi-core": "^0.2.1"
+    "@privacybydesign/yivi-core": "^1.0.0-beta.1"
   },
   "devDependencies": {
     "@types/prompt-sync": "^4.2.0",

@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-frontend",
-  "version": "0.2.1",
+  "version": "1.0.0-beta.1",
   "description": "A simplified package of yivi-frontend modules to get started easily",
   "type": "module",
   "main": "./dist/yivi.js",
@@ -37,11 +37,11 @@
     "> 0.25%, not dead"
   ],
   "dependencies": {
-    "@privacybydesign/yivi-client": "^0.2.1",
-    "@privacybydesign/yivi-core": "^0.2.1",
-    "@privacybydesign/yivi-css": "^0.2.1",
-    "@privacybydesign/yivi-popup": "^0.2.1",
-    "@privacybydesign/yivi-web": "^0.2.1"
+    "@privacybydesign/yivi-client": "^1.0.0-beta.1",
+    "@privacybydesign/yivi-core": "^1.0.0-beta.1",
+    "@privacybydesign/yivi-css": "^1.0.0-beta.1",
+    "@privacybydesign/yivi-popup": "^1.0.0-beta.1",
+    "@privacybydesign/yivi-web": "^1.0.0-beta.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

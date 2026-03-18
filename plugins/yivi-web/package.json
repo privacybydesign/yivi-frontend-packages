@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-web",
-  "version": "0.2.1",
+  "version": "1.0.0-beta.1",
   "description": "A front-end to Yivi flows for in the web browser",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -31,7 +31,7 @@
     "qrcode": "^1.4.2"
   },
   "peerDependencies": {
-    "@privacybydesign/yivi-core": "^0.2.1"
+    "@privacybydesign/yivi-core": "^1.0.0-beta.1"
   },
   "devDependencies": {
     "@types/qrcode": "^1.5.0"

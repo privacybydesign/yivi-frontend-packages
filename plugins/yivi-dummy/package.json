@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-dummy",
-  "version": "0.2.1",
+  "version": "1.0.0-beta.1",
   "description": "A dummy back-end for Yivi flows. Useful for testing without an actual server",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -30,7 +30,7 @@
     "deepmerge": "^4.2.2"
   },
   "peerDependencies": {
-    "@privacybydesign/yivi-core": "^0.2.1"
+    "@privacybydesign/yivi-core": "^1.0.0-beta.1"
   },
   "repository": {
     "type": "git",

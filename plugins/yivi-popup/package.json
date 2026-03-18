@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-popup",
-  "version": "0.2.1",
+  "version": "1.0.0-beta.1",
   "description": "A front-end plugin to show the Yivi form in a popup",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -30,8 +30,8 @@
     "deepmerge": "^4.2.2"
   },
   "peerDependencies": {
-    "@privacybydesign/yivi-core": "^0.2.1",
-    "@privacybydesign/yivi-web": "^0.2.1"
+    "@privacybydesign/yivi-core": "^1.0.0-beta.1",
+    "@privacybydesign/yivi-web": "^1.0.0-beta.1"
   },
   "repository": {
     "type": "git",
