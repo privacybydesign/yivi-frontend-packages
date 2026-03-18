@@ -1,11 +1,14 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   dts: true,
-  splitting: false,
+
   sourcemap: true,
   clean: true,
-  external: ['@privacybydesign/yivi-core', '@privacybydesign/yivi-web'],
+  deps: {
+    neverBundle: ['@privacybydesign/yivi-core'],
+  },
+  target: false,
 });

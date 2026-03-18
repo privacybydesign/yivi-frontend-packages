@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   entry: {
@@ -8,8 +8,11 @@ export default defineConfig({
   },
   format: ['esm', 'cjs'],
   dts: true,
-  splitting: false,
+
   sourcemap: true,
   clean: true,
-  external: ['@privacybydesign/yivi-core', 'prompt-sync', 'qrcode-terminal'],
+  deps: {
+    neverBundle: ['@privacybydesign/yivi-core', 'prompt-sync', 'qrcode-terminal'],
+  },
+  target: false,
 });

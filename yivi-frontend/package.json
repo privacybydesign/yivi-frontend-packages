@@ -4,17 +4,17 @@
   "description": "A simplified package of yivi-frontend modules to get started easily",
   "type": "module",
   "main": "./dist/yivi.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
       "browser": {
-        "types": "./dist/index.d.ts",
+        "types": "./dist/index.d.mts",
         "default": "./dist/yivi.js"
       },
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       },
       "require": {
         "types": "./dist/index.d.cts",
@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "webpack --mode development --watch",
     "build:webpack": "webpack --mode production",
-    "build:esm": "tsup",
+    "build:esm": "tsdown",
     "build": "npm run build:esm && npm run build:webpack",
     "release": "npm run build"
   },
