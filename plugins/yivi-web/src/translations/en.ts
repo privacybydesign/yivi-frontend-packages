@@ -19,4 +19,3 @@ export const en: Translations = {
   pairing: 'Enter the pairing code that your Yivi app currently shows.',
   pairingFailed: (code: string) => `The pairing code ${code} does not match the code in your Yivi app. Please try again.`
 };
-

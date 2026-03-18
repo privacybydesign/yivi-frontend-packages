@@ -15,10 +15,7 @@ interface QRCodePayload {
   qr: string;
 }
 
-export function createYiviConsole(
-  askRetry: AskRetryFn,
-  askPairingCode: AskPairingCodeFn,
-): YiviPluginConstructor {
+export function createYiviConsole(askRetry: AskRetryFn, askPairingCode: AskPairingCodeFn): YiviPluginConstructor {
   return class YiviConsole implements YiviPlugin {
     private _stateMachine: IStateMachine;
     private _options: YiviOptions;

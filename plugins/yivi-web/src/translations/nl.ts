@@ -19,4 +19,3 @@ export const nl: Translations = {
   pairing: 'Vul de koppelcode in die in jouw Yivi-app verschijnt.',
   pairingFailed: (code: string) => `De koppelcode ${code} komt niet overeen met de code in je Yivi-app. Probeer het opnieuw.`
 };
-

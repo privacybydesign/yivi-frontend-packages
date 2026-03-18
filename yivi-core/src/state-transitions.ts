@@ -137,4 +137,3 @@ export const transitions: StateTransitions = {
   Success: {},
   Aborted: {},
 };
-
