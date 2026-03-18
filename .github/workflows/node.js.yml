@@ -13,34 +13,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
+    - uses: actions/checkout@v6
+    - name: Use Node.js 22
+      uses: actions/setup-node@v6
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - run: npm ci
     - run: npm run lint
-    
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+    - name: Use Node.js 22
+      uses: actions/setup-node@v6
+      with:
+        node-version: 22
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build
+    - run: npm test
+
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
+    - uses: actions/checkout@v6
+    - name: Use Node.js 22
+      uses: actions/setup-node@v6
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - run: npm ci
     - run: cd ./yivi-css && npm run clean
-    - run: npm run link
     - run: npm run build
     - name: Upload GitHub Pages artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4
       with:
         path: docs/
-    
+
   deploy-github-pages:
     # Exclude job on feature branches, because GitHub Pages does not support this yet.
     if: github.ref == 'refs/heads/master'
@@ -57,7 +70,7 @@ jobs:
     needs: build
     steps:
       - name: Setup Pages
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v5
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

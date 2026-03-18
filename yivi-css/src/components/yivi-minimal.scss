@@ -14,7 +14,8 @@ Markup:
 Styleguide Components.Yivi minimal
 */
 
-@import '../mixins/reset', '../variables/sizes';
+@use '../mixins/reset' as *;
+@use '../variables/sizes' as *;
 
 .yivi-web-minimal {
   @include reset;

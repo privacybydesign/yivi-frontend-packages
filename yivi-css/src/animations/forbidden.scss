@@ -11,7 +11,9 @@ Styleguide Animations.Forbidden
 
 @use 'sass:math';
 
-@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+@use '../mixins/reset' as *;
+@use '../mixins/animation' as *;
+@use '../variables/colours' as *;
 
 .yivi-web-forbidden-animation {
   $sign-size: 44px;

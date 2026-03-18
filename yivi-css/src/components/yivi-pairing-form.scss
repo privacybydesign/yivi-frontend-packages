@@ -73,8 +73,12 @@ Markup:
 Styleguide Components.Yivi pairing form
 */
 
-@import './yivi-button', '../animations/loading', '../mixins/reset',
-  '../mixins/fonts', '../mixins/center', '../variables/colours';
+@use './yivi-button';
+@use '../animations/loading';
+@use '../mixins/reset' as *;
+@use '../mixins/fonts' as *;
+@use '../mixins/center' as *;
+@use '../variables/colours' as *;
 
 .yivi-web-pairing-form {
   @include reset;

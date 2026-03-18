@@ -1,8 +1,6 @@
-const YiviCore = require('@privacybydesign/yivi-core');
-const Console = require('@privacybydesign/yivi-console');
-const Dummy = require('@privacybydesign/yivi-dummy');
-
-const util = require('util');
+import YiviCore from '@privacybydesign/yivi-core';
+import Console from '@privacybydesign/yivi-console/web';
+import Dummy from '@privacybydesign/yivi-dummy';
 
 const yivi = new YiviCore({
   debugging: true,
@@ -14,5 +12,5 @@ yivi.use(Dummy);
 
 yivi
   .start()
-  .then((result) => console.log('Successful disclosure! 🎉', util.inspect(result, { showHidden: false, depth: null })))
-  .catch((error) => console.error("Couldn't do what you asked 😢", error));
+  .then((result) => console.log('Successful disclosure!', JSON.stringify(result, null, 2)))
+  .catch((error) => console.error("Couldn't do what you asked", error));

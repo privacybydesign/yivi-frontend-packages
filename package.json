@@ -1,21 +1,40 @@
 {
   "name": "yivi-frontend-packages",
+  "private": true,
   "license": "MIT",
+  "workspaces": [
+    "yivi-core",
+    "yivi-css",
+    "yivi-frontend",
+    "plugins/*"
+  ],
   "browserslist": [
-    "> 0.25%, not dead"
+    "> 0.25%",
+    "not dead",
+    "not op_mini all"
   ],
   "scripts": {
     "fmt": "eslint . --fix",
-    "lint-js": "eslint . --ext .js",
+    "lint-js": "eslint . --ext .js,.ts",
     "lint-css": "stylelint yivi-css/src/",
     "lint": "npm run lint-js && npm run lint-css",
-    "install": "set -eux; for pkg in `find . -maxdepth 2 -type d -name 'yivi-*'`; do (cd $pkg && npm install); done",
-    "link": "npm run link-yivi-popup && npm run link-yivi-frontend",
-    "link-yivi-popup": "cd ./plugins/yivi-popup && npm install ../yivi-web --no-save",
-    "link-yivi-frontend": "cd ./yivi-frontend && npm install ../yivi-core ../yivi-css ../plugins/yivi-client ../plugins/yivi-web ../plugins/yivi-popup --no-save",
-    "build": "set -eux; for pkg in ./yivi-css ./yivi-frontend; do (cd $pkg; npm run release); done"
+    "build:core": "npm run build -w yivi-core",
+    "build:plugins": "npm run build -w @privacybydesign/yivi-client -w @privacybydesign/yivi-web -w @privacybydesign/yivi-dummy -w @privacybydesign/yivi-console",
+    "build:popup": "npm run build -w @privacybydesign/yivi-popup",
+    "build:frontend": "npm run build -w @privacybydesign/yivi-frontend",
+    "build:css": "npm run build -w yivi-css --if-present",
+    "build": "npm run build:css && npm run build:core && npm run build:plugins && npm run build:popup && npm run build:frontend",
+    "dev": "npm run dev --workspaces --if-present",
+    "typecheck": "tsc --build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitest/coverage-v8": "^1.2.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-prettier-standard": "^4.0.1",
@@ -30,7 +49,10 @@
     "stylelint": "^15.10.3",
     "stylelint-config-recommended-scss": "^13.0.0",
     "stylelint-prettier": "^4.0.2",
-    "stylelint-scss": "^5.2.1"
+    "stylelint-scss": "^5.2.1",
+    "tsdown": "^0.21.4",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
   },
   "repository": {
     "type": "git",

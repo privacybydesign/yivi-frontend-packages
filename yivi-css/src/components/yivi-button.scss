@@ -15,8 +15,12 @@ Markup:
 Styleguide Components.Yivi button
 */
 
-@import '../mixins/reset', '../mixins/fonts', '../variables/colours',
-  '../variables/sizes', '../mixins/svg-url', '../variables/svg-images';
+@use '../mixins/reset' as *;
+@use '../mixins/fonts' as *;
+@use '../variables/colours' as *;
+@use '../variables/sizes' as *;
+@use '../mixins/svg-url' as *;
+@use '../variables/svg-images' as *;
 
 .yivi-web-button {
   @extend %yivi-web-button;

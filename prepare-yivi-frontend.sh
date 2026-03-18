@@ -27,7 +27,7 @@ then
   eval "npm version $version --no-git-tag-version"
   # Make sure dev dependencies are not included to prevent artifact pollution
   rm -rf ./node_modules
-  npm install --only=prod
+  npm install --omit=dev
 
   cd $root
   set +x
@@ -36,4 +36,5 @@ then
   echo "Preparing yivi-frontend for release done."
   echo "Please check whether all output satisfies you."
   echo "If you are happy, you can run 'cd ./yivi-frontend && npm publish --access public'"
+  echo "For pre-release versions, add --tag <tag>, e.g. 'npm publish --access public --tag beta'"
 fi

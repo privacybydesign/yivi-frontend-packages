@@ -2,6 +2,7 @@
   "name": "yivi-node-console-example",
   "version": "0.1.0",
   "description": "An example on how to use the yivi-console package",
+  "type": "module",
   "main": "index.js",
   "license": "SEE LICENSE IN REPOSITORY",
   "scripts": {

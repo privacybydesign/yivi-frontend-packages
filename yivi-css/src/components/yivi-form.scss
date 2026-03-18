@@ -48,9 +48,13 @@ Markup:
 Styleguide Components.Yivi login
 */
 
-@import '../mixins/reset', '../mixins/fonts', '../mixins/responsiveness',
-  '../mixins/center', '../mixins/animation', '../variables/colours',
-  '../variables/sizes';
+@use '../mixins/reset' as *;
+@use '../mixins/fonts' as *;
+@use '../mixins/responsiveness' as *;
+@use '../mixins/center' as *;
+@use '../mixins/animation' as *;
+@use '../variables/colours' as *;
+@use '../variables/sizes' as *;
 
 .yivi-web-centered {
   @include reset;

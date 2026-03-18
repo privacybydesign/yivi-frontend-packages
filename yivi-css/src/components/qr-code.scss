@@ -8,7 +8,8 @@ Markup:
 
 Styleguide Components.QR code
 */
-@import '../mixins/reset', '../variables/sizes';
+@use '../mixins/reset' as *;
+@use '../variables/sizes' as *;
 
 .yivi-web-qr-code {
   @include reset;

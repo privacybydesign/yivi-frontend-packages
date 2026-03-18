@@ -11,7 +11,9 @@ Markup:
 Styleguide Components.Yivi logo
 */
 
-@import '../mixins/reset', '../mixins/svg-url', '../variables/svg-images';
+@use '../mixins/reset' as *;
+@use '../mixins/svg-url' as *;
+@use '../variables/svg-images' as *;
 
 .yivi-web-logo {
   @include reset;

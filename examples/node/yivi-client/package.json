@@ -2,6 +2,7 @@
   "name": "yivi-node-client-example",
   "version": "0.1.0",
   "description": "An example on how to use the yivi-client plugin",
+  "type": "module",
   "main": "index.js",
   "license": "SEE LICENSE IN REPOSITORY",
   "scripts": {
@@ -16,6 +17,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/privacybydesign/yivi-frontend-packages",
-    "directory": "examples/backends/yivi-client"
+    "directory": "examples/node/yivi-client"
   }
 }

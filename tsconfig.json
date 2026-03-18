@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "yivi-core/src/**/*.ts",
+    "yivi-frontend/src/**/*.ts",
+    "plugins/*/src/**/*.ts"
+  ]
+}

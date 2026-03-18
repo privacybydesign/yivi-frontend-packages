@@ -1,13 +1,62 @@
 {
   "name": "@privacybydesign/yivi-console",
-  "version": "0.2.1",
+  "version": "1.0.0-beta.1",
   "description": "A console based front-end for Yivi flows. Useful for testing or use in nodejs",
-  "main": "node.js",
-  "browser": "web.js",
+  "type": "module",
+  "main": "./dist/node.cjs",
+  "module": "./dist/node.mjs",
+  "browser": "./dist/web.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./node": {
+      "import": {
+        "types": "./dist/node.d.mts",
+        "default": "./dist/node.mjs"
+      },
+      "require": {
+        "types": "./dist/node.d.cts",
+        "default": "./dist/node.cjs"
+      }
+    },
+    "./web": {
+      "import": {
+        "types": "./dist/web.d.mts",
+        "default": "./dist/web.mjs"
+      },
+      "require": {
+        "types": "./dist/web.d.cts",
+        "default": "./dist/web.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
     "prompt-sync": "^4.1.7",
     "qrcode-terminal": "^0.12.0"
+  },
+  "peerDependencies": {
+    "@privacybydesign/yivi-core": "^1.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@types/prompt-sync": "^4.2.0",
+    "@types/qrcode-terminal": "^0.12.0"
   },
   "repository": {
     "type": "git",
