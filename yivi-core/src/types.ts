@@ -38,7 +38,7 @@ export interface StateChangeEvent {
 export interface YiviPlugin {
   stateChange?(state: StateChangeEvent): void;
   start?(...args: unknown[]): void | Promise<unknown>;
-  close?(): void | Promise<unknown>;
+  close?(): unknown;
 }
 
 /**
