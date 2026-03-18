@@ -20,7 +20,6 @@ interface StateClientArgs {
 interface SanitizedOptions extends YiviOptions {
   state: YiviStateOptions;
 }
-
 interface FrontendOptions {
   pairingCode?: string;
   pairingMethod?: string;
@@ -237,16 +236,15 @@ export default class YiviStateClient {
         const pairingOptions = this._options.state.pairing;
         if (!pairingOptions) return Promise.resolve();
 
-        const onlyEnableIf = (pairingOptions as { onlyEnableIf?: (m: SessionMappings) => boolean }).onlyEnableIf;
         // onlyEnableIf may return 'undefined', so we force conversion to boolean by doing a double negation (!!).
-        const shouldBeEnabled = continueOnSecondDevice && !!(onlyEnableIf && onlyEnableIf(this._mappings));
+        const shouldBeEnabled = continueOnSecondDevice && !!pairingOptions.onlyEnableIf?.(this._mappings);
 
         // Skip the request when the pairing method is correctly set already.
         if (shouldBeEnabled === this._pairingEnabled) return Promise.resolve();
 
         this._pairingEnabled = shouldBeEnabled;
 
-        const pairingMethod = (pairingOptions as { pairingMethod?: string }).pairingMethod || 'pin';
+        const pairingMethod = pairingOptions.pairingMethod || 'pin';
         // If pairing should be enabled, parse the pairing options struct.
         const options = shouldBeEnabled ? { pairingMethod } : { pairingMethod: 'none' };
         return this._updateFrontendOptions(options);
@@ -287,10 +285,8 @@ export default class YiviStateClient {
   }
 
   private _pairingCompleted(): Promise<void> {
-    const pairingOptions = this._options.state.pairing as {
-      minCheckingDelay?: number;
-      completedEndpoint?: string;
-    };
+    const pairingOptions = this._options.state.pairing;
+    if (!pairingOptions) return Promise.reject(new Error('Pairing options are not configured'));
     const delay = new Promise<void>((resolve) => {
       setTimeout(resolve, pairingOptions?.minCheckingDelay || 500);
     });
@@ -302,12 +298,11 @@ export default class YiviStateClient {
       headers: { Authorization: this._mappings.frontendRequest?.authorization || '' },
     })
       .finally(() => delay)
-      .then(() =>
+      .then(() => {
         this._stateMachine.selectTransition(({ validTransitions }) =>
           validTransitions.includes('appConnected') ? { transition: 'appConnected' } : false,
-        ),
-      )
-      .then(() => {})
+        );
+      })
       .catch((err) => {
         if (this._options.debugging) console.error('Error received while completing pairing:', err);
         this._handleNoSuccess('fail', err);
@@ -316,7 +311,7 @@ export default class YiviStateClient {
 
   private _updateFrontendOptions(options: { pairingMethod: string }): Promise<void> {
     const maxProtocolVersion = this._mappings.frontendRequest?.maxProtocolVersion;
-    if (maxProtocolVersion && ProtocolVersion.below(maxProtocolVersion, ProtocolVersion.get('pairing'))) {
+    if (!maxProtocolVersion || ProtocolVersion.below(maxProtocolVersion, ProtocolVersion.get('pairing'))) {
       return Promise.reject(new Error('Frontend options are not supported by the IRMA server'));
     }
 
