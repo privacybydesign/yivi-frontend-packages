@@ -11,7 +11,9 @@ Styleguide Animations.Clock
 
 @use 'sass:math';
 
-@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+@use '../mixins/reset' as *;
+@use '../mixins/animation' as *;
+@use '../variables/colours' as *;
 
 .yivi-web-clock-animation {
   $clock-size: 42px;

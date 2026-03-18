@@ -11,7 +11,8 @@ Markup:
 Styleguide Layouts.Center
 */
 
-@import '../mixins/reset', '../mixins/center';
+@use '../mixins/reset' as *;
+@use '../mixins/center' as *;
 
 .yivi-web-center-child {
   @include reset;

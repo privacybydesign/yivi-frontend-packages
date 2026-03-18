@@ -8,7 +8,9 @@ Markup:
 
 Styleguide Animations.Checkmark
 */
-@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+@use '../mixins/reset' as *;
+@use '../mixins/animation' as *;
+@use '../variables/colours' as *;
 
 .yivi-web-checkmark-animation {
   $check-width: 27px;
