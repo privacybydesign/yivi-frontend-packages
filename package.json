@@ -9,7 +9,9 @@
     "plugins/*"
   ],
   "browserslist": [
-    "> 0.25%, not dead"
+    "> 0.25%",
+    "not dead",
+    "not op_mini all"
   ],
   "scripts": {
     "fmt": "eslint . --fix",
@@ -33,7 +35,6 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitest/coverage-v8": "^1.2.0",
-    "vitest": "^1.2.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-prettier-standard": "^4.0.1",
@@ -50,7 +51,8 @@
     "stylelint-prettier": "^4.0.2",
     "stylelint-scss": "^5.2.1",
     "tsup": "^8.0.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
   },
   "repository": {
     "type": "git",
