@@ -7,6 +7,7 @@ module.exports = class DOMManipulations {
     this._showHelper = options.showHelper;
     this._showCloseButton = options.showCloseButton;
     this._fallbackDelay = options.fallbackDelay;
+    this._minimal = options.minimal || false;
     this._eventHandlers = {};
 
     this._clickCallback = clickCallback;
@@ -21,7 +22,7 @@ module.exports = class DOMManipulations {
     if (!newPartial) throw new Error(`I don't know how to render '${state.newState}'`);
     this._renderPartial(newPartial, state);
 
-    if (state.oldState === 'ShowingYiviButton' && !this._showHelper) {
+    if (!this._minimal && state.oldState === 'ShowingYiviButton' && !this._showHelper) {
       this._element.querySelector('.yivi-web-header').classList.remove('yivi-web-show-helper');
     }
 
@@ -44,8 +45,13 @@ module.exports = class DOMManipulations {
   }
 
   _renderInitialState() {
-    this._element.classList.add('yivi-web-form');
-    this._element.innerHTML = this._yiviWebForm(this._stateUninitialized());
+    if (this._minimal) {
+      this._element.classList.add('yivi-web-minimal');
+      this._element.innerHTML = `<div class="yivi-web-centered">${this._stateUninitialized()}</div>`;
+    } else {
+      this._element.classList.add('yivi-web-form');
+      this._element.innerHTML = this._yiviWebForm(this._stateUninitialized());
+    }
   }
 
   _attachEventHandler(e, callback) {
@@ -136,7 +142,10 @@ module.exports = class DOMManipulations {
     const content = newPartial.call(this, state);
 
     if (content) {
-      this._element.querySelector('.yivi-web-content .yivi-web-centered').innerHTML = content;
+      const container = this._minimal
+        ? this._element.querySelector('.yivi-web-centered')
+        : this._element.querySelector('.yivi-web-content .yivi-web-centered');
+      container.innerHTML = content;
     }
 
     // Focus on first input field if any is present.
