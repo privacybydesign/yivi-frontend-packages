@@ -34,7 +34,7 @@ module.exports = class DOMManipulations {
   }
 
   setQRCode(qr) {
-    QRCode.toCanvas(this._element.querySelector('.yivi-web-qr-canvas'), qr, {
+    QRCode.toCanvas(this._element.querySelector('.yivi-web-qr-code'), qr, {
       width: '230',
       margin: '1',
     });
@@ -226,7 +226,7 @@ module.exports = class DOMManipulations {
   _stateShowingQRCode({ payload }) {
     return `
       <!-- State: ShowingQRCode -->
-      <canvas class="yivi-web-qr-canvas"></canvas>
+      <canvas class="yivi-web-qr-code"></canvas>
       ${
         payload.showBackButton
           ? `<p><a data-yivi-glue-transition="checkUserAgent">${this._translations.back}</a></p>`
