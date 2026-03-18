@@ -79,3 +79,25 @@ becomes visible when the user presses the button to open the Yivi app, and the a
 So, when `showHelper` is set to false, the helper is only visible as fallback and disappears
 again as soon as the happy flow continues. When `showHelper` is set to true, the helper will
 be visible unconditionally._
+
+### minimal
+
+The option `minimal` is a boolean that renders only the essential content
+(QR code, button, and state animations) without the form wrapper, header, or
+helper elements. This is useful when you want to embed the QR code into your
+own UI and control the surrounding layout yourself. Default is false.
+
+```javascript
+const YiviCore = require('@privacybydesign/yivi-core');
+const Web      = require('@privacybydesign/yivi-web');
+
+require('@privacybydesign/yivi-css');
+
+const yivi = new YiviCore({
+  element: '#yivi-qr',
+  minimal: true,
+});
+
+yivi.use(Web);
+yivi.start();
+```

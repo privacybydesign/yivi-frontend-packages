@@ -10,6 +10,7 @@ interface DOMOptions {
   showHelper?: boolean;
   showCloseButton?: boolean;
   fallbackDelay?: number;
+  minimal?: boolean;
 }
 
 interface QRCodePayload {
@@ -33,6 +34,7 @@ export default class DOMManipulations {
   private _showHelper: boolean;
   private _showCloseButton: boolean;
   private _fallbackDelay: number;
+  private _minimal: boolean;
   private _eventHandlers: Record<string, EventListener>;
   private _clickCallback: TransitionCallback;
   private _pairingCodeCallback: PairingCodeCallback;
@@ -51,6 +53,7 @@ export default class DOMManipulations {
     this._showHelper = options.showHelper || false;
     this._showCloseButton = options.showCloseButton || false;
     this._fallbackDelay = options.fallbackDelay || 1000;
+    this._minimal = options.minimal || false;
     this._eventHandlers = {};
 
     this._clickCallback = clickCallback;
@@ -65,7 +68,7 @@ export default class DOMManipulations {
     if (!newPartial) throw new Error(`I don't know how to render '${state.newState}'`);
     this._renderPartial(newPartial, state);
 
-    if (state.oldState === 'ShowingYiviButton' && !this._showHelper) {
+    if (!this._minimal && state.oldState === 'ShowingYiviButton' && !this._showHelper) {
       this._element.querySelector('.yivi-web-header')?.classList.remove('yivi-web-show-helper');
     }
 
@@ -93,8 +96,13 @@ export default class DOMManipulations {
   }
 
   private _renderInitialState(): void {
-    this._element.classList.add('yivi-web-form');
-    this._element.innerHTML = this._yiviWebForm(this._stateUninitialized());
+    if (this._minimal) {
+      this._element.classList.add('yivi-web-minimal');
+      this._element.innerHTML = `<div class="yivi-web-centered">${this._stateUninitialized()}</div>`;
+    } else {
+      this._element.classList.add('yivi-web-form');
+      this._element.innerHTML = this._yiviWebForm(this._stateUninitialized());
+    }
   }
 
   private _attachEventHandler(e: string, callback: EventListener): void {
@@ -197,7 +205,9 @@ export default class DOMManipulations {
     const content = newPartial.call(this, state);
 
     if (content) {
-      const centered = this._element.querySelector('.yivi-web-content .yivi-web-centered');
+      const centered = this._minimal
+        ? this._element.querySelector('.yivi-web-centered')
+        : this._element.querySelector('.yivi-web-content .yivi-web-centered');
       if (centered) {
         centered.innerHTML = content;
       }

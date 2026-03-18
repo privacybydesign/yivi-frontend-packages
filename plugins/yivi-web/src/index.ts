@@ -82,6 +82,7 @@ export default class YiviWeb {
     const defaults = {
       element: '#yivi-web-form',
       showHelper: false,
+      minimal: false,
       fallbackDelay: 1000,
       translations: translations[language],
     };
