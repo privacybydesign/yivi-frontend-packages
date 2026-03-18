@@ -36,4 +36,5 @@ then
   echo "Preparing yivi-frontend for release done."
   echo "Please check whether all output satisfies you."
   echo "If you are happy, you can run 'cd ./yivi-frontend && npm publish --access public'"
+  echo "For pre-release versions, add --tag <tag>, e.g. 'npm publish --access public --tag beta'"
 fi
