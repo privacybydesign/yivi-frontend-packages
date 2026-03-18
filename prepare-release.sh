@@ -60,7 +60,7 @@ for package in ${standalone_packages[@]}; do
   npm run release --if-present
   # Make sure dev dependencies are not included to prevent artifact pollution
   rm -rf ./node_modules
-  npm install --only=prod
+  npm install --omit=dev
   cd $root
 done
 
