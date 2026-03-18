@@ -6,6 +6,7 @@ import type {
   YiviSessionOptions,
   SessionMappings,
   StateChangeEvent,
+  SelectTransitionResult,
 } from '@privacybydesign/yivi-core';
 
 interface SessionClientArgs {
@@ -42,7 +43,7 @@ export default class YiviSessionClient {
     }
   }
 
-  start(): Promise<unknown> {
+  start(): Promise<SelectTransitionResult | false | void> {
     if (this._options.session) {
       return this._stateMachine.selectTransition(({ state }) => {
         if (state !== 'Uninitialized') throw new Error('State machine is already initialized by another plugin');
@@ -101,7 +102,7 @@ export default class YiviSessionClient {
   }
 
   private _sanitizeOptions(options: YiviOptions): SanitizedOptions {
-    const defaults = {
+    const defaults: Partial<SanitizedOptions> = {
       session: {
         url: '',
         start: {
