@@ -16,6 +16,7 @@ Styleguide Components.QR code
   width: $qr-code-size;
   height: $qr-code-size;
   max-width: 100%;
+  image-rendering: pixelated;
 
   background-color: white;
 }
