@@ -1,7 +1,7 @@
-import StateMachine from './state-machine';
+import { StateMachine } from './state-machine';
 import type { YiviOptions, YiviPlugin, YiviPluginConstructor, StateChangeEvent } from './types';
 
-export default class YiviCore {
+export class YiviCore {
   private _modules: YiviPlugin[];
   private _options: YiviOptions;
   private _stateMachine: StateMachine;
@@ -91,5 +91,5 @@ export default class YiviCore {
 export * from './types';
 // Export the StateMachine class (for advanced usage)
 // The IStateMachine interface should be used for type annotations in plugins
-export { default as StateMachineImpl } from './state-machine';
-export { default as transitions } from './state-transitions';
+export { StateMachine as StateMachineImpl } from './state-machine';
+export { transitions } from './state-transitions';

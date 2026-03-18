@@ -24,7 +24,7 @@ interface PairingCodePayload {
   enteredPairingCode: string;
 }
 
-export default class YiviDummy {
+export class YiviDummy {
   private _stateMachine: IStateMachine;
   private _options: DummyOptions;
 

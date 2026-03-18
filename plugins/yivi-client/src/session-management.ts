@@ -1,4 +1,4 @@
-import ProtocolVersion from './protocol-version';
+import { ProtocolVersion } from './protocol-version';
 import type { SessionMappings, SessionPtr, FrontendRequest, YiviSessionOptions } from '@privacybydesign/yivi-core';
 
 interface MappingFunctions {
@@ -22,7 +22,7 @@ interface ResultOptions {
   headers?: Record<string, string>;
 }
 
-export default class SessionManagement {
+export class SessionManagement {
   private _options: YiviSessionOptions;
   private _mappings: Partial<SessionMappings>;
 

@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-export default function userAgent(): UserAgentType {
+export function userAgent(): UserAgentType {
   if (typeof window === 'undefined') return 'nodejs';
 
   // IE11 doesn't have window.navigator, test differently

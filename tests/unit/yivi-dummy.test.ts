@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import YiviCore from '../../yivi-core/src/index';
-import YiviDummy from '../../plugins/yivi-dummy/src/index';
+import { YiviCore } from '../../yivi-core/src/index';
+import { YiviDummy } from '../../plugins/yivi-dummy/src/index';
 
 describe('YiviDummy', () => {
   describe('QR code generation', () => {

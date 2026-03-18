@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 
 describe('Module Exports', () => {
   describe('yivi-core', () => {
-    it('should export YiviCore as default', async () => {
-      const { default: YiviCore } = await import('../../yivi-core/src/index');
+    it('should export YiviCore as named export', async () => {
+      const { YiviCore } = await import('../../yivi-core/src/index');
       expect(YiviCore).toBeDefined();
       expect(typeof YiviCore).toBe('function');
     });
@@ -28,16 +28,16 @@ describe('Module Exports', () => {
   });
 
   describe('yivi-dummy', () => {
-    it('should export YiviDummy as default', async () => {
-      const { default: YiviDummy } = await import('../../plugins/yivi-dummy/src/index');
+    it('should export YiviDummy as named export', async () => {
+      const { YiviDummy } = await import('../../plugins/yivi-dummy/src/index');
       expect(YiviDummy).toBeDefined();
       expect(typeof YiviDummy).toBe('function');
     });
   });
 
   describe('yivi-client', () => {
-    it('should export YiviClient as default', async () => {
-      const { default: YiviClient } = await import('../../plugins/yivi-client/src/index');
+    it('should export YiviClient as named export', async () => {
+      const { YiviClient } = await import('../../plugins/yivi-client/src/index');
       expect(YiviClient).toBeDefined();
       expect(typeof YiviClient).toBe('function');
     });
@@ -65,8 +65,8 @@ describe('Module Exports', () => {
   });
 
   describe('yivi-web', () => {
-    it('should export YiviWeb as default', async () => {
-      const { default: YiviWeb } = await import('../../plugins/yivi-web/src/index');
+    it('should export YiviWeb as named export', async () => {
+      const { YiviWeb } = await import('../../plugins/yivi-web/src/index');
       expect(YiviWeb).toBeDefined();
       expect(typeof YiviWeb).toBe('function');
     });
@@ -86,8 +86,8 @@ describe('Module Exports', () => {
   });
 
   describe('yivi-popup', () => {
-    it('should export YiviPopup as default', async () => {
-      const { default: YiviPopup } = await import('../../plugins/yivi-popup/src/index');
+    it('should export YiviPopup as named export', async () => {
+      const { YiviPopup } = await import('../../plugins/yivi-popup/src/index');
       expect(YiviPopup).toBeDefined();
       expect(typeof YiviPopup).toBe('function');
     });

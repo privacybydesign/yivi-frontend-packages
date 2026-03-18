@@ -1,3 +1,3 @@
 export type { Translations } from './types';
-export { default as en } from './en';
-export { default as nl } from './nl';
+export { en } from './en';
+export { nl } from './nl';

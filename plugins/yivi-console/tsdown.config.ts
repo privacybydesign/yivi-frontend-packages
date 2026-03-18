@@ -8,7 +8,7 @@ export default defineConfig({
   },
   format: ['esm', 'cjs'],
   dts: true,
-  outputOptions: { exports: 'named' },
+
   sourcemap: true,
   clean: true,
   deps: {

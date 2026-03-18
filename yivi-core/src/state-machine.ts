@@ -1,4 +1,4 @@
-import transitions from './state-transitions';
+import { transitions } from './state-transitions';
 import type {
   YiviState,
   StateChangeEvent,
@@ -12,7 +12,7 @@ interface InitializePayload {
   canRestart?: boolean;
 }
 
-export default class StateMachine implements IStateMachine {
+export class StateMachine implements IStateMachine {
   private _state: YiviState;
   private _debugging: boolean;
   private _listeners: StateChangeListener[];

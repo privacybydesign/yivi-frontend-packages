@@ -1,7 +1,7 @@
 import type { Translations } from './types';
 
 // prettier-ignore
-const translations: Translations = {
+export const nl: Translations = {
   header: 'Ga verder met <i class="yivi-web-logo">Yivi</i>',
   helper: 'Kom je er niet uit? Kijk dan eens op <a href="https://yivi.app/">de website van Yivi</a>.',
   loading: 'Een moment alstublieft',
@@ -20,4 +20,3 @@ const translations: Translations = {
   pairingFailed: (code: string) => `De koppelcode ${code} komt niet overeen met de code in je Yivi-app. Probeer het opnieuw.`
 };
 
-export default translations;

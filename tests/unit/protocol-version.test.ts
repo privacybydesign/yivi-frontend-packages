@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import ProtocolVersion from '../../plugins/yivi-client/src/protocol-version';
+import { ProtocolVersion } from '../../plugins/yivi-client/src/protocol-version';
 
 describe('ProtocolVersion', () => {
   describe('get', () => {

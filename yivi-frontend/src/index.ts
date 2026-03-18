@@ -1,10 +1,10 @@
 import '@privacybydesign/yivi-css';
 
-import YiviCore from '@privacybydesign/yivi-core';
+import { YiviCore } from '@privacybydesign/yivi-core';
 import type { YiviOptions } from '@privacybydesign/yivi-core';
-import YiviWeb from '@privacybydesign/yivi-web';
-import YiviPopup from '@privacybydesign/yivi-popup';
-import YiviClient from '@privacybydesign/yivi-client';
+import { YiviWeb } from '@privacybydesign/yivi-web';
+import { YiviPopup } from '@privacybydesign/yivi-popup';
+import { YiviClient } from '@privacybydesign/yivi-client';
 
 export interface YiviSession {
   start: (...input: unknown[]) => Promise<unknown>;
@@ -32,7 +32,7 @@ export function newPopup(options: YiviOptions): YiviSession {
 }
 
 // Re-export types and classes for advanced usage
-export { default as YiviCore, StateMachineImpl } from '@privacybydesign/yivi-core';
+export { YiviCore, StateMachineImpl } from '@privacybydesign/yivi-core';
 export type {
   YiviOptions,
   YiviPlugin,
@@ -45,6 +45,6 @@ export type {
   FrontendRequest,
   SessionMappings,
 } from '@privacybydesign/yivi-core';
-export { default as YiviWeb } from '@privacybydesign/yivi-web';
-export { default as YiviPopup } from '@privacybydesign/yivi-popup';
-export { default as YiviClient } from '@privacybydesign/yivi-client';
+export { YiviWeb } from '@privacybydesign/yivi-web';
+export { YiviPopup } from '@privacybydesign/yivi-popup';
+export { YiviClient } from '@privacybydesign/yivi-client';

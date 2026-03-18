@@ -1,7 +1,7 @@
-import ProtocolVersion from './protocol-version';
-import StatusListener, { type ServerState } from './status-listener';
+import { ProtocolVersion } from './protocol-version';
+import { StatusListener, type ServerState } from './status-listener';
 import merge from 'deepmerge';
-import userAgent, { type UserAgentType } from './user-agent';
+import { userAgent, type UserAgentType } from './user-agent';
 import type {
   IStateMachine,
   YiviOptions,
@@ -29,7 +29,7 @@ interface PairingCodePayload {
   enteredPairingCode: string;
 }
 
-export default class YiviStateClient {
+export class YiviStateClient {
   private _stateMachine: IStateMachine;
   private _options: SanitizedOptions;
   private _mappings: SessionMappings;

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import StateMachine from '../../yivi-core/src/state-machine';
-import transitions from '../../yivi-core/src/state-transitions';
+import { StateMachine } from '../../yivi-core/src/state-machine';
+import { transitions } from '../../yivi-core/src/state-transitions';
 
 describe('StateMachine', () => {
   let stateMachine: StateMachine;

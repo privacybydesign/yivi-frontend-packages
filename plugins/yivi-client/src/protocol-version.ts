@@ -5,7 +5,7 @@ interface ParsedVersion {
 
 type FeatureName = 'pairing' | 'chained-sessions';
 
-export default class ProtocolVersion {
+export class ProtocolVersion {
   private static _parse(str: string): ParsedVersion {
     const split = str.split('.').map((x) => parseInt(x, 10));
     if (split.length !== 2) throw new Error('Length does not match');

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import YiviCore from '../../yivi-core/src/index';
-import YiviDummy from '../../plugins/yivi-dummy/src/index';
+import { YiviCore } from '../../yivi-core/src/index';
+import { YiviDummy } from '../../plugins/yivi-dummy/src/index';
 
 describe('YiviCore Integration', () => {
   describe('with YiviDummy plugin', () => {

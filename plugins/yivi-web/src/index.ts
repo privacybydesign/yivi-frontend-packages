@@ -1,4 +1,4 @@
-import DOMManipulations from './dom-manipulations';
+import { DOMManipulations } from './dom-manipulations';
 import merge from 'deepmerge';
 import { en, nl, type Translations } from './translations';
 import type { IStateMachine, YiviOptions, StateChangeEvent } from '@privacybydesign/yivi-core';
@@ -26,7 +26,7 @@ interface ButtonPayload {
   mobile: string;
 }
 
-export default class YiviWeb {
+export class YiviWeb {
   private _stateMachine: IStateMachine;
   private _options: YiviWebOptions;
   private _lastPayload: unknown;
@@ -138,4 +138,4 @@ export default class YiviWeb {
 
 // Re-export translations
 export { en, nl, type Translations } from './translations';
-export { default as DOMManipulations } from './dom-manipulations';
+export { DOMManipulations } from './dom-manipulations';

@@ -28,7 +28,7 @@ interface InputWithPrevValue extends HTMLInputElement {
 
 type StatePartialMethod = (state: StateChangeEvent) => string | false;
 
-export default class DOMManipulations {
+export class DOMManipulations {
   private _element: Element;
   private _translations: Translations;
   private _showHelper: boolean;

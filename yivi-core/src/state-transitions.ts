@@ -24,7 +24,7 @@ export type StateTransitions = {
  * The transition 'fail' is a special one, and will (also) be triggered if we
  * try to apply an invalid transition from that state.
  */
-const transitions: StateTransitions = {
+export const transitions: StateTransitions = {
   startState: 'Uninitialized',
   endStates: ['BrowserNotSupported', 'Success', 'Aborted', 'Cancelled', 'TimedOut', 'Error'],
 
@@ -138,4 +138,3 @@ const transitions: StateTransitions = {
   Aborted: {},
 };
 
-export default transitions;

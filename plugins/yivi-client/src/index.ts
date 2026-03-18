@@ -1,5 +1,5 @@
-import SessionClient from './session-client';
-import StateClient from './state-client';
+import { YiviSessionClient as SessionClient } from './session-client';
+import { YiviStateClient as StateClient } from './state-client';
 import type { IStateMachine, YiviOptions, StateChangeEvent, SessionMappings } from '@privacybydesign/yivi-core';
 
 interface YiviClientArgs {
@@ -7,7 +7,7 @@ interface YiviClientArgs {
   options: YiviOptions;
 }
 
-export default class YiviClient {
+export class YiviClient {
   private _stateClient: StateClient;
   private _sessionClient: SessionClient;
 
@@ -34,7 +34,7 @@ export default class YiviClient {
 }
 
 // Re-export useful types and utilities
-export { default as ProtocolVersion } from './protocol-version';
-export { default as userAgent, type UserAgentType } from './user-agent';
-export { default as SessionManagement } from './session-management';
-export { default as StatusListener, type ServerState } from './status-listener';
+export { ProtocolVersion } from './protocol-version';
+export { userAgent, type UserAgentType } from './user-agent';
+export { SessionManagement } from './session-management';
+export { StatusListener, type ServerState } from './status-listener';

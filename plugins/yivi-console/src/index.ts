@@ -1,1 +1,1 @@
-export { default as createYiviConsole } from './yivi-console';
+export { createYiviConsole } from './yivi-console';

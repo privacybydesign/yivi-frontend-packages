@@ -1,6 +1,6 @@
 type CloseCallback = () => void;
 
-export default class DOMManipulations {
+export class DOMManipulations {
   private _closeCallback: CloseCallback;
   private _element: HTMLElement;
   private _removeEventListeners: () => void;

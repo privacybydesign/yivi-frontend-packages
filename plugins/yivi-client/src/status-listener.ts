@@ -1,4 +1,4 @@
-import ProtocolVersion from './protocol-version';
+import { ProtocolVersion } from './protocol-version';
 import EventSource from 'eventsource';
 import type { SessionMappings, YiviStateOptions, SessionPtr } from '@privacybydesign/yivi-core';
 
@@ -15,7 +15,7 @@ interface FetchParams {
   cache?: RequestCache;
 }
 
-export default class StatusListener {
+export class StatusListener {
   private _isRunning: boolean;
   private _isPolling: boolean;
   private _options: YiviStateOptions;

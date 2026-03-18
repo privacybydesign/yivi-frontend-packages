@@ -1,5 +1,5 @@
-import YiviWeb from '@privacybydesign/yivi-web';
-import DOMManipulations from './dom-manipulations';
+import { YiviWeb } from '@privacybydesign/yivi-web';
+import { DOMManipulations } from './dom-manipulations';
 import merge from 'deepmerge';
 import type { IStateMachine, YiviOptions, StateChangeEvent } from '@privacybydesign/yivi-core';
 
@@ -12,7 +12,7 @@ interface YiviPopupOptions extends YiviOptions {
   closePopupDelay: number;
 }
 
-export default class YiviPopup {
+export class YiviPopup {
   private _stateMachine: IStateMachine;
   private _options: YiviPopupOptions;
   private _dom: DOMManipulations;
@@ -83,4 +83,4 @@ export default class YiviPopup {
   }
 }
 
-export { default as DOMManipulations } from './dom-manipulations';
+export { DOMManipulations } from './dom-manipulations';

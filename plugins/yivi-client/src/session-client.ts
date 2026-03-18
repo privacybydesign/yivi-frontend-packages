@@ -1,4 +1,4 @@
-import SessionManagement from './session-management';
+import { SessionManagement } from './session-management';
 import merge from 'deepmerge';
 import type {
   IStateMachine,
@@ -19,7 +19,7 @@ interface SanitizedOptions extends YiviOptions {
   session: YiviSessionOptions;
 }
 
-export default class YiviSessionClient {
+export class YiviSessionClient {
   private _stateMachine: IStateMachine;
   private _options: SanitizedOptions;
   private _session: SessionManagement | false;
