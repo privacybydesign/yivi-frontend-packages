@@ -229,7 +229,7 @@ module.exports = class DOMManipulations {
       <canvas class="yivi-web-qr-code"></canvas>
       ${
         payload.showBackButton
-          ? `<p><a data-yivi-glue-transition="checkUserAgent">${this._translations.back}</a></p>`
+          ? `<p><button class="yivi-web-button-tertiary" data-yivi-glue-transition="checkUserAgent">${this._translations.back}</button></p>`
           : ''
       }
     `;
@@ -238,10 +238,10 @@ module.exports = class DOMManipulations {
   _stateShowingYiviButton() {
     return `
       <!-- State: ShowingButton -->
-      <a class="yivi-web-button-link">
-        <button class="yivi-web-button">${this._translations.button}</button>
+      <a class="yivi-web-button-link yivi-web-button">
+        ${this._translations.button}
       </a>
-      <p><a data-yivi-glue-transition="chooseQR">${this._translations.qrCode}</a></p>
+      <p><button class="yivi-web-button-secondary" data-yivi-glue-transition="chooseQR">${this._translations.qrCode}</button></p>
     `;
   }
 
@@ -277,7 +277,7 @@ module.exports = class DOMManipulations {
             <div class="yivi-web-pairing-loading-animation">
                 <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </div>
-            <p><a data-yivi-glue-transition="cancel">${this._translations.cancel}</a></p>
+            <p><button class="yivi-web-button-secondary" data-yivi-glue-transition="cancel">${this._translations.cancel}</button></p>
           </form>
         `;
     }
@@ -288,7 +288,7 @@ module.exports = class DOMManipulations {
       <!-- State: WaitingForUser -->
       <div class="yivi-web-waiting-for-user-animation"></div>
       <p>${this._translations.app}</p>
-      <p><a data-yivi-glue-transition="cancel">${this._translations.cancel}</a></p>
+      <p><button class="yivi-web-button-secondary" data-yivi-glue-transition="cancel">${this._translations.cancel}</button></p>
     `;
   }
 
@@ -297,7 +297,7 @@ module.exports = class DOMManipulations {
       <!-- State: Cancelled -->
       <div class="yivi-web-forbidden-animation"></div>
       <p>${this._translations.cancelled}</p>
-      <p class="yivi-web-restart-button"><a data-yivi-glue-transition="restart">${this._translations.retry}</a></p>
+      <p class="yivi-web-restart-button"><button class="yivi-web-button-secondary" data-yivi-glue-transition="restart">${this._translations.retry}</button></p>
     `;
   }
 
@@ -306,7 +306,7 @@ module.exports = class DOMManipulations {
       <!-- State: TimedOut -->
       <div class="yivi-web-clock-animation"></div>
       <p>${this._translations.timeout}</p>
-      <p class="yivi-web-restart-button"><a data-yivi-glue-transition="restart">${this._translations.retry}</a></p>
+      <p class="yivi-web-restart-button"><button class="yivi-web-button-secondary" data-yivi-glue-transition="restart">${this._translations.retry}</button></p>
     `;
   }
 
@@ -315,7 +315,7 @@ module.exports = class DOMManipulations {
       <!-- State: Error -->
       <div class="yivi-web-forbidden-animation"></div>
       <p>${this._translations.error}</p>
-      <p class="yivi-web-restart-button"><a data-yivi-glue-transition="restart">${this._translations.retry}</a></p>
+      <p class="yivi-web-restart-button"><button class="yivi-web-button-secondary" data-yivi-glue-transition="restart">${this._translations.retry}</button></p>
     `;
   }
 
