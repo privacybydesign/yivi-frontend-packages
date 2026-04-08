@@ -45,20 +45,30 @@ for package in ${all_packages[@]}; do
   set -x
 done
 
-# Second pass: install, build, and clean standalone packages only
+# Second pass: install dependencies and build all standalone packages.
+# This must happen before stripping devDependencies, because all packages
+# share the root node_modules (workspace hoisting) and removing devDependencies
+# from one package would break the build tools (e.g. tsdown) for the next.
+npm install
 for package in ${standalone_packages[@]}; do
   dirname=`dirname $package`
   cd $dirname
   set +x
-  echo "Preparing $dirname for release"
+  echo "Building $dirname"
   set -x
-  rm -rf ./node_modules ./dist
-  npm install
-  npm audit fix
-  npm update
+  rm -rf ./dist
   npm run clean --if-present
   npm run release --if-present
-  # Make sure dev dependencies are not included to prevent artifact pollution
+  cd $root
+done
+
+# Third pass: strip devDependencies from standalone packages for clean publish artifacts.
+for package in ${standalone_packages[@]}; do
+  dirname=`dirname $package`
+  cd $dirname
+  set +x
+  echo "Cleaning $dirname for publish"
+  set -x
   rm -rf ./node_modules
   npm install --omit=dev
   cd $root

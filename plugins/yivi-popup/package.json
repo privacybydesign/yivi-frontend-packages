@@ -23,6 +23,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "release": "npm run build",
     "dev": "tsdown --watch"
   },
   "license": "SEE LICENSE IN REPOSITORY",
