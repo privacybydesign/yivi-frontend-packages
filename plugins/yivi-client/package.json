@@ -28,14 +28,10 @@
   },
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
-    "deepmerge": "^4.2.2",
-    "eventsource": "^1.0.7"
+    "deepmerge": "^4.2.2"
   },
   "peerDependencies": {
     "@privacybydesign/yivi-core": "^1.0.0-beta.3"
-  },
-  "devDependencies": {
-    "@types/eventsource": "^1.1.0"
   },
   "repository": {
     "type": "git",

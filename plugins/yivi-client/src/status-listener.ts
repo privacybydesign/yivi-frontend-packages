@@ -1,14 +1,13 @@
 import { ProtocolVersion } from './protocol-version';
 import type { SessionMappings, YiviStateOptions, SessionPtr } from '@privacybydesign/yivi-core';
 
-/** Resolve EventSource: use the browser built-in, or dynamically import the Node.js polyfill. */
-async function getEventSource(): Promise<typeof EventSource> {
+/** Get the native EventSource, or null if unavailable (Node.js). */
+function getEventSource(): typeof EventSource | null {
   if (typeof globalThis.EventSource !== 'undefined') {
     return globalThis.EventSource;
   }
-  // Dynamic import so Node.js eventsource package is never loaded in browsers
-  const mod: any = await import('eventsource');
-  return mod.default ?? mod;
+  // No native EventSource (Node.js) — caller should fall back to polling.
+  return null;
 }
 
 export interface ServerState {
@@ -102,10 +101,16 @@ export class StatusListener {
     return {};
   }
 
-  private async _startSSE(): Promise<void> {
-    if (this._options.debugging) console.log(`Using EventSource for server events on ${this._sseUrl}`);
+  private _startSSE(): void {
+    const ES = getEventSource();
+    if (!ES) {
+      // No native EventSource (e.g. Node.js) — fall back to polling
+      if (this._options.debugging) console.log('No native EventSource available, falling back to polling');
+      this._startPolling();
+      return;
+    }
 
-    const ES = await getEventSource();
+    if (this._options.debugging) console.log(`Using EventSource for server events on ${this._sseUrl}`);
     this._source = new ES(this._sseUrl, this._fetchParams as EventSourceInit) as unknown as EventSource;
 
     const sseOptions = this._options.serverSentEvents as { timeout?: number };
