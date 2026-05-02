@@ -10,13 +10,12 @@ const yivi = new YiviCore({
   element: '#yivi-qr',
   language: 'en',
   minimal: true,
-  // Simulates a realistic Yivi session pointer payload
-  qrPayload: {
-    u: 'https://irma.example.com/irma/session/xJ3Fk9Rq7mNpLwB2vT8cYdGhKjWnZqAs',
-    irmaqr: 'disclosing',
-    continueOnSecondDevice: true,
-    frontendRequest: { authorization: 'qGx9f3Lk2mNpRwYz' },
-  },
+  qrPayload: `https://open.yivi.app/-/session#${encodeURIComponent(
+    JSON.stringify({
+      u: 'abcdef0123456789abcdef0123456789',
+      irmaqr: 'disclosing',
+    }),
+  )}`,
 });
 
 yivi.use(YiviWeb);
