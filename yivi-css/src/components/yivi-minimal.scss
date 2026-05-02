@@ -23,6 +23,8 @@ Styleguide Components.Yivi minimal
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: 240px;
+  height: 240px;
 
   .yivi-web-centered {
     display: flex;
@@ -35,8 +37,9 @@ Styleguide Components.Yivi minimal
   img {
     display: block;
     width: $qr-code-size;
-    height: $qr-code-size;
+    height: auto;
     max-width: 100%;
+    aspect-ratio: 1;
     image-rendering: pixelated;
   }
 
