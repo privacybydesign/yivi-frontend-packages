@@ -37,7 +37,7 @@ module.exports = class DOMManipulations {
     const canvas = this._element.querySelector('.yivi-web-qr-code');
     QRCode.toCanvas(canvas, qr, {
       scale: 8,
-      margin: 0,
+      margin: 1,
     });
     canvas.style.width = '';
     canvas.style.height = '';
