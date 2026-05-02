@@ -34,10 +34,13 @@ module.exports = class DOMManipulations {
   }
 
   setQRCode(qr) {
-    QRCode.toCanvas(this._element.querySelector('.yivi-web-qr-code'), qr, {
-      width: '230',
-      margin: '1',
+    const canvas = this._element.querySelector('.yivi-web-qr-code');
+    QRCode.toCanvas(canvas, qr, {
+      scale: 8,
+      margin: 0,
     });
+    canvas.style.width = '';
+    canvas.style.height = '';
   }
 
   setButtonLink(link) {
