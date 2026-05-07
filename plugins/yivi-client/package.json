@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-client",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "A plugin to allow your Yivi flows to communicate with a server",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -31,7 +31,7 @@
     "deepmerge": "^4.2.2"
   },
   "peerDependencies": {
-    "@privacybydesign/yivi-core": "^1.0.0-beta.4"
+    "@privacybydesign/yivi-core": "^1.0.0-beta.5"
   },
   "repository": {
     "type": "git",
