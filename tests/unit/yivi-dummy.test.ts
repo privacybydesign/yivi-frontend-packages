@@ -1,21 +1,22 @@
 import { describe, it, expect } from 'vitest';
 import { YiviCore } from '../../yivi-core/src/index';
 import { YiviDummy } from '../../plugins/yivi-dummy/src/index';
+import type { StateChangeEvent, YiviPluginArgs } from '../../yivi-core/src/types';
 
 describe('YiviDummy', () => {
   describe('QR code generation', () => {
     it('should generate universal link for QR code', async () => {
-      const stateChanges: any[] = [];
+      const stateChanges: StateChangeEvent[] = [];
 
-      const StateLogger = class {
-        constructor({ stateMachine }: any) {
-          stateMachine.addStateChangeListener((event: any) => {
+      class StateLogger {
+        constructor({ stateMachine }: YiviPluginArgs) {
+          stateMachine.addStateChangeListener((event: StateChangeEvent) => {
             stateChanges.push(event);
           });
         }
 
         start() {}
-      };
+      }
 
       const yivi = new YiviCore({
         debugging: false,
@@ -30,21 +31,21 @@ describe('YiviDummy', () => {
 
       const qrEvent = stateChanges.find((e) => e.newState === 'ShowingQRCode');
       expect(qrEvent).toBeDefined();
-      expect(qrEvent.payload.qr).toMatch(/^https:\/\/open\.yivi\.app\/-\/session#/);
+      expect((qrEvent!.payload as { qr: string }).qr).toMatch(/^https:\/\/open\.yivi\.app\/-\/session#/);
     });
 
     it('should include session pointer in QR code URL', async () => {
-      const stateChanges: any[] = [];
+      const stateChanges: StateChangeEvent[] = [];
 
-      const StateLogger = class {
-        constructor({ stateMachine }: any) {
-          stateMachine.addStateChangeListener((event: any) => {
+      class StateLogger {
+        constructor({ stateMachine }: YiviPluginArgs) {
+          stateMachine.addStateChangeListener((event: StateChangeEvent) => {
             stateChanges.push(event);
           });
         }
 
         start() {}
-      };
+      }
 
       const customPayload = {
         u: 'https://custom.server.com/session/123',
@@ -67,7 +68,7 @@ describe('YiviDummy', () => {
       expect(qrEvent).toBeDefined();
 
       // Decode the URL and verify content
-      const url = qrEvent.payload.qr;
+      const url = (qrEvent!.payload as { qr: string }).qr;
       const hash = url.split('#')[1];
       const decoded = JSON.parse(decodeURIComponent(hash));
 
@@ -77,17 +78,17 @@ describe('YiviDummy', () => {
     });
 
     it('should use default session pointer when not provided', async () => {
-      const stateChanges: any[] = [];
+      const stateChanges: StateChangeEvent[] = [];
 
-      const StateLogger = class {
-        constructor({ stateMachine }: any) {
-          stateMachine.addStateChangeListener((event: any) => {
+      class StateLogger {
+        constructor({ stateMachine }: YiviPluginArgs) {
+          stateMachine.addStateChangeListener((event: StateChangeEvent) => {
             stateChanges.push(event);
           });
         }
 
         start() {}
-      };
+      }
 
       const yivi = new YiviCore({
         debugging: false,
@@ -103,7 +104,7 @@ describe('YiviDummy', () => {
       const qrEvent = stateChanges.find((e) => e.newState === 'ShowingQRCode');
       expect(qrEvent).toBeDefined();
 
-      const url = qrEvent.payload.qr;
+      const url = (qrEvent!.payload as { qr: string }).qr;
       const hash = url.split('#')[1];
       const decoded = JSON.parse(decodeURIComponent(hash));
 
@@ -116,15 +117,15 @@ describe('YiviDummy', () => {
     it('should go through expected states in happy path', async () => {
       const states: string[] = [];
 
-      const StateLogger = class {
-        constructor({ stateMachine }: any) {
-          stateMachine.addStateChangeListener((event: any) => {
+      class StateLogger {
+        constructor({ stateMachine }: YiviPluginArgs) {
+          stateMachine.addStateChangeListener((event: StateChangeEvent) => {
             states.push(event.newState);
           });
         }
 
         start() {}
-      };
+      }
 
       const yivi = new YiviCore({
         debugging: false,

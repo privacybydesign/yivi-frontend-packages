@@ -9,7 +9,8 @@ describe('ProtocolVersion', () => {
     });
 
     it('should throw for unknown features', () => {
-      expect(() => ProtocolVersion.get('unknown' as any)).toThrow('unknown feature');
+      // @ts-expect-error — intentionally passing an invalid feature name
+      expect(() => ProtocolVersion.get('unknown')).toThrow('unknown feature');
     });
   });
 

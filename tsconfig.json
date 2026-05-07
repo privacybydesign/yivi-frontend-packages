@@ -6,6 +6,7 @@
   "include": [
     "yivi-core/src/**/*.ts",
     "yivi-frontend/src/**/*.ts",
-    "plugins/*/src/**/*.ts"
+    "plugins/*/src/**/*.ts",
+    "tests/**/*.ts"
   ]
 }

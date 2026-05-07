@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { YiviCore } from '../../yivi-core/src/index';
 import { YiviDummy } from '../../plugins/yivi-dummy/src/index';
+import type { IStateMachine, YiviOptions, YiviPluginArgs } from '../../yivi-core/src/types';
 
 describe('YiviCore Integration', () => {
   describe('with YiviDummy plugin', () => {
@@ -152,15 +153,15 @@ describe('YiviCore Integration', () => {
     });
 
     it('should pass correct options to plugins', () => {
-      let receivedOptions: any;
+      let receivedOptions: YiviOptions | undefined;
 
-      const MockPlugin = class {
-        constructor({ options }: any) {
+      class MockPlugin {
+        constructor({ options }: YiviPluginArgs) {
           receivedOptions = options;
         }
 
         start() {}
-      };
+      }
 
       const options = {
         debugging: true,
@@ -174,21 +175,21 @@ describe('YiviCore Integration', () => {
     });
 
     it('should pass stateMachine to plugins', () => {
-      let receivedStateMachine: any;
+      let receivedStateMachine: IStateMachine | undefined;
 
-      const MockPlugin = class {
-        constructor({ stateMachine }: any) {
+      class MockPlugin {
+        constructor({ stateMachine }: YiviPluginArgs) {
           receivedStateMachine = stateMachine;
         }
 
         start() {}
-      };
+      }
 
       const yivi = new YiviCore({});
       yivi.use(MockPlugin);
 
       expect(receivedStateMachine).toBeDefined();
-      expect(typeof receivedStateMachine.selectTransition).toBe('function');
+      expect(typeof receivedStateMachine!.selectTransition).toBe('function');
     });
 
     it('should call close method on plugins', async () => {

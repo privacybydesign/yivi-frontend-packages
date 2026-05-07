@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { StateMachine } from '../../yivi-core/src/state-machine';
 import { transitions } from '../../yivi-core/src/state-transitions';
+import type { YiviState } from '../../yivi-core/src/types';
 
 describe('StateMachine', () => {
   let stateMachine: StateMachine;
@@ -216,7 +217,7 @@ describe('State Transitions', () => {
 
     // Verify each non-end state has transitions defined
     for (const state of allStates) {
-      if (transitions.endStates.includes(state as any)) continue;
+      if (transitions.endStates.includes(state as YiviState)) continue;
       const stateTransitions = transitions[state as keyof typeof transitions];
       expect(stateTransitions, `State ${state} should have transitions defined`).toBeDefined();
     }
