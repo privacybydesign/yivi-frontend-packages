@@ -31,6 +31,10 @@ Styleguide Components.Yivi minimal
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // Fill the minimal box so the QR's `max-width: 100%` resolves
+    // against a definite size instead of its own intrinsic preference.
+    width: 100%;
+    height: 100%;
   }
 
   p {
