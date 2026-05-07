@@ -2,9 +2,9 @@ import { ProtocolVersion } from './protocol-version';
 import type { SessionMappings, SessionPtr, FrontendRequest, YiviSessionOptions } from '@privacybydesign/yivi-core';
 
 interface MappingFunctions {
-  sessionPtr?: (response: unknown) => SessionPtr;
-  sessionToken?: (response: unknown) => string;
-  frontendRequest?: (response: unknown) => FrontendRequest;
+  sessionPtr?: (response: unknown) => SessionPtr | undefined;
+  sessionToken?: (response: unknown) => string | undefined;
+  frontendRequest?: (response: unknown) => FrontendRequest | undefined;
 }
 
 interface StartOptions {

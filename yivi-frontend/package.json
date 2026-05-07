@@ -1,17 +1,13 @@
 {
   "name": "@privacybydesign/yivi-frontend",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "A simplified package of yivi-frontend modules to get started easily",
   "type": "module",
-  "main": "./dist/yivi.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "browser": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/yivi.js"
-      },
       "import": {
         "types": "./dist/index.d.mts",
         "default": "./dist/index.mjs"
@@ -20,7 +16,8 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
-    }
+    },
+    "./umd": "./dist/yivi.js"
   },
   "files": [
     "dist"
@@ -39,12 +36,11 @@
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.6",
-    "@privacybydesign/yivi-client": "^1.0.0-beta.3",
-    "@privacybydesign/yivi-core": "^1.0.0-beta.3",
-    "@privacybydesign/yivi-css": "^1.0.0-beta.3",
-    "@privacybydesign/yivi-frontend": "^1.0.0-beta.3",
-    "@privacybydesign/yivi-popup": "^1.0.0-beta.3",
-    "@privacybydesign/yivi-web": "^1.0.0-beta.3",
+    "@privacybydesign/yivi-client": "^1.0.0-beta.4",
+    "@privacybydesign/yivi-core": "^1.0.0-beta.4",
+    "@privacybydesign/yivi-css": "^1.0.0-beta.4",
+    "@privacybydesign/yivi-popup": "^1.0.0-beta.4",
+    "@privacybydesign/yivi-web": "^1.0.0-beta.4",
     "babel-loader": "^9.1.2",
     "core-js": "^3.16.3",
     "css-loader": "^6.3.0",

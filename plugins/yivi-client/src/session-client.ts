@@ -5,6 +5,8 @@ import type {
   YiviOptions,
   YiviSessionOptions,
   SessionMappings,
+  SessionPtr,
+  FrontendRequest,
   StateChangeEvent,
   SelectTransitionResult,
 } from '@privacybydesign/yivi-core';
@@ -112,9 +114,9 @@ export class YiviSessionClient {
           // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
         },
         mapping: {
-          sessionPtr: (r: { sessionPtr?: unknown }) => r.sessionPtr,
-          sessionToken: (r: { token?: string }) => r.token,
-          frontendRequest: (r: { frontendRequest?: unknown }) => r.frontendRequest,
+          sessionPtr: (r: unknown) => (r as { sessionPtr?: SessionPtr }).sessionPtr,
+          sessionToken: (r: unknown) => (r as { token?: string }).token,
+          frontendRequest: (r: unknown) => (r as { frontendRequest?: FrontendRequest }).frontendRequest,
         },
         result: {
           url: (o: YiviSessionOptions, { sessionToken }: SessionMappings) => `${o.url}/session/${sessionToken}/result`,

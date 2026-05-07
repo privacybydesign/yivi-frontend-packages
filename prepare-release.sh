@@ -33,6 +33,11 @@ for package in ${all_packages[@]}; do
     ['dependencies', 'peerDependencies', 'devDependencies'].forEach(function(depType) {
       if (!json[depType]) return;
       Object.keys(json[depType]).forEach(function(name) {
+        // Drop self-references; otherwise update internal package versions in lockstep.
+        if (name === json.name) {
+          delete json[depType][name];
+          return;
+        }
         if (name.startsWith('@privacybydesign/')) {
           json[depType][name] = '^$new_version';
         }

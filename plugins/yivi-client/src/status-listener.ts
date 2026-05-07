@@ -10,6 +10,8 @@ function getEventSource(): typeof EventSource | null {
   return null;
 }
 
+const hasNativeEventSource = (): boolean => typeof globalThis.EventSource !== 'undefined';
+
 export interface ServerState {
   status: string;
   nextSession?: SessionPtr;
@@ -42,7 +44,7 @@ export class StatusListener {
     this._isPolling = false;
     this._options = options;
     this._mappings = mappings;
-    this._listeningMethod = this._options.serverSentEvents ? 'sse' : 'polling';
+    this._listeningMethod = this._options.serverSentEvents && hasNativeEventSource() ? 'sse' : 'polling';
     this._sseUrl = this._options.serverSentEvents
       ? this._getFetchUrl((this._options.serverSentEvents as { endpoint?: string }).endpoint || 'statusevents')
       : '';
@@ -102,13 +104,8 @@ export class StatusListener {
   }
 
   private _startSSE(): void {
-    const ES = getEventSource();
-    if (!ES) {
-      // No native EventSource (e.g. Node.js) — fall back to polling
-      if (this._options.debugging) console.log('No native EventSource available, falling back to polling');
-      this._startPolling();
-      return;
-    }
+    // _listeningMethod is only set to 'sse' when a native EventSource is available, so this is safe.
+    const ES = getEventSource()!;
 
     if (this._options.debugging) console.log(`Using EventSource for server events on ${this._sseUrl}`);
     this._source = new ES(this._sseUrl, this._fetchParams as EventSourceInit) as unknown as EventSource;
