@@ -7,7 +7,7 @@ and state animations without the form wrapper, header, or helper elements.
 Markup:
 <div class="yivi-web-minimal">
   <div class="yivi-web-centered">
-    <canvas class="yivi-web-qr-code"></canvas>
+    <div class="yivi-web-qr-code"></div>
   </div>
 </div>
 
@@ -31,16 +31,6 @@ Styleguide Components.Yivi minimal
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  canvas,
-  img {
-    display: block;
-    width: $qr-code-size;
-    height: auto;
-    max-width: 100%;
-    aspect-ratio: 1;
-    image-rendering: pixelated;
   }
 
   p {

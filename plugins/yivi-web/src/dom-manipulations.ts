@@ -81,14 +81,17 @@ export class DOMManipulations {
     }
   }
 
-  setQRCode(qr: string): void {
-    const canvas = this._element.querySelector<HTMLCanvasElement>('.yivi-web-qr-code');
-    if (canvas) {
-      QRCode.toCanvas(canvas, qr, {
-        scale: 5,
-        margin: 1,
-      });
-    }
+  async setQRCode(qr: string): Promise<void> {
+    const host = this._element.querySelector<HTMLElement>('.yivi-web-qr-code');
+    if (!host) return;
+    // Render as SVG so the QR scales to any container size with no
+    // browser scaling artifacts and no inline-style conflicts. The
+    // viewBox carries the module grid; CSS controls the displayed size.
+    const svg = await QRCode.toString(qr, {
+      type: 'svg',
+      margin: 1,
+    });
+    host.innerHTML = svg;
   }
 
   setButtonLink(link: string): void {
@@ -292,7 +295,7 @@ export class DOMManipulations {
     const qrPayload = payload as QRCodePayload;
     return `
       <!-- State: ShowingQRCode -->
-      <canvas class="yivi-web-qr-code"></canvas>
+      <div class="yivi-web-qr-code"></div>
       ${
         qrPayload?.showBackButton
           ? `<p><button class="yivi-web-button-tertiary" data-yivi-glue-transition="checkUserAgent">${this._translations.back}</button></p>`
