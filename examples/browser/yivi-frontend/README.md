@@ -12,7 +12,6 @@ You can build this example by running the following commands in this directory:
 
 ```bash
 npm install
-npm run link # Only necessary for development builds
 npm run build
 ```
 

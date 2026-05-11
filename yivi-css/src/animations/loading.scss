@@ -11,7 +11,9 @@ Markup:
 Styleguide Animations.Loading
 */
 
-@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+@use '../mixins/reset' as *;
+@use '../mixins/animation' as *;
+@use '../variables/colours' as *;
 
 .yivi-web-loading-animation {
   @extend %yivi-web-loading-animation;

@@ -6,4 +6,8 @@ Weight: 5
 Styleguide Animations
 */
 
-@import 'loading', 'waiting-for-user', 'checkmark', 'forbidden', 'clock';
+@forward 'loading';
+@forward 'waiting-for-user';
+@forward 'checkmark';
+@forward 'forbidden';
+@forward 'clock';

@@ -14,7 +14,9 @@ Markup:
 Styleguide Layouts.Popup
 */
 
-@import '../mixins/reset', '../mixins/center', '../mixins/animation';
+@use '../mixins/reset' as *;
+@use '../mixins/center' as *;
+@use '../mixins/animation' as *;
 
 .yivi-web-popup {
   @include reset;

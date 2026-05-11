@@ -6,4 +6,6 @@ Weight: 0
 Styleguide Examples
 */
 
-@import 'states', 'happy-path', 'helpers';
+@forward 'states';
+@forward 'happy-path';
+@forward 'helpers';

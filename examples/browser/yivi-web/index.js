@@ -1,12 +1,18 @@
-require('@privacybydesign/yivi-css');
+import '@privacybydesign/yivi-css';
 
-const YiviCore = require('@privacybydesign/yivi-core');
-const YiviWeb = require('@privacybydesign/yivi-web');
-const Dummy = require('@privacybydesign/yivi-dummy');
+import YiviCore from '@privacybydesign/yivi-core';
+import YiviWeb from '@privacybydesign/yivi-web';
+import Dummy from '@privacybydesign/yivi-dummy';
 
 const yivi = new YiviCore({
   debugging: true,
   dummy: 'happy path',
+  qrPayload: `https://open.yivi.app/-/session#${encodeURIComponent(
+    JSON.stringify({
+      u: 'abcdef0123456789abcdef0123456789',
+      irmaqr: 'disclosing',
+    }),
+  )}`,
   element: '#yivi-web-form',
   language: 'en',
   translations: {
@@ -20,13 +26,13 @@ yivi.use(Dummy);
 
 yivi
   .start()
-  .then((result) => console.log('Successful disclosure! 🎉', result))
+  .then((result) => console.log('Successful disclosure!', result))
   .catch((error) => {
     if (error === 'Aborted') {
-      console.log('We closed it ourselves, so no problem 😅');
+      console.log('We closed it ourselves, so no problem');
       return;
     }
-    console.error("Couldn't do what you asked 😢", error);
+    console.error("Couldn't do what you asked", error);
   });
 
 document.getElementById('abort-button').addEventListener('click', () => {
