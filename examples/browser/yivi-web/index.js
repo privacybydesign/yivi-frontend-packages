@@ -1,8 +1,8 @@
 import '@privacybydesign/yivi-css';
 
-import YiviCore from '@privacybydesign/yivi-core';
-import YiviWeb from '@privacybydesign/yivi-web';
-import Dummy from '@privacybydesign/yivi-dummy';
+import { YiviCore } from '@privacybydesign/yivi-core';
+import { YiviWeb } from '@privacybydesign/yivi-web';
+import { YiviDummy } from '@privacybydesign/yivi-dummy';
 
 const yivi = new YiviCore({
   debugging: true,
@@ -22,7 +22,7 @@ const yivi = new YiviCore({
 });
 
 yivi.use(YiviWeb);
-yivi.use(Dummy);
+yivi.use(YiviDummy);
 
 yivi
   .start()

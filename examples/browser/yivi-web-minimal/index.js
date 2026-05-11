@@ -1,8 +1,8 @@
 require('@privacybydesign/yivi-css');
 
-const YiviCore = require('@privacybydesign/yivi-core');
-const YiviWeb = require('@privacybydesign/yivi-web');
-const Dummy = require('@privacybydesign/yivi-dummy');
+const { YiviCore } = require('@privacybydesign/yivi-core');
+const { YiviWeb } = require('@privacybydesign/yivi-web');
+const { YiviDummy } = require('@privacybydesign/yivi-dummy');
 
 const yivi = new YiviCore({
   debugging: true,
@@ -19,7 +19,7 @@ const yivi = new YiviCore({
 });
 
 yivi.use(YiviWeb);
-yivi.use(Dummy);
+yivi.use(YiviDummy);
 
 yivi
   .start()

@@ -1,8 +1,8 @@
 import '@privacybydesign/yivi-css';
 
-import YiviCore from '@privacybydesign/yivi-core';
-import Popup from '@privacybydesign/yivi-popup';
-import Dummy from '@privacybydesign/yivi-dummy';
+import { YiviCore } from '@privacybydesign/yivi-core';
+import { YiviPopup } from '@privacybydesign/yivi-popup';
+import { YiviDummy } from '@privacybydesign/yivi-dummy';
 
 document.getElementById('start-button').addEventListener('click', () => {
   const yivi = new YiviCore({
@@ -15,8 +15,8 @@ document.getElementById('start-button').addEventListener('click', () => {
     },
   });
 
-  yivi.use(Popup);
-  yivi.use(Dummy);
+  yivi.use(YiviPopup);
+  yivi.use(YiviDummy);
 
   yivi
     .start()
