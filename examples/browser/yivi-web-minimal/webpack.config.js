@@ -1,30 +1,27 @@
 const path = require('path');
 
 module.exports = {
-	mode: 'development',
+  mode: 'development',
 
-	entry: {
-		'yivi': './index.js'
-	},
+  entry: {
+    yivi: './index.js',
+  },
 
-	output: {
-		path: path.join(__dirname, 'public'),
-		filename: '[name].js'
-	},
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: '[name].js',
+  },
 
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.woff2$/,
-        loader: 'file-loader'
-      }
-    ]
-  }
+        loader: 'file-loader',
+      },
+    ],
+  },
 };

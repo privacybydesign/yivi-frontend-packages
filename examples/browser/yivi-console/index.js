@@ -1,14 +1,14 @@
-import YiviCore from '@privacybydesign/yivi-core';
-import Console from '@privacybydesign/yivi-console/web';
-import Dummy from '@privacybydesign/yivi-dummy';
+import { YiviCore } from '@privacybydesign/yivi-core';
+import { YiviConsole } from '@privacybydesign/yivi-console/web';
+import { YiviDummy } from '@privacybydesign/yivi-dummy';
 
 const yivi = new YiviCore({
   debugging: true,
   dummy: 'happy path',
 });
 
-yivi.use(Console);
-yivi.use(Dummy);
+yivi.use(YiviConsole);
+yivi.use(YiviDummy);
 
 yivi
   .start()
