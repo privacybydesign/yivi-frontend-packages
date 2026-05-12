@@ -110,36 +110,33 @@ The eight packages are:
 - `@privacybydesign/yivi-popup`
 - `@privacybydesign/yivi-frontend`
 
-## One-time bootstrap: seed per-package tags
+## First release: v1.0.0
 
-The first time the workflow runs after this PR merges, multi-semantic-
-release will look for tags of the form `@privacybydesign/<pkg>@<version>`
-to determine each package's previous release. None exist yet, so without
-seed tags the first computed version would be `1.0.0` — overwriting the
-`1.0.0-beta.N` series that's already on npm.
+This monorepo is graduating from the `1.0.0-beta.N` series to a stable
+`v1.0.0` line. The first run of the release workflow after this PR
+merges will publish `1.0.0` for every package, for two reasons:
 
-Before merging this PR, create one tag per package pointing at the
-current `master` HEAD (or whichever commit you consider the last
-manually-released state):
+1. **No per-package tags exist yet.** multi-semantic-release looks for
+   tags of the form `@privacybydesign/<pkg>@<version>`. Without one,
+   semantic-release defaults the first release to `1.0.0`.
+2. **The dep cascade propagates the same default.** Any package whose
+   own files didn't get a release-worthy commit since the start of git
+   history gets pulled into the release through the cascade — yivi-core
+   publishes 1.0.0, which forces a cascade release of every package
+   that depends on yivi-core, and so on. Cascade releases with no prior
+   tag fall back to the same `1.0.0` first-release default.
 
-```bash
-last="$(git rev-parse HEAD)"
-for pkg_ver in \
-  '@privacybydesign/yivi-core@1.0.0-beta.6' \
-  '@privacybydesign/yivi-css@1.0.0-beta.7' \
-  '@privacybydesign/yivi-client@1.0.0-beta.6' \
-  '@privacybydesign/yivi-console@1.0.0-beta.6' \
-  '@privacybydesign/yivi-dummy@1.0.0-beta.6' \
-  '@privacybydesign/yivi-web@1.0.0-beta.6' \
-  '@privacybydesign/yivi-popup@1.0.0-beta.6' \
-  '@privacybydesign/yivi-frontend@1.0.0-beta.6'; do
-    git tag "$pkg_ver" "$last"
-done
-git push --tags
-```
+**Do not seed per-package tags** for this transition. Doing so would
+anchor each package at `1.0.0-beta.N` and the next release would be
+`1.0.0-beta.N+1`, not `1.0.0`.
 
-After that, semantic-release will compute the next version from each
-package's last tag using the commits that touched its files.
+If you ever need to override the computed version (for any package, at
+any future release), append a `Release-As: X.Y.Z` footer to the PR's
+squash-merge commit message. semantic-release will respect it and skip
+its own analysis.
+
+After this v1.0.0 transition, all subsequent releases follow the normal
+Conventional Commits flow described above.
 
 ## Running locally (dry-run)
 
@@ -183,7 +180,15 @@ each package gets its version: either "(commits)" or "(triggered by
 dependency)". If you expected the former, double-check that your
 commits' scope/files actually touched that package's directory.
 
-### The first run after merge wants to start at 1.0.0
+### One package didn't get released in the first run
 
-You skipped the seed-tag bootstrap above. Tag the current state per
-package, push the tags, and re-run the workflow.
+The first release relies on the dep cascade to pull every package into
+the run. If a package has no release-worthy commits in its directory
+AND nothing it depends on got released, the cascade won't reach it. To
+force-release it: open a trivial `feat(<pkg>): ...` PR scoped to that
+package's directory.
+
+### I need to publish a specific version, not the one semantic-release computed
+
+Append a `Release-As: X.Y.Z` footer to the PR's squash-merge commit
+message. semantic-release uses it verbatim.
