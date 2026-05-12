@@ -1,6 +1,6 @@
 {
   "name": "@privacybydesign/yivi-popup",
-  "version": "1.0.0-beta.5",
+  "version": "0.0.0-managed-by-semantic-release",
   "description": "A front-end plugin to show the Yivi form in a popup",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -28,8 +28,8 @@
   },
   "license": "SEE LICENSE IN REPOSITORY",
   "dependencies": {
-    "@privacybydesign/yivi-core": "^1.0.0-beta.5",
-    "@privacybydesign/yivi-web": "^1.0.0-beta.5",
+    "@privacybydesign/yivi-core": "*",
+    "@privacybydesign/yivi-web": "*",
     "deepmerge": "^4.2.2"
   },
   "repository": {

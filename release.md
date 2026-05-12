@@ -1,234 +1,189 @@
 # Releasing yivi-frontend-packages
 
-This document describes the full release process for all packages in this monorepo.
+Releases are fully automated by [multi-semantic-release][msr] on top of
+[semantic-release][sr]. There is **no manual `npm publish` step** and
+**no `NPM_TOKEN` secret** — npm authenticates via [Trusted Publishing][tp]
+(OIDC).
 
-## Prerequisites
+[msr]: https://github.com/dhoulb/multi-semantic-release
+[sr]: https://semantic-release.gitbook.io/
+[tp]: https://docs.npmjs.com/trusted-publishers
 
-- You must be logged into npm (`npm login`) with an account that has publish access to the `@privacybydesign` scope.
-- Verify with `npm whoami` and `npm org ls privacybydesign`.
+## How it works
 
-## Package overview
+1. Land a PR on `master` (stable) or `beta` (prerelease) with a
+   Conventional Commit title:
+   - `fix: ...` → patch (`1.2.3 → 1.2.4`)
+   - `feat: ...` → minor (`1.2.3 → 1.3.0`)
+   - `feat!: ...` or footer `BREAKING CHANGE:` → major
+   - `chore:`, `docs:`, `test:`, `refactor:`, `ci:` → no release
+2. CI runs lint + build + test, then `npm run release`, which invokes
+   `multi-semantic-release`.
+3. For each of the eight publishable packages:
+   - Commits touching that package's files since its last tag determine
+     the new version.
+   - If no commits affect the package, no release happens — **unless**
+     one of its workspace dependencies got a new version, in which case
+     the package is published as a patch with the new dep version
+     baked in (this is the cascade you want for `A → B → C`).
+4. Each released package gets:
+   - An npm publish with `provenance` via OIDC.
+   - A git tag `@privacybydesign/<pkg>@<version>`.
+   - A GitHub Release with auto-generated notes.
 
-The release involves 8 packages, published in three stages:
+## Conventional Commits cheat sheet
 
-**Standalone packages** (published via `release.sh`):
+| Commit prefix              | Release | Notes                          |
+|----------------------------|---------|--------------------------------|
+| `fix(scope): ...`          | patch   | Bug fixes                      |
+| `feat(scope): ...`         | minor   | New features                   |
+| `feat(scope)!: ...`        | major   | Breaking change                |
+| `perf(scope): ...`         | patch   | Perf improvements              |
+| `refactor`, `chore`, `docs`, `test`, `ci`, `style`, `build` | none | No release |
+
+A footer of `BREAKING CHANGE: <description>` also triggers a major bump,
+regardless of the type. The `scope` is free-form; conventional choices
+are the package name (`yivi-web`, `yivi-core`, …) or area (`release`,
+`types`).
+
+PR titles are enforced by `.github/workflows/pr-title.yml` so the
+squash-merge commit on `master` has the right prefix.
+
+## Dependency cascade
+
+multi-semantic-release runs with `--deps.bump=override --deps.release=patch`,
+which means:
+
+- When package B publishes a new version, every package A that has B in
+  its `dependencies`, `devDependencies`, or `peerDependencies` gets:
+  - A patch release.
+  - Its A→B dep spec rewritten to the exact new B version.
+
+Concretely, the chain in this repo looks like:
+
+```
+yivi-core ─┬─→ yivi-client    (peerDep)
+           ├─→ yivi-console   (peerDep)
+           ├─→ yivi-dummy     (peerDep)
+           ├─→ yivi-web       (peerDep) ──→ yivi-popup ──→ yivi-frontend
+           └─→ yivi-popup     (dep)
+yivi-css ──────────────────────────────────────────────→ yivi-frontend
+```
+
+A `fix:` to yivi-core will publish yivi-core, then cascade patch
+releases through yivi-client/console/dummy/web/popup/frontend.
+
+## Beta releases
+
+Push to the `beta` branch instead of `master`:
+
+```bash
+git checkout -b beta
+# ... commits ...
+git push origin beta
+```
+
+Versions on this branch carry the `-beta.N` suffix and are published
+with the `beta` npm dist-tag (not `latest`).
+
+## One-time npm setup (per package)
+
+Trusted Publishing has to be enabled once per package on npmjs.com:
+
+1. Sign in as a member of the `@privacybydesign` org.
+2. For each of the eight packages, go to *Settings > Publishing access*.
+3. Click *Add Trusted Publisher* and fill in:
+   - Publisher: **GitHub Actions**
+   - Owner: `privacybydesign`
+   - Repository: `yivi-frontend-packages`
+   - Workflow filename: `release.yml`
+   - Environment: *(empty)*
+
+The eight packages are:
+
 - `@privacybydesign/yivi-core`
 - `@privacybydesign/yivi-css`
 - `@privacybydesign/yivi-client`
 - `@privacybydesign/yivi-console`
 - `@privacybydesign/yivi-dummy`
 - `@privacybydesign/yivi-web`
-
-**Special packages** (published manually, each has its own prepare script):
 - `@privacybydesign/yivi-popup`
 - `@privacybydesign/yivi-frontend`
 
-All packages are versioned in lockstep (same version number).
+## One-time bootstrap: seed per-package tags
 
-## Stable release
+The first time the workflow runs after this PR merges, multi-semantic-
+release will look for tags of the form `@privacybydesign/<pkg>@<version>`
+to determine each package's previous release. None exist yet, so without
+seed tags the first computed version would be `1.0.0` — overwriting the
+`1.0.0-beta.N` series that's already on npm.
 
-```bash
-# 1. Bump all package versions, build standalone packages
-./prepare-release.sh <version>
-# Example: ./prepare-release.sh 1.1.0
-
-# Check output carefully before continuing.
-
-# 2. Publish standalone packages
-./release.sh
-
-# 3. Prepare and publish yivi-popup
-./prepare-yivi-popup.sh
-cd ./plugins/yivi-popup && npm publish --access public
-cd ../..
-
-# 4. Prepare and publish yivi-frontend
-./prepare-yivi-frontend.sh
-cd ./yivi-frontend && npm publish --access public
-cd ..
-
-# 5. Commit the version bump
-git add -u ./\*package.json ./\*package-lock.json
-git commit -m "Version bump"
-```
-
-## Pre-release (beta)
-
-For beta or other pre-release versions, use a pre-release version string and add
-`--tag <tag>` to all publish commands. This prevents the pre-release from becoming
-the `latest` tag on npm.
+Before merging this PR, create one tag per package pointing at the
+current `master` HEAD (or whichever commit you consider the last
+manually-released state):
 
 ```bash
-# 1. Bump all package versions, build standalone packages
-./prepare-release.sh <version>
-# Example: ./prepare-release.sh 1.0.0-beta.5
-
-# Check output carefully before continuing.
-
-# 2. Restore root dev dependencies (see "Known issues" below).
-npm install
-
-# 3. Publish standalone packages with beta tag
-./release.sh beta
-
-# 4. Prepare and publish yivi-popup with beta tag
-./prepare-yivi-popup.sh
-# Verify plugins/yivi-popup/package.json has no self-reference in dependencies;
-# remove it if present (see "Known issues" below).
-cd ./plugins/yivi-popup && npm publish --access public --tag beta
-cd ../..
-
-# 5. Prepare and publish yivi-frontend with beta tag
-./prepare-yivi-frontend.sh
-# Verify yivi-frontend/package.json has no self-reference in devDependencies;
-# remove it if present (see "Known issues" below).
-cd ./yivi-frontend && npm publish --access public --tag beta
-cd ..
-
-# 6. Commit the version bump
-git add -u ./\*package.json ./\*package-lock.json
-git commit -m "Version bump to <version>"
+last="$(git rev-parse HEAD)"
+for pkg_ver in \
+  '@privacybydesign/yivi-core@1.0.0-beta.6' \
+  '@privacybydesign/yivi-css@1.0.0-beta.7' \
+  '@privacybydesign/yivi-client@1.0.0-beta.6' \
+  '@privacybydesign/yivi-console@1.0.0-beta.6' \
+  '@privacybydesign/yivi-dummy@1.0.0-beta.6' \
+  '@privacybydesign/yivi-web@1.0.0-beta.6' \
+  '@privacybydesign/yivi-popup@1.0.0-beta.6' \
+  '@privacybydesign/yivi-frontend@1.0.0-beta.6'; do
+    git tag "$pkg_ver" "$last"
+done
+git push --tags
 ```
 
-## What the scripts do
+After that, semantic-release will compute the next version from each
+package's last tag using the commits that touched its files.
 
-### `prepare-release.sh <version>`
-
-1. Bumps the `version` field in every package.json to the given version.
-2. Updates all `@privacybydesign/*` cross-references in dependencies, peerDependencies, and devDependencies to `^<version>`.
-3. For each standalone package: cleans, installs, builds (`npm run release`), then reinstalls with `--omit=dev`.
-
-### `release.sh [tag]`
-
-1. Finds all standalone packages (excludes yivi-popup and yivi-frontend).
-2. Prompts for confirmation.
-3. Runs `npm publish --access public` for each, optionally with `--tag <tag>`.
-
-### `prepare-yivi-popup.sh`
-
-1. Auto-detects the version from yivi-core's package.json.
-2. Reinstalls dependencies, replacing workspace links with versioned registry packages as production dependencies.
-3. Sets the package version.
-4. Reinstalls with `--omit=dev` to prepare a clean publish artifact.
-
-### `prepare-yivi-frontend.sh`
-
-Same as yivi-popup, but installs `@privacybydesign/*` packages as devDependencies (they get bundled by webpack into the output). Runs both an ESM build (tsdown) and a UMD bundle (webpack).
-
-## Known issues with the current scripts
-
-These are workarounds you have to apply manually until the scripts are fixed.
-The "Automation roadmap" section below tracks the planned cleanup.
-
-### Root dev dependencies get stripped after `prepare-release.sh`
-
-`prepare-release.sh` ends with a per-package loop that runs
-`npm install --omit=dev` inside each standalone package. Because the repo uses
-npm workspaces with hoisting, that command rewrites the **root** `node_modules`
-to a production-only tree, removing transitive dev deps such as `tree-kill`
-(needed by `tsdown`).
-
-Symptom when running `prepare-yivi-popup.sh` or `prepare-yivi-frontend.sh`
-afterwards:
-
-```
-ERROR  Error: Cannot find module 'tree-kill'
-```
-
-**Workaround:** run `npm install` at the repo root once between
-`prepare-release.sh` and the prepare-yivi-popup / prepare-yivi-frontend
-scripts. This restores the dev tree without affecting the already-built
-standalone artifacts.
-
-### Self-reference added to yivi-popup / yivi-frontend `package.json`
-
-The prepare scripts loop over `npm ls --parseable | grep '@privacybydesign/'`
-and run `npm install <pkg>@<version> --save-prod` (or `--save-dev`) for each.
-That listing includes the package itself, so the script ends up adding the
-package to its own `dependencies` (popup) or `devDependencies` (frontend).
-
-After running each prepare script, check the affected `package.json` and
-remove the self-reference before publishing. One-liner:
+## Running locally (dry-run)
 
 ```bash
-node -e "
-  const fs = require('fs');
-  for (const path of ['plugins/yivi-popup/package.json', 'yivi-frontend/package.json']) {
-    const json = JSON.parse(fs.readFileSync(path, 'utf8'));
-    for (const k of ['dependencies', 'devDependencies', 'peerDependencies']) {
-      if (json[k] && json[k][json.name]) {
-        delete json[k][json.name];
-        console.log('removed self-ref from', path, k);
-      }
-    }
-    fs.writeFileSync(path, JSON.stringify(json, null, 2) + '\n');
-  }
-"
+npm ci
+npm run build
+npm run release:dry
 ```
+
+This runs multi-semantic-release with `--dry-run`: nothing is published,
+but you'll see which packages would be released, the next versions, and
+the rewritten dep specs.
+
+## Cross-package version specs
+
+Internal deps in this monorepo (`@privacybydesign/*` referenced from
+other `@privacybydesign/*` packages) are stored as `"*"` in working tree
+package.json files. npm workspaces always resolves these to the local
+workspace package regardless of version, and multi-semantic-release
+rewrites `"*"` to the exact published version in the tarball at publish
+time (because of `--deps.bump=override`).
+
+Consumers of these packages on npm see exact-version pins between our
+own packages (e.g. yivi-frontend's `@privacybydesign/yivi-web` will read
+`1.2.3`, not `^1.2.3`). This matches how multi-semantic-release ensures
+the cascade keeps the published graph internally consistent.
 
 ## Troubleshooting
 
-### `npm error 401 Unauthorized` / `404 Not Found` on publish
+### `npm error 401 Unauthorized` from CI
 
-You are not logged in or your account does not have publish access to the
-`@privacybydesign` scope. Run `npm whoami` and check your org membership with
-`npm org ls privacybydesign`.
+Trusted Publishing isn't configured for that package on npmjs.com, or
+the workflow filename / repo / owner doesn't match the configured
+publisher. Re-check the per-package setup above. Note that you have to
+do it eight times — once per package.
 
-### `npm error Version not changed`
+### A package was bumped by cascade but I expected a real release
 
-The prepare scripts set the version, but `prepare-yivi-popup.sh` /
-`prepare-yivi-frontend.sh` also try to set it. This is harmless since both
-scripts now use `--allow-same-version`. If you see this on an older version
-of the scripts, you can safely continue with the publish step manually.
+Run `npm run release:dry` locally. multi-semantic-release prints why
+each package gets its version: either "(commits)" or "(triggered by
+dependency)". If you expected the former, double-check that your
+commits' scope/files actually touched that package's directory.
 
-### Webpack build fails with `Module not found: @privacybydesign/*`
+### The first run after merge wants to start at 1.0.0
 
-This happens when the workspace packages don't have their `dist/`
-directories built. The `prepare-yivi-frontend.sh` script expects sibling
-packages to already be built. Fix by running from the repo root before
-retrying:
-
-```bash
-npm install
-npm run build --workspaces --if-present
-```
-
-Then re-run `./prepare-yivi-frontend.sh`.
-
-## Automation roadmap
-
-Once the `typescript-esm-modernization` PR is merged, replace the manual
-flow above with a single CI-driven release. Concrete cleanups, in
-priority order:
-
-1. **Fix the dev-tree strip** — In `prepare-release.sh`, replace the
-   final per-package `npm install --omit=dev` loop with a `.npmignore` /
-   `files` field strategy so publish artifacts stay clean without
-   touching `node_modules`. The current approach corrupts the dev tree
-   and forces the manual `npm install` workaround between phases.
-2. **Stop adding self-references** — In `prepare-yivi-popup.sh` and
-   `prepare-yivi-frontend.sh`, filter the `npm ls --parseable` output
-   to skip the current package's own name before the install loop.
-3. **Single entry point** — A top-level `release.sh <version> [tag]`
-   that runs prepare-release, the two special prepares, all eight
-   publishes, and the version-bump commit in one go. Fail loudly on
-   any non-zero exit; never on `npm audit`.
-4. **CI release on tag push** — A GitHub Action (or GitLab CI job)
-   that runs the same script on `git push --tags`, using an
-   `NPM_TOKEN` secret with publish rights to `@privacybydesign`. The
-   workflow should:
-   - Verify the tag matches every package's `version` field.
-   - Run `npm publish --provenance --access public` (provenance gives
-     consumers a verifiable build trail).
-   - For pre-release tags (`vX.Y.Z-beta.N`), pass `--tag beta`
-     automatically based on the tag string.
-5. **Changesets or conventional commits** — Replace the manual
-   "bump everything in lockstep" step with a tool that tracks
-   per-package changes (e.g. `changesets`). Lockstep versioning is
-   the simplest path today, but it forces a release of all eight
-   packages even when only one changed.
-6. **Remove `npm audit fix` / `npm update`** from the prepare
-   scripts. These mutate the lockfile in non-deterministic ways
-   right before publish, which is the opposite of what a release
-   pipeline needs. Lockfile hygiene belongs in regular dependency-
-   bump PRs, not in the release flow.
+You skipped the seed-tag bootstrap above. Tag the current state per
+package, push the tags, and re-run the workflow.

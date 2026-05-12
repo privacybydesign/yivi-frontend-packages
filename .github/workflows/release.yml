@@ -1,0 +1,56 @@
+name: Release
+
+# Per-package releases via multi-semantic-release.
+#
+# - Triggered on push to `master` (stable) and `beta` (prerelease).
+# - Conventional commits drive version bumps per package.
+# - When a workspace package is published, every dependent gets a
+#   patch release with the new dep version (deps.bump=override,
+#   deps.release=patch).
+# - npm publish uses Trusted Publishing (OIDC) — no NPM_TOKEN secret.
+#
+# One-time setup per package on npmjs.com:
+#   Settings > Publishing access > Add Trusted Publisher
+#     Publisher: GitHub Actions
+#     Owner: privacybydesign
+#     Repository: yivi-frontend-packages
+#     Workflow filename: release.yml
+#     Environment: (leave empty)
+#
+# Required repo secrets / vars: none. GITHUB_TOKEN is auto-provisioned.
+
+on:
+  push:
+    branches:
+      - master
+      - beta
+
+permissions:
+  contents: write       # tag releases + create GitHub releases
+  issues: write         # semantic-release comments on resolved issues
+  pull-requests: write  # semantic-release comments on merged PRs
+  id-token: write       # npm Trusted Publishing (OIDC)
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # semantic-release needs full history
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24 # ships with npm 11 (Trusted Publishing-capable)
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm test
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release

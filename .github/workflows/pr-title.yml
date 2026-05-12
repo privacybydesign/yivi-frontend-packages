@@ -1,0 +1,21 @@
+name: PR Title
+
+# Enforces Conventional Commit style PR titles so semantic-release can
+# determine the appropriate version bump from the squash-merge commit
+# message. See https://www.conventionalcommits.org/.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  lint-pr-title:
+    name: Conventional Commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
