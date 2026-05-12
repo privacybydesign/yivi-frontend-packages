@@ -31,6 +31,13 @@ permissions:
   pull-requests: write  # semantic-release comments on merged PRs
   id-token: write       # npm Trusted Publishing (OIDC)
 
+concurrency:
+  # Don't cancel an in-flight release; a second push to master should
+  # queue and run after the first finishes, otherwise the second job
+  # races the first on tag creation.
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest

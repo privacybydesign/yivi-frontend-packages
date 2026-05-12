@@ -113,18 +113,26 @@ The eight packages are:
 ## First release: v1.0.0
 
 This monorepo is graduating from the `1.0.0-beta.N` series to a stable
-`v1.0.0` line. The first run of the release workflow after this PR
-merges will publish `1.0.0` for every package, for two reasons:
+`v1.0.0` line. The first run of the release workflow will publish
+`1.0.0` for every package, but **only if** the squash-merge that
+introduces this automation uses a release-worthy Conventional Commit
+type (`feat:`, `fix:`, etc.).
+
+Why:
 
 1. **No per-package tags exist yet.** multi-semantic-release looks for
    tags of the form `@privacybydesign/<pkg>@<version>`. Without one,
    semantic-release defaults the first release to `1.0.0`.
-2. **The dep cascade propagates the same default.** Any package whose
-   own files didn't get a release-worthy commit since the start of git
-   history gets pulled into the release through the cascade — yivi-core
-   publishes 1.0.0, which forces a cascade release of every package
-   that depends on yivi-core, and so on. Cascade releases with no prior
-   tag fall back to the same `1.0.0` first-release default.
+2. **The merge commit touches every package's `package.json`** (version
+   placeholder + dep-spec rewrite to `*`), so a release-worthy type on
+   the merge commit attributes to every package and triggers the first
+   `1.0.0` release for each of them. No cascade dance required.
+
+A `ci:` or `chore:` merge commit will NOT trigger a release. If the PR
+introducing this workflow is squash-merged with the wrong type, the
+fallback is to push any follow-up `feat(<pkg>): bootstrap release`
+commit per package, or to land a single `feat(release): bootstrap`
+commit that touches every `package.json`.
 
 **Do not seed per-package tags** for this transition. Doing so would
 anchor each package at `1.0.0-beta.N` and the next release would be

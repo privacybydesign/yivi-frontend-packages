@@ -29,8 +29,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "release": "multi-semantic-release --deps.bump=override --deps.prefix=^ --deps.release=patch",
-    "release:dry": "multi-semantic-release --deps.bump=override --deps.prefix=^ --deps.release=patch --dry-run"
+    "release": "multi-semantic-release --deps.bump=override --deps.release=patch",
+    "release:dry": "multi-semantic-release --deps.bump=override --deps.release=patch --dry-run"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^13.0.0",
