@@ -95,7 +95,16 @@ export class DOMManipulations {
   }
 
   setButtonLink(link: string): void {
-    this._element.querySelector('.yivi-web-button-link')?.setAttribute('href', link);
+    const anchor = this._element.querySelector('.yivi-web-button-link');
+    if (!anchor) return;
+    anchor.setAttribute('href', link);
+    // Inside an iframe on iOS Safari the universal link navigates the iframe
+    // itself instead of opening the Yivi app. Targeting _top lets Safari hand
+    // the URL off to the OS so the app can claim it. Skipped for Android
+    // intent:// links, where _top would break the intent fallback chain.
+    if (!link.startsWith('intent')) {
+      anchor.setAttribute('target', '_top');
+    }
   }
 
   private _renderInitialState(): void {
