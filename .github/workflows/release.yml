@@ -60,4 +60,14 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release
+        # `workspaces-update=false` stops `npm version` (run by
+        # @semantic-release/npm during prepare) from refreshing the
+        # lockfile. Without it, npm tries to resolve the
+        # just-cascaded `@privacybydesign/yivi-core@1.0.0` (etc.)
+        # against the registry — but those versions haven't been
+        # published yet — and fails with ETARGET. Known
+        # multi-semantic-release + npm-workspaces interaction:
+        # https://github.com/dhoulb/multi-semantic-release/issues/112
+        run: |
+          npm config set workspaces-update false
+          npm run release
