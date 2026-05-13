@@ -60,14 +60,18 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # `workspaces-update=false` stops `npm version` (run by
-        # @semantic-release/npm during prepare) from refreshing the
-        # lockfile. Without it, npm tries to resolve the
-        # just-cascaded `@privacybydesign/yivi-core@1.0.0` (etc.)
-        # against the registry — but those versions haven't been
-        # published yet — and fails with ETARGET. Known
-        # multi-semantic-release + npm-workspaces interaction:
-        # https://github.com/dhoulb/multi-semantic-release/issues/112
-        run: |
-          npm config set workspaces-update false
-          npm run release
+          # `workspaces-update=false` stops `npm version` (run by
+          # @semantic-release/npm during prepare) from refreshing the
+          # lockfile. Without it, npm tries to resolve the
+          # just-cascaded `@privacybydesign/yivi-core@1.0.0` (etc.)
+          # against the registry — but those versions haven't been
+          # published yet — and fails with ETARGET.
+          #
+          # Setting via env (not `npm config set`) is required because
+          # @semantic-release/npm spawns `npm version` with
+          # `--userconfig /tmp/<id>/.npmrc`, which overrides
+          # `~/.npmrc`. Env vars beat userconfig in npm's precedence
+          # order. Known multi-semantic-release ↔ npm-workspaces
+          # interaction: https://github.com/dhoulb/multi-semantic-release/issues/112
+          NPM_CONFIG_WORKSPACES_UPDATE: 'false'
+        run: npm run release
