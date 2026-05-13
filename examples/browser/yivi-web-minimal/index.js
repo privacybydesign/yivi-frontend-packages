@@ -10,12 +10,10 @@ const yivi = new YiviCore({
   element: '#yivi-qr',
   language: 'en',
   minimal: true,
-  qrPayload: `https://open.yivi.app/-/session#${encodeURIComponent(
-    JSON.stringify({
-      u: 'abcdef0123456789abcdef0123456789',
-      irmaqr: 'disclosing',
-    }),
-  )}`,
+  qrPayload: {
+    u: 'abcdef0123456789abcdef0123456789',
+    irmaqr: 'disclosing',
+  },
 });
 
 yivi.use(YiviWeb);

@@ -95,7 +95,16 @@ export class DOMManipulations {
   }
 
   setButtonLink(link: string): void {
-    this._element.querySelector('.yivi-web-button-link')?.setAttribute('href', link);
+    const anchor = this._element.querySelector('.yivi-web-button-link');
+    if (!anchor) return;
+    anchor.setAttribute('href', link);
+    // Inside an iframe on iOS Safari the universal link navigates the iframe
+    // itself instead of opening the Yivi app. Targeting _top lets Safari hand
+    // the URL off to the OS so the app can claim it. Skipped for Android
+    // intent:// links, where _top would break the intent fallback chain.
+    if (!link.startsWith('intent')) {
+      anchor.setAttribute('target', '_top');
+    }
   }
 
   private _renderInitialState(): void {
@@ -126,13 +135,11 @@ export class DOMManipulations {
       const isAndroid = /Android/i.test(window.navigator.userAgent);
       if (target.matches('[data-yivi-glue-transition]')) {
         this._clickCallback(target.getAttribute('data-yivi-glue-transition') || '');
-      } else if (isAndroid && target.matches('.yivi-web-button-link *')) {
-        (target as HTMLButtonElement).disabled = true;
+      } else if (isAndroid && target.matches('.yivi-web-button-link')) {
         setTimeout(() => {
-          // Only activate helper if the button to open the Yivi app is still present after the timeout.
+          // Only activate helper if the link to open the Yivi app is still present after the timeout.
           if (this._element.contains(target)) {
             this._element.querySelector('.yivi-web-header')?.classList.add('yivi-web-show-helper');
-            (target as HTMLButtonElement).disabled = false;
           }
         }, this._fallbackDelay);
       } else if (target.matches('.yivi-web-pairing-code')) {

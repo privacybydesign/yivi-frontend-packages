@@ -159,8 +159,14 @@ Styleguide Components.Yivi login
 
       background-color: $helper-color;
 
+      // visibility hides the helper from the focus order while it is
+      // translated off-screen, so Tab cannot land on the link inside it
+      // and force the browser to scroll the overflow:hidden header.
+      visibility: hidden;
       transform: translateX(120%);
-      @include transition(transform 0.4s ease);
+      transition:
+        transform 0.4s ease,
+        visibility 0s 0.4s;
 
       a {
         @include font($color: $yivi-anthracite, $weight: 400);
@@ -186,7 +192,11 @@ Styleguide Components.Yivi login
       }
 
       .yivi-web-helper {
+        visibility: visible;
         transform: translateX(0%);
+        transition:
+          transform 0.4s ease,
+          visibility 0s 0s;
       }
     }
 
