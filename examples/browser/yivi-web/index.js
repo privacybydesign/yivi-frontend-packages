@@ -7,12 +7,10 @@ import { YiviDummy } from '@privacybydesign/yivi-dummy';
 const yivi = new YiviCore({
   debugging: true,
   dummy: 'happy path',
-  qrPayload: `https://open.yivi.app/-/session#${encodeURIComponent(
-    JSON.stringify({
-      u: 'abcdef0123456789abcdef0123456789',
-      irmaqr: 'disclosing',
-    }),
-  )}`,
+  qrPayload: {
+    u: 'abcdef0123456789abcdef0123456789',
+    irmaqr: 'disclosing',
+  },
   element: '#yivi-web-form',
   language: 'en',
   translations: {
