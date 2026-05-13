@@ -38,10 +38,10 @@
     "@semantic-release/npm": "^13.1.0",
     "@semantic-release/release-notes-generator": "^14.0.0",
     "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vitest/coverage-v8": "^1.2.0",
-    "eslint": "^8.50.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
+    "@vitest/coverage-v8": "^4.1.6",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-prettier-standard": "^4.0.1",
     "eslint-config-standard": "^17.1.0",
@@ -60,7 +60,7 @@
     "stylelint-scss": "^5.2.1",
     "tsdown": "^0.21.4",
     "typescript": "^5.3.0",
-    "vitest": "^1.2.0"
+    "vitest": "^4.1.6"
   },
   "repository": {
     "type": "git",
