@@ -1,8 +1,8 @@
-require('@privacybydesign/yivi-css');
+import '@privacybydesign/yivi-css';
 
-const YiviCore = require('@privacybydesign/yivi-core');
-const Popup = require('@privacybydesign/yivi-popup');
-const Dummy = require('@privacybydesign/yivi-dummy');
+import { YiviCore } from '@privacybydesign/yivi-core';
+import { YiviPopup } from '@privacybydesign/yivi-popup';
+import { YiviDummy } from '@privacybydesign/yivi-dummy';
 
 document.getElementById('start-button').addEventListener('click', () => {
   const yivi = new YiviCore({
@@ -15,11 +15,11 @@ document.getElementById('start-button').addEventListener('click', () => {
     },
   });
 
-  yivi.use(Popup);
-  yivi.use(Dummy);
+  yivi.use(YiviPopup);
+  yivi.use(YiviDummy);
 
   yivi
     .start()
-    .then((result) => console.log('Successful disclosure! 🎉', result))
-    .catch((error) => console.error("Couldn't do what you asked 😢", error));
+    .then((result) => console.log('Successful disclosure!', result))
+    .catch((error) => console.error("Couldn't do what you asked", error));
 });

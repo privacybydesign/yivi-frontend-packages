@@ -6,4 +6,5 @@ Weight: 3
 Styleguide Layouts
 */
 
-@import 'center', 'popup';
+@forward 'center';
+@forward 'popup';

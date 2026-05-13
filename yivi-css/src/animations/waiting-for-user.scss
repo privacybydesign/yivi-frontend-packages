@@ -10,7 +10,9 @@ Markup:
 Styleguide Animations.Waiting for user
 */
 
-@import '../mixins/reset', '../mixins/animation', '../variables/colours';
+@use '../mixins/reset' as *;
+@use '../mixins/animation' as *;
+@use '../variables/colours' as *;
 
 .yivi-web-waiting-for-user-animation {
   @include reset;

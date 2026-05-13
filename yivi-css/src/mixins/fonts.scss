@@ -16,7 +16,8 @@ $color  - The color to use for the font, defaults to $text-color
 Styleguide Mixins.fonts
 */
 
-@import '../variables/fonts', '../variables/colours';
+@use '../variables/fonts' as *;
+@use '../variables/colours' as *;
 
 @mixin font(
   $family: $default-font,

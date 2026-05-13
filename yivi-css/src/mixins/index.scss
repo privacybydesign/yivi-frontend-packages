@@ -6,4 +6,8 @@ Weight: 2
 Styleguide Mixins
 */
 
-@import 'fonts', 'reset', 'responsiveness', 'animation', 'center';
+@forward 'fonts';
+@forward 'reset';
+@forward 'responsiveness';
+@forward 'animation';
+@forward 'center';

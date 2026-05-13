@@ -1,0 +1,43 @@
+/*
+Yivi minimal mode
+
+Styling for the yivi-web 'minimal' mode, which renders only the QR code
+and state animations without the form wrapper, header, or helper elements.
+
+Markup:
+<div class="yivi-web-minimal">
+  <div class="yivi-web-centered">
+    <div class="yivi-web-qr-code"></div>
+  </div>
+</div>
+
+Styleguide Components.Yivi minimal
+*/
+
+@use '../mixins/reset' as *;
+@use '../variables/sizes' as *;
+
+.yivi-web-minimal {
+  @include reset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 240px;
+  height: 240px;
+
+  .yivi-web-centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // Fill the minimal box so the QR's `max-width: 100%` resolves
+    // against a definite size instead of its own intrinsic preference.
+    width: 100%;
+    height: 100%;
+  }
+
+  p {
+    display: none;
+  }
+}

@@ -1,6 +1,8 @@
 node_modules
 .DS_Store
 dist
+*.tsbuildinfo
+coverage
 **/public/yivi.js
 .idea/
 examples/*/*/package-lock.json

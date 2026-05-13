@@ -1,9 +1,13 @@
 # Yivi frontend packages
 
 Welcome to this repository! Yivi frontend packages is a collection of related
-packages, that together form a Javascript "client" to the IRMA server. The
+packages, that together form a TypeScript/JavaScript "client" to the IRMA server. The
 primary purpose of these packages is to have a very flexible Yivi client in the
 web browser, but you can also use them to build a NodeJS client.
+
+All packages are written in TypeScript and provide full type definitions. They support
+both ES Modules (ESM) and CommonJS, making them compatible with modern bundlers
+like Vite, Rollup, and esbuild, as well as traditional setups.
 
 The browser version, by default, will look like this:
 
@@ -85,15 +89,14 @@ _Getting the session result through a proxy_
   ##### Combining your own packages
 
   ```bash
-$ npm install --save-dev yivi-css yivi-core yivi-web yivi-client
+$ npm install @privacybydesign/yivi-css @privacybydesign/yivi-core @privacybydesign/yivi-web @privacybydesign/yivi-client
   ```
 
   ```javascript
-require('@privacybydesign/yivi-css');
-
-const YiviCore = require('@privacybydesign/yivi-core');
-const Web      = require('@privacybydesign/yivi-web');
-const Client   = require('@privacybydesign/yivi-client');
+import '@privacybydesign/yivi-css';
+import YiviCore from '@privacybydesign/yivi-core';
+import Web from '@privacybydesign/yivi-web';
+import Client from '@privacybydesign/yivi-client';
 
 const yivi = new YiviCore({
   debugging: false,            // Enable to get helpful output in the browser console
@@ -119,8 +122,8 @@ yivi.use(Web);
 yivi.use(Client);
 
 yivi.start()
-.then(result => console.log("Successful disclosure! 🎉", result))
-.catch(error => console.error("Couldn't do what you asked 😢", error));
+.then(result => console.log("Successful disclosure!", result))
+.catch(error => console.error("Couldn't do what you asked", error));
   ```
 
   #### Server side
@@ -206,15 +209,14 @@ _Getting the session result directly_
   ##### Combining your own packages
 
   ```bash
-$ npm install --save-dev yivi-css yivi-core yivi-web yivi-client
+$ npm install @privacybydesign/yivi-css @privacybydesign/yivi-core @privacybydesign/yivi-web @privacybydesign/yivi-client
   ```
 
   ```javascript
-require('@privacybydesign/yivi-css');
-
-const YiviCore = require('@privacybydesign/yivi-core');
-const Web      = require('@privacybydesign/yivi-web');
-const Client   = require('@privacybydesign/yivi-client');
+import '@privacybydesign/yivi-css';
+import YiviCore from '@privacybydesign/yivi-core';
+import Web from '@privacybydesign/yivi-web';
+import Client from '@privacybydesign/yivi-client';
 
 const yiviRequest = document.getElementById('yivi-request').value;
 
@@ -239,8 +241,8 @@ yivi.use(Web);
 yivi.use(Client);
 
 yivi.start()
-.then(result => console.log("Successful disclosure! 🎉", result))
-.catch(error => console.error("Couldn't do what you asked 😢", error));
+.then(result => console.log("Successful disclosure!", result))
+.catch(error => console.error("Couldn't do what you asked", error));
   ```
 
   #### Server side
@@ -312,15 +314,14 @@ session there. The back-end does not need to be involved at all.
   ##### Combining your own packages
 
   ```bash
-$ npm install --save-dev yivi-css yivi-core yivi-web yivi-client
+$ npm install @privacybydesign/yivi-css @privacybydesign/yivi-core @privacybydesign/yivi-web @privacybydesign/yivi-client
   ```
 
   ```javascript
-require('@privacybydesign/yivi-css');
-
-const YiviCore = require('@privacybydesign/yivi-core');
-const Web      = require('@privacybydesign/yivi-web');
-const Client   = require('@privacybydesign/yivi-client');
+import '@privacybydesign/yivi-css';
+import YiviCore from '@privacybydesign/yivi-core';
+import Web from '@privacybydesign/yivi-web';
+import Client from '@privacybydesign/yivi-client';
 
 const yivi = new YiviCore({
   debugging: false,            // Enable to get helpful output in the browser console
@@ -351,8 +352,8 @@ yivi.use(Web);
 yivi.use(Client);
 
 yivi.start()
-.then(result => console.log("Successful disclosure! 🎉", result))
-.catch(error => console.error("Couldn't do what you asked 😢", error));
+.then(result => console.log("Successful disclosure!", result))
+.catch(error => console.error("Couldn't do what you asked", error));
   ```
 </details>
 
@@ -366,15 +367,14 @@ to this end.
   <summary>How to implement this flow</summary>
 
   ```bash
-$ npm install --save-dev yivi-css yivi-core yivi-web yivi-dummy
+$ npm install @privacybydesign/yivi-css @privacybydesign/yivi-core @privacybydesign/yivi-web @privacybydesign/yivi-dummy
   ```
 
   ```javascript
-require('@privacybydesign/yivi-css');
-
-const YiviCore = require('@privacybydesign/yivi-core');
-const Web      = require('@privacybydesign/yivi-web');
-const Dummy    = require('@privacybydesign/yivi-dummy');
+import '@privacybydesign/yivi-css';
+import YiviCore from '@privacybydesign/yivi-core';
+import Web from '@privacybydesign/yivi-web';
+import Dummy from '@privacybydesign/yivi-dummy';
 
 const yivi = new YiviCore({
   debugging: false,            // Enable to get helpful output in the browser console
@@ -386,8 +386,8 @@ yivi.use(Web);
 yivi.use(Dummy);
 
 yivi.start()
-.then(result => console.log("Successful disclosure! 🎉", result))
-.catch(error => console.error("Couldn't do what you asked 😢", error));
+.then(result => console.log("Successful disclosure!", result))
+.catch(error => console.error("Couldn't do what you asked", error));
   ```
 
   See [`yivi-dummy`](plugins/yivi-dummy) for more options.
@@ -427,19 +427,21 @@ combinations of plugins to achieve different effects:
 ## Development
 When developing a certain package, you can test the package using one of the examples.
 
-We provide development scripts to install all packages, configure all needed links between the packages and
-then build the packages. The setup is tested on Linux (debian), MacOS and Windows (in git bash).
+This repository uses npm workspaces to manage the monorepo. All packages are automatically
+linked together when you run `npm install` from the root directory.
 
-These scripts require `npm` (Node.js) to be installed. We recommend you to use **`npm` version 7 or above**.
-On `npm` version 6 (LTS) the `--no-save` option of `npm install` is not working correctly.
-This leads to unintended changes being made to the `package.json` files.
-
-These development scripts are automatically triggered when installing and building the examples.
+These scripts require `npm` (Node.js) version 7 or above to be installed.
 
 ```bash
-npm install   # To install the dependencies for all packages
-npm run link  # To make sure local changes in other yivi-frontend-packages propagate
-npm run build # To trigger the building steps for yivi-css and yivi-frontend
+npm install      # Install dependencies for all packages (workspaces handle linking)
+npm run build    # Build all packages (TypeScript compilation)
+npm run typecheck # Run TypeScript type checking
+npm run lint     # Run ESLint and Stylelint
+```
+
+For development with watch mode:
+```bash
+npm run dev      # Watch mode for all packages
 ```
 
 ### Linter
