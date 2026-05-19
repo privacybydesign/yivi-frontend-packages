@@ -33,12 +33,14 @@
   "browserslist": [
     "> 0.25%, not dead"
   ],
+  "dependencies": {
+    "@privacybydesign/yivi-css": "*"
+  },
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.6",
     "@privacybydesign/yivi-client": "*",
     "@privacybydesign/yivi-core": "*",
-    "@privacybydesign/yivi-css": "*",
     "@privacybydesign/yivi-popup": "*",
     "@privacybydesign/yivi-web": "*",
     "babel-loader": "^9.1.2",
