@@ -454,28 +454,27 @@ npm run lint
 ```
 
 ## Releasing
-To release a new version of the `yivi-frontend-packages` you have to run the scripts below.
-You need access to the NPM repository in order to release new versions. Otherwise,
-these scripts will fail.
 
-```bash
-./prepare-release.sh <command line parameters for npm version>
-# Check whether all steps succeeded properly, otherwise undo changes and fix issues first.
-./release.sh
+Releases are fully automated by [multi-semantic-release][msr] on top of
+[semantic-release][sr], using [Conventional Commits][cc] to decide which
+packages get a new version and what kind of bump (patch/minor/major) they get.
+There is no manual `npm publish` step. npm authenticates from CI via
+[Trusted Publishing][tp] (OIDC).
 
-./prepare-yivi-popup.sh
-# Check whether all steps succeeded properly, otherwise fix issues in yivi-popup first.
-cd ./plugins/yivi-popup && npm publish --access public
+To cut a release, open a PR with a Conventional Commit title (`fix:`, `feat:`,
+`feat!:`, …) and merge it into `master` (stable) or `beta` (prerelease). CI
+runs lint + build + test, then publishes every affected package, including
+cascading patch releases to downstream packages that depend on the
+just-released one. Non-release commit types (`docs:`, `chore:`, `ci:`,
+`refactor:`, `style:`, `test:`, `build:`) do not trigger a release.
 
-cd ../.. # Go back to root of the repository
-./prepare-yivi-frontend.sh
-# Check whether all steps succeeded properly, otherwise fix issues in yivi-frontend first.
-cd ./yivi-frontend && npm publish --access public
+See [`release.md`](release.md) for the full mechanism: commit conventions,
+the dependency cascade, beta releases, dry-runs, and troubleshooting.
 
-cd .. # Go back to root of the repository
-git add -u ./\*package.json ./\*package-lock.json
-git commit -m "Version bump"
-```
+[msr]: https://github.com/dhoulb/multi-semantic-release
+[sr]: https://semantic-release.gitbook.io/semantic-release/
+[cc]: https://www.conventionalcommits.org/
+[tp]: https://docs.npmjs.com/trusted-publishers/
 
 ## Documentation
 More documentation on how to use this package can be found in the
