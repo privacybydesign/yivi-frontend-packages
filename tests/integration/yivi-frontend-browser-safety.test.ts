@@ -9,10 +9,7 @@ import { resolve } from 'node:path';
 // first evaluation. These assertions run against the built artifact and fail
 // fast if a future change reintroduces a Node-only dependency in the ESM.
 
-const esmBundlePath = resolve(
-  __dirname,
-  '../../yivi-frontend/dist/index.mjs',
-);
+const esmBundlePath = resolve(__dirname, '../../yivi-frontend/dist/index.mjs');
 
 describe('yivi-frontend ESM bundle browser safety', () => {
   const bundle = readFileSync(esmBundlePath, 'utf8');
