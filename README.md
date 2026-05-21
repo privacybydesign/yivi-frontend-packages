@@ -458,22 +458,23 @@ npm run lint
 Releases are fully automated by [multi-semantic-release][msr] on top of
 [semantic-release][sr], using [Conventional Commits][cc] to decide which
 packages get a new version and what kind of bump (patch/minor/major) they get.
-There is no manual `npm publish` step — npm authenticates from CI via
+There is no manual `npm publish` step. npm authenticates from CI via
 [Trusted Publishing][tp] (OIDC).
-
-[msr]: https://github.com/dhoulb/multi-semantic-release
-[sr]: https://semantic-release.gitbook.io/
-[cc]: https://www.conventionalcommits.org/
-[tp]: https://docs.npmjs.com/trusted-publishers
 
 To cut a release, open a PR with a Conventional Commit title (`fix:`, `feat:`,
 `feat!:`, …) and merge it into `master` (stable) or `beta` (prerelease). CI
-runs lint + build + test, then publishes every affected package — including
-cascading patch releases to downstream packages whose internal dep specs need
-to be rewritten to the new version.
+runs lint + build + test, then publishes every affected package, including
+cascading patch releases to downstream packages that depend on the
+just-released one. Non-release commit types (`docs:`, `chore:`, `ci:`,
+`refactor:`, `style:`, `test:`, `build:`) do not trigger a release.
 
 See [`release.md`](release.md) for the full mechanism: commit conventions,
 the dependency cascade, beta releases, dry-runs, and troubleshooting.
+
+[msr]: https://github.com/dhoulb/multi-semantic-release
+[sr]: https://semantic-release.gitbook.io/semantic-release/
+[cc]: https://www.conventionalcommits.org/
+[tp]: https://docs.npmjs.com/trusted-publishers/
 
 ## Documentation
 More documentation on how to use this package can be found in the
