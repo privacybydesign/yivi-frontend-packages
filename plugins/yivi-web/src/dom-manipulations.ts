@@ -317,7 +317,7 @@ export class DOMManipulations {
       <a class="yivi-web-button-link yivi-web-button">
         ${this._translations.button}
       </a>
-      <p><button class="yivi-web-button-secondary" data-yivi-glue-transition="chooseQR">${this._translations.qrCode}</button></p>
+      <p><button class="yivi-web-button-tertiary" data-yivi-glue-transition="chooseQR">${this._translations.qrCode}</button></p>
     `;
   }
 
