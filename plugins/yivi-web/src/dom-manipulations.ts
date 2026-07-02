@@ -5,6 +5,17 @@ import type { StateChangeEvent, YiviState } from '@privacybydesign/yivi-core';
 type TransitionCallback = (transition: string) => void;
 type PairingCodeCallback = (code: string) => void;
 
+/**
+ * Pairing codes are numeric (the input fields accept a single digit each), so
+ * strip everything that is not a digit. This keeps the value harmless when it is
+ * interpolated into the `pairingFailed` translation, as defence in depth on top
+ * of rendering that message with `textContent` rather than `innerHTML`.
+ * Exported for testing.
+ */
+export function sanitizePairingCode(code: string): string {
+  return (code || '').replace(/\D/g, '');
+}
+
 interface DOMOptions {
   translations: Translations;
   showHelper?: boolean;
@@ -330,7 +341,12 @@ export class DOMManipulations {
       case 'pairingRejected': {
         if (form) {
           const textElement = form.firstElementChild as HTMLElement;
-          textElement.innerHTML = this._translations.pairingFailed(pairingPayload?.enteredPairingCode || '');
+          // The pairing code is user-controlled input and pairingFailed()
+          // interpolates it into the returned string. Render as text, never
+          // HTML, so a crafted code cannot inject markup (DOM XSS). Defence in
+          // depth: pairing codes are numeric, so strip to digits first.
+          const enteredCode = sanitizePairingCode(pairingPayload?.enteredPairingCode || '');
+          textElement.textContent = this._translations.pairingFailed(enteredCode);
           textElement.classList.add('yivi-web-error');
           form.reset();
           inputFields.forEach((f) => (f.disabled = false));

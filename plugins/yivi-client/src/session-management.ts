@@ -76,8 +76,54 @@ export class SessionManagement {
       });
   }
 
+  /**
+   * The session pointer URL (`sessionPtr.u`) is returned by the requestor's
+   * server and used as the base for every subsequent frontend request,
+   * including ones that carry the frontend authorization header. A tampered
+   * value pointing at an attacker-controlled host would leak that token, so we
+   * validate the scheme here — immediately after parsing the start response —
+   * before it is ever used as a fetch base.
+   *
+   * Allowed: relative URLs (resolve same-origin as the hosting page), absolute
+   * https URLs, and http/https to localhost for local development. Rejected:
+   * http to a remote host, protocol-relative `//host`, and any other scheme
+   * (javascript:, data:, ...).
+   */
+  private _assertSafeSessionUrl(url: string): void {
+    if (typeof url !== 'string' || url.length === 0) {
+      throw new Error('Missing or invalid sessionPtr URL in mappings');
+    }
+
+    // Reject protocol-relative URLs (`//host/...`) up front: they inherit the
+    // page scheme (so a scheme check alone would pass them) but resolve to an
+    // arbitrary cross-origin host once concatenated into a fetch URL, leaking
+    // the frontend authorization header.
+    if (url.startsWith('//')) {
+      throw new Error(`Refusing to use protocol-relative sessionPtr URL: ${url}`);
+    }
+
+    // Resolve against the hosting page's origin when available so that
+    // relative session URLs (which stay same-origin) are accepted.
+    const base = typeof window !== 'undefined' && window.location ? window.location.href : 'https://localhost/';
+
+    let parsed: URL;
+    try {
+      parsed = new URL(url, base);
+    } catch {
+      throw new Error(`Invalid sessionPtr URL received from server: ${url}`);
+    }
+
+    const isLocalhost =
+      parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1' || parsed.hostname === '[::1]';
+    const isSafe = parsed.protocol === 'https:' || (parsed.protocol === 'http:' && isLocalhost);
+    if (!isSafe) {
+      throw new Error(`Refusing to use insecure sessionPtr URL (scheme "${parsed.protocol}"): ${url}`);
+    }
+  }
+
   private _parseMappings(mappings: SessionMappings): SessionMappings {
     if (!mappings.sessionPtr) throw new Error('Missing sessionPtr in mappings');
+    this._assertSafeSessionUrl(mappings.sessionPtr.u);
 
     let frontendRequest = mappings.frontendRequest;
     if (!frontendRequest) {
