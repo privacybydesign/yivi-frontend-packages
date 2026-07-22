@@ -1,5 +1,0 @@
-**/dist/**/*.js
-**/node_modules/**/*.js
-**/public/**/*.js
-**/webpack.config.js
-docs/styleguide/**/*.js
