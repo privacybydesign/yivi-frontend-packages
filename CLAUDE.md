@@ -34,14 +34,18 @@ The published artifacts are built by `npm run build`. A dev-dependency change
 should not alter them, so byte-compare against `master` before opening the PR:
 
 ```bash
-git clone -q --branch master "file://$PWD" /tmp/pristine && (cd /tmp/pristine && npm ci && npm run build)
+git clone -q --branch master "file://$PWD" /tmp/pristine
+(cd /tmp/pristine && git rev-parse --abbrev-ref HEAD)   # expect master
+(cd /tmp/pristine && npm ci && npm run build)
 npm ci && npm run build
 sha256sum {.,/tmp/pristine}/yivi-frontend/dist/{yivi.js,index.mjs,index.cjs}
 ```
 
 Keep `--branch master`. Cloning a local path without it checks out whatever the
 source repo has checked out, so from a feature branch the compare runs the branch
-against itself and reports identical whatever the change did.
+against itself and reports identical whatever the change did. Confirm the
+baseline still contains the thing you removed, too — a compare that cannot fail
+is not evidence.
 
 `npm run lint` covers both eslint and stylelint; `npm run fmt` applies the
 prettier fixes eslint reports. `npm test` reads built artifacts in
