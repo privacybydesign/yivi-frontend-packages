@@ -8,8 +8,13 @@ import { resolve } from 'node:path';
 // node-polyfill-webpack-plugin -> node-stdlib-browser -> crypto-browserify in
 // yivi-frontend. The plugin turned out to be inert (removing it produces a
 // byte-identical yivi.js), so it was dropped. If the plugin, or anything else
-// pulling in crypto-browserify, comes back, this test fails and the choice has
-// to be made deliberately instead of silently reopening the alert.
+// pulling in crypto-browserify, comes back anywhere in the workspace tree, this
+// test fails and the choice has to be made deliberately instead of silently
+// reopening the alert.
+//
+// Scope: this reads the root package-lock.json, so it covers the workspaces only.
+// examples/ is not a workspace and is absent from that lockfile, so the copy of
+// node-polyfill-webpack-plugin in examples/browser/yivi-console does not trip it.
 
 const lockfile = JSON.parse(readFileSync(resolve(__dirname, '../../package-lock.json'), 'utf8')) as {
   packages: Record<string, unknown>;
