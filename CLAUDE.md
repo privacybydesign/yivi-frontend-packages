@@ -31,10 +31,10 @@ we are maintainers on both sides, with the same review conventions either way.
 - `privacybydesign/irmamobile` — the Yivi app, which scans what `yivi-web`
   renders.
 
-Consumers move on a release, not on a merge: multi-semantic-release publishes
-each affected package from the Conventional Commit titles landing on `master`
-(stable) or `beta` (prerelease), so a `feat!:` is a major on npm before anyone
-outside this repo has read the diff.
+Consumers move on a release, not on a merge: a Conventional Commit title landing
+on `master` or `beta` publishes every affected package, so a `feat!:` is a major
+on npm before anyone outside this repo has read the diff. The README's Releasing
+section and `release.md` have the mechanism.
 
 ## Where the operational knowledge is
 
