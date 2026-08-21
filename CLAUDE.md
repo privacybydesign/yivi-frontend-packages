@@ -10,7 +10,7 @@ list and the development commands; `release.md` has the release mechanism.
 
 Yivi is attribute-based identity: a person holds credentials on their own device
 and discloses only the attributes a verifier asks for. These packages are the
-browser end of it — they ask a back end to start a session, render the QR or
+browser end of it: they ask a back end to start a session, render the QR or
 pairing code, and follow the session to its result. What an attribute means, and
 whether a disclosure is valid, is decided by the server and not here.
 
