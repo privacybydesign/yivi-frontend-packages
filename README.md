@@ -437,7 +437,12 @@ npm install      # Install dependencies for all packages (workspaces handle link
 npm run build    # Build all packages (TypeScript compilation)
 npm run typecheck # Run TypeScript type checking
 npm run lint     # Run ESLint and Stylelint
+npm run fmt      # Apply the Prettier fixes ESLint reports
+npm test         # Run the test suite
 ```
+
+Part of the test suite reads the built bundles in `yivi-frontend/dist`, so run
+`npm run build` before `npm test`. CI runs them in that order too.
 
 For development with watch mode:
 ```bash
@@ -452,6 +457,26 @@ ESLint for JavaScript and Stylelint for SCSS. You can run these in the following
 npm install
 npm run lint
 ```
+
+### Verifying a dependency change
+
+`npm run build` produces the artifacts that get published, and a change to a dev
+dependency should not alter them. Byte-compare against `master` before opening
+the PR:
+
+```bash
+git clone -q --branch master "file://$PWD" /tmp/pristine
+(cd /tmp/pristine && git rev-parse --abbrev-ref HEAD)   # expect master
+(cd /tmp/pristine && npm ci && npm run build)
+npm ci && npm run build
+sha256sum {.,/tmp/pristine}/yivi-frontend/dist/{yivi.js,index.mjs,index.cjs}
+```
+
+Keep `--branch master`. Cloning a local path without it checks out whatever the
+source repo has checked out, so from a feature branch the compare runs the branch
+against itself and reports identical whatever the change did. Confirm the
+baseline still contains the thing you removed, too — a comparison that cannot
+fail is not evidence.
 
 ## Releasing
 
