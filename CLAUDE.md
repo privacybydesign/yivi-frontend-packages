@@ -14,11 +14,6 @@ browser end of it: they ask a back end to start a session, render the QR or
 pairing code, and follow the session to its result. What an attribute means, and
 whether a disclosure is valid, is decided by the server and not here.
 
-One company, two GitHub orgs. `privacybydesign` is the Yivi/IRMA lineage;
-`encryption4all` is the vehicle the PostGuard research project used to apply for
-grants, kept as an org after Yivi bought PostGuard. The split is historical, and
-we are maintainers on both sides, with the same review conventions either way.
-
 ## Repos to consider before changing something here
 
 - `privacybydesign/irmago` — the IRMA server on the other end of every session
