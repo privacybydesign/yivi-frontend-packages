@@ -437,7 +437,12 @@ npm install      # Install dependencies for all packages (workspaces handle link
 npm run build    # Build all packages (TypeScript compilation)
 npm run typecheck # Run TypeScript type checking
 npm run lint     # Run ESLint and Stylelint
+npm run fmt      # Apply the Prettier fixes ESLint reports
+npm test         # Run the test suite
 ```
+
+Part of the test suite reads the built bundles in `yivi-frontend/dist`, so run
+`npm run build` before `npm test`. CI runs them in that order too.
 
 For development with watch mode:
 ```bash
