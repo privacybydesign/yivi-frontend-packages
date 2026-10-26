@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "onchange": "^7.1.0",
-    "sass": "^1.32.4",
-    "svgo": "^4.0.0",
+    "sass": "^1.105.2",
+    "svgo": "^4.1.0",
     "uglifycss": "0.0.29"
   }
 }
