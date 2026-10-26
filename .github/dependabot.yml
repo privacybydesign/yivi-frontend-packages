@@ -1,0 +1,19 @@
+# Updates are grouped (one PR per ecosystem) and wait 7 days after a release
+# (cooldown) so compromised releases are usually yanked before they reach us.
+# Security updates are not delayed.
+version: 2
+updates:
+  - package-ecosystem: github-actions # also bumps the shared workflows
+    directory: /
+    schedule: { interval: weekly, day: monday }
+    groups:
+      actions: { patterns: ["*"] }
+    cooldown: { default-days: 7 }
+
+  - package-ecosystem: npm
+    directory: / # npm workspaces: the root lockfile covers every package
+    schedule: { interval: weekly, day: monday }
+    groups:
+      npm-production: { dependency-type: production, update-types: [minor, patch] }
+      npm-development: { dependency-type: development, update-types: [minor, patch] }
+    cooldown: { default-days: 7 }
