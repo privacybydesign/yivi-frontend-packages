@@ -346,7 +346,8 @@ export class YiviStateClient {
       case 'Android': {
         // Universal links are not stable in Android webviews and custom tabs, so always use intent links.
         // The install referrer passes through Google, so it carries a flag only, never session data.
-        const intent = `Intent;package=org.irmacard.cardemu;scheme=irma;l.timestamp=${Date.now()};S.market_referrer=from%3Dweb`;
+        const referrerExtra = 'S.market_referrer=from%3Dweb';
+        const intent = `Intent;package=org.irmacard.cardemu;scheme=irma;l.timestamp=${Date.now()};${referrerExtra}`;
         return `intent://qr/json/${encodeURIComponent(json)}#${intent};end`;
       }
       case 'iOS': {
