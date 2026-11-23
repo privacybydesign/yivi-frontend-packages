@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "onchange": "^7.1.0",
-    "sass": "^1.106.1",
+    "sass": "^1.108.2",
     "svgo": "^4.1.0",
     "uglifycss": "0.0.29"
   }
